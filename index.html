@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nettalco | Pasaporte Digital</title>
+    
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .loader { width: 48px; height: 48px; border: 5px solid #004526; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
+        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { motion, AnimatePresence } = window.Motion;
+
+        // --- 1. MAPA DE IMÁGENES TEMÁTICAS (El toque V0) ---
+        // Aquí definimos la foto "editorial" para cada etapa.
+        // --- 1. MAPA DE IMÁGENES LOCALES (Assets) ---
+        const StageImages = {
+            1: "./assets/fase1.png",
+            2: "./assets/fase2.png",
+            3: "./assets/fase3.png",
+            4: "./assets/fase4.png",
+            5: "./assets/fase5.png",
+            6: "./assets/fase6.png"
+        };
+
+        // --- 2. ICONOS SVG ---
+        const Icons = {
+            MapPin: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>,
+            Shirt: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.38 3.4a2 2 0 0 0-1.2-1.28l-3.11-1a2 2 0 0 0-1.34 0l-3.11 1a2 2 0 0 0-1.2 1.28L9 16.2V22h6v-5.8l-1.38-12.8Z"/><path d="M9 3 4 5v13h5"/></svg>,
+            Droplets: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.8-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>,
+            Scissors: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" x2="8.12" y1="4" y2="15.88"/><line x1="14.47" x2="20" y1="14.48" y2="20"/><line x1="8.12" x2="12" y1="8.12" y2="12"/></svg>,
+            CheckCircle2: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>,
+            Box: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>,
+        };
+
+      // --- 3. TRADUCTOR DE DATOS (FINAL V4: MATERIAL + ORIGEN GEOGRÁFICO) ---
+        const formatData = (raw) => {
+            
+            // Helper 1: Extraer lista de personas
+            const getPeople = (list, nameKey, idKey, roleDefault, roleKey = null) => {
+                if (!list) return [];
+                const unique = {};
+                list.forEach(item => {
+                    const name = item[nameKey];
+                    const id = item[idKey]; 
+                    if (name && !unique[name]) {
+                        unique[name] = {
+                            name: name.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
+                            role: (roleKey && item[roleKey] ? item[roleKey] : roleDefault),
+                            id: id 
+                        };
+                    }
+                });
+                return Object.values(unique);
+            };
+
+            const info = raw.tztotrazwebinfo?.[0] || {};
+            const alma = raw.tztotrazwebalma?.[0] || {};
+            const hilo = raw.tztotrazwebhiloloteprin?.[0] || {};
+
+            // 1. EXTRAEMOS LOS EQUIPOS
+            const tejedores = getPeople(raw.tztotrazwebteje, 'TNOMBPERS', 'TCODIPERS', 'Tejedor');
+            const tintoreros = getPeople(raw.tztotrazwebtint, 'TNOMBOPERACABINIC', 'TOPERACABINIC', 'Acabado').concat(getPeople(raw.tztotrazwebtint, 'TNOMBOPERCORTINIC', 'TOPERCORTINIC', 'Apertura'));
+            const cortadores = getPeople(raw.tztotrazwebcortoper, 'TNOMBPERS', 'TCODIPERS', 'Corte');
+            const confeccionistas = getPeople(raw.tztotrazwebcostoper, 'TNOMBPERS', 'TCODIPERS', 'Confección', 'TDESCOPERESPE').concat(getPeople(raw.tztotrazwebcost, 'TNOMBPERSSUPE', 'TCODIPERSSUPE', 'Supervisora'));
+            const logistica = getPeople(raw.tztotrazwebacab, 'TNOMBPERSPESA', 'TCODIPERSPESA', 'Empaque').concat(getPeople(raw.tztotrazwebacab, 'TNOMBRECEBANDCOST', 'TCODIRECEBANDCOST', 'Recepción'));
+
+            // Helper 2: Generador de Frases de Equipo
+            const mencionarEquipo = (lista, sujetoDefault) => {
+                if (!lista || lista.length === 0) return sujetoDefault;
+                const nombres = lista.map(p => p.name.split(' ')[0]);
+                if (nombres.length === 1) return `La dedicación de ${nombres[0]}`;
+                if (nombres.length === 2) return `El trabajo conjunto de ${nombres[0]} y ${nombres[1]}`;
+                if (nombres.length === 3) return `La labor de ${nombres[0]}, ${nombres[1]} y ${nombres[2]}`;
+                const restantes = lista.length - 2; 
+                return `Un gran equipo conformado por ${nombres[0]}, ${nombres[1]} y ${restantes} expertos más`;
+            };
+
+            // Helper 3: DETECTIVE DE MATERIALES
+            const detectarMaterial = () => {
+                let mat = hilo.TDESCHILO || hilo.TDESCMATERIA;
+                if (!mat && info.TDESCPREN) {
+                    const nombre = info.TDESCPREN.toUpperCase();
+                    if (nombre.includes("PIMA")) return "Algodón Pima";
+                    if (nombre.includes("TANGUIS")) return "Algodón Tangüis";
+                    if (nombre.includes("COTTON") || nombre.includes("ALGODON")) return "Algodón Premium";
+                    if (nombre.includes("POLY") || nombre.includes("POLIESTER")) return "Poliéster Tecnológico";
+                    if (nombre.includes("MODAL")) return "Fibra Modal";
+                }
+                if (mat) return mat.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+                return "Fibras de alta calidad";
+            };
+
+            // Helper 4: DETECTIVE DE ZONA (Nuevo!)
+            const detectarZona = () => {
+                // Buscamos si existe el campo TDESCZONA o TPROCEDENCIA en la data de hilo
+                // Si no, usamos un fallback bonito.
+                let zona = hilo.TDESCZONA || hilo.TPROCEDENCIA; 
+                if (zona) return `los valles de ${zona.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())}`;
+                return "los valles de la costa peruana";
+            };
+
+            // VARIABLES DINÁMICAS
+            const colorReal = info.TDESCETIQCLIE ? `"${info.TDESCETIQCLIE}"` : "este tono";
+            const materialReal = detectarMaterial();
+            const origenReal = detectarZona();
+
+            return {
+                header: {
+                    brand: info.TNOMBCLIE || "LACOSTE",
+                    collection: `Temporada ${alma.TCODITEMP || "2026"}`,
+                    item: (info.TDESCPREN || "Prenda Nettalco").toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
+                    color: info.TDESCETIQCLIE || "Original",
+                    img: "https://image.uniqlo.com/UQ/ST3/Latam/imagesgoods/422992/item/lggoods_12_422992.jpg?width=1600&impolicy=quality_75"
+                },
+                steps: [
+                    { 
+                        id: 1, 
+                        stage: "ORIGEN", 
+                        title: "La Fibra Inicial", 
+                        date: hilo.TFECHGUIAHILO ? hilo.TFECHGUIAHILO.split(" ")[0] : "Dic 2025", 
+                        // LOCATION DINÁMICA: Si hay zona, la pone. Si no, pone "Perú"
+                        location: hilo.TDESCZONA ? hilo.TDESCZONA : "Valles del Perú", 
+                        // DESCRIPCIÓN CON ZONA Y MATERIAL:
+                        desc: `El viaje comienza en ${origenReal}. Seleccionamos exclusivamente ${materialReal}, reconocido mundialmente por su pureza, resistencia y tacto inigualable.`, 
+                        icon: Icons.MapPin, 
+                        people: [] 
+                    },
+                    { 
+                        id: 2, 
+                        stage: "TEJEDURÍA", 
+                        title: "Arquitectos del Tejido", 
+                        date: raw.tztotrazwebteje?.[0]?.TFECHTEJE?.split(" ")[0] || "Proceso Continuo", 
+                        location: "Planta Tejido Circular", 
+                        desc: `Donde la ingeniería se encuentra con el arte. ${mencionarEquipo(tejedores, "Nuestro equipo")} se aseguró de vigilar cada revolución de las máquinas para crear una estructura textil resistente y perfecta.`, 
+                        icon: Icons.Shirt, 
+                        people: tejedores 
+                    },
+                    { 
+                        id: 3, 
+                        stage: "TINTORERÍA", 
+                        title: "Alquimia Sostenible", 
+                        date: raw.tztotrazwebtint?.[0]?.TFECHTENIINIC?.split(" ")[0] || "Proceso Continuo", 
+                        location: "Planta de Teñido", 
+                        desc: `Color vibrante con bajo consumo hídrico. ${mencionarEquipo(tintoreros, "Nuestros especialistas")} lograron fijar el color ${colorReal} profundamente en la fibra cuidando cada gota de agua.`, 
+                        icon: Icons.Droplets, 
+                        people: tintoreros 
+                    },
+                    { 
+                        id: 4, 
+                        stage: "CORTE", 
+                        title: "Precisión Milimétrica", 
+                        date: raw.tztotrazwebcort?.[0]?.TFECHDESPCORT?.split(" ")[0] || "Proceso Continuo", 
+                        location: "Sala de Corte Automático", 
+                        desc: `Tecnología al servicio de la eficiencia. ${mencionarEquipo(cortadores, "El equipo de corte")} garantizó que cada pieza fuera trazada con exactitud quirúrgica, optimizando la tela al máximo.`, 
+                        icon: Icons.Scissors, 
+                        people: cortadores 
+                    },
+                    { 
+                        id: 5, 
+                        stage: "CONFECCIÓN", 
+                        title: "El Toque Humano", 
+                        date: "Proceso Artesanal", 
+                        location: "Líneas de Costura", 
+                        desc: `El corazón de Nettalco. ${mencionarEquipo(confeccionistas, "Nuestras manos expertas")} ensambló tu prenda puntada a puntada, combinando la mejor tecnología con tradición artesanal.`, 
+                        icon: Icons.CheckCircle2, 
+                        people: confeccionistas 
+                    },
+                    { 
+                        id: 6, 
+                        stage: "ACABADO Y EMPACADO", 
+                        title: "Listo para el Mundo", 
+                        date: raw.tztotrazwebacab?.[0]?.TFECHEMPA?.split(" ")[0] || "Finalizado", 
+                        location: "Centro de Distribución", 
+                        desc: `Promesa cumplida. ${mencionarEquipo(logistica, "El equipo final")} se encargó de inspeccionar y preparar tu prenda bajo estándares globales, lista para cruzar fronteras.`, 
+                        icon: Icons.Box, 
+                        people: logistica 
+                    }
+                ]
+            };
+        };
+
+        // --- 4. COMPONENTES UI ---
+
+        const PersonCard = ({ person, index }) => {
+            const nettalcoPhoto = person.id ? `http://app.nettalco.com.pe/php/foto.php?codigo=${person.id}` : null;
+            const fallbackAvatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${person.name}&backgroundColor=c0aede,b6e3f4`;
+            const [imgSrc, setImgSrc] = useState(nettalcoPhoto || fallbackAvatar);
+            useEffect(() => { setImgSrc(nettalcoPhoto || fallbackAvatar); }, [person.id]);
+
+            return (
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    whileHover={{ y: -3 }}
+                    className="flex flex-col items-center p-3 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all"
+                >
+                    <div className="relative w-16 h-16 mb-2">
+                        <img 
+                            src={imgSrc} 
+                            alt={person.name} 
+                            className="w-full h-full rounded-full object-cover border-2 border-white shadow-sm"
+                            onError={() => setImgSrc(fallbackAvatar)} 
+                        />
+                    </div>
+                    <h4 className="text-xs font-bold text-gray-800 text-center leading-tight mb-0.5">{person.name}</h4>
+                    <span className="text-[10px] text-gray-500 uppercase tracking-wide truncate max-w-full">{person.role}</span>
+                </motion.div>
+            );
+        };
+
+        // --- NUEVO STEPCARD: Layout de Revista (Texto Izq | Imagen Der) ---
+        const StepCard = ({ step, index }) => {
+            // Obtenemos la imagen temática basada en el ID de la etapa
+            const themeImage = StageImages[step.id];
+
+            return (
+                <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+                    className="relative pl-10 pb-16 last:pb-0 group"
+                >
+                    {/* Línea conectora */}
+                    <div className="absolute left-[9px] top-8 bottom-0 w-px bg-gray-200 group-last:hidden"></div>
+                    
+                    {/* Icono del paso */}
+                    <div className="absolute left-0 top-0 w-5 h-5 bg-green-700 rounded-full flex items-center justify-center border-[3px] border-white shadow-md z-10 box-content">
+                    </div>
+
+                    {/* TARJETA GRID (La magia del layout) */}
+                    <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100/80 overflow-hidden grid md:grid-cols-5 hover:shadow-xl transition-shadow duration-500">
+                        
+                        {/* COLUMNA IZQUIERDA: Contenido (Texto y Personas) */}
+                        <div className="p-8 md:col-span-3 flex flex-col justify-center relative z-10">
+                             <div className="flex justify-between items-center mb-6">
+                                <div className="flex items-center gap-3">
+                                    <span className="bg-green-50 text-green-700 p-2 rounded-xl shadow-sm">{step.icon}</span>
+                                    <span className="text-xs font-bold tracking-widest text-green-800 uppercase">{step.stage}</span>
+                                </div>
+                                <span className="text-xs font-medium text-gray-400 bg-gray-100/80 px-3 py-1 rounded-full backdrop-blur-sm">{step.date}</span>
+                            </div>
+                            
+                            <h3 className="text-2xl font-extrabold text-gray-900 mb-3 tracking-tight">{step.title}</h3>
+                            <p className="text-base text-gray-600 mb-8 leading-relaxed font-medium">{step.desc}</p>
+                            
+                            {step.people.length > 0 && (
+                                <div className="mt-auto pt-6 border-t border-gray-100">
+                                    <p className="text-[11px] font-bold text-gray-400 mb-4 uppercase tracking-wider flex items-center gap-2">
+                                        Protagonistas <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[10px]">{step.people.length}</span>
+                                    </p>
+                                    <div className={`grid gap-3 ${step.people.length > 3 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2'}`}>
+                                        {step.people.map((p, i) => <PersonCard key={i} person={p} index={i} />)}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* COLUMNA DERECHA: Imagen Temática */}
+                        {themeImage && (
+                            <div className="relative h-64 md:h-auto md:col-span-2 overflow-hidden bg-gray-200">
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 md:bg-gradient-to-l"></div>
+                                <motion.img 
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ duration: 2 }}
+                                    src={themeImage} 
+                                    className="absolute inset-0 w-full h-full object-cover transform scale-105 origin-center"
+                                    // EL ESCUDO: Si la imagen falla, la ocultamos para ver el fondo gris limpio
+                                    onError={(e) => { e.target.style.display = 'none'; }} 
+                                />
+                            </div>
+                        )}
+                    </div>
+                </motion.div>
+            );
+        };
+
+        const App = () => {
+            const [data, setData] = useState(null);
+            const [loading, setLoading] = useState(true);
+
+            useEffect(() => {
+                const loadData = async () => {
+                    const params = new URLSearchParams(window.location.search);
+                    const id = params.get('id');
+                    if (!id) { setLoading(false); return; }
+
+                    try {
+                        const response = await fetch(`./data/${id}.json`);
+                        if (!response.ok) throw new Error("File not found");
+                        const jsonRaw = await response.json();
+                        setData(formatData(jsonRaw));
+                    } catch (err) { console.error(err); } 
+                    finally { setLoading(false); }
+                };
+                loadData();
+            }, []);
+
+            if (loading) return <div className="h-screen flex items-center justify-center bg-gray-50"><span className="loader"></span></div>;
+
+            if (!data) return (
+                <div className="h-screen flex flex-col items-center justify-center text-center p-6 bg-gradient-to-b from-gray-50 to-white">
+                    <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6 shadow-sm text-3xl">📷</div>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Escanea el QR</h2>
+                    <p className="text-gray-500 max-w-xs">Acerca tu cámara a la etiqueta de la prenda para descubrir su historia.</p>
+                </div>
+            );
+
+            return (
+                // Contenedor principal más ancho para que luzcan las dos columnas
+                <div className="max-w-4xl mx-auto bg-white min-h-screen shadow-2xl relative overflow-hidden">
+                    {/* HERO HEADER */}
+                    <header className="relative h-[60vh] min-h-[500px] bg-gray-900 text-white overflow-hidden z-10">
+                        <motion.img 
+                            initial={{ scale: 1.1, opacity: 0 }} animate={{ scale: 1, opacity: 0.9 }} transition={{ duration: 1.5 }}
+                            src={data.header.img} className="absolute inset-0 w-full h-full object-cover" 
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-transparent"></div>
+                        
+                        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-16 pb-24">
+                            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
+                                <span className="inline-block glass px-4 py-1.5 rounded-full text-sm font-semibold mb-6 tracking-wide text-white/90 border-white/20 backdrop-blur-md">
+                                    {data.header.collection}
+                                </span>
+                                <h1 className="text-5xl md:text-6xl font-black mb-4 leading-none tracking-tight">{data.header.item}</h1>
+                                <p className="text-xl text-gray-300 font-medium flex items-center gap-3">
+                                    <span className="flex h-4 w-4 relative"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-white"></span></span>
+                                    {data.header.color}
+                                </p>
+                            </motion.div>
+                        </div>
+                    </header>
+
+                    {/* CONTENIDO PRINCIPAL */}
+                    <main className="px-6 md:px-16 py-16 -mt-16 relative z-20 bg-white rounded-t-[3rem]">
+                        <div className="mb-16">
+                            {data.steps.map((step, index) => <StepCard key={step.id} step={step} index={index} />)}
+                        </div>
+
+                        {/* FOOTER BLOCKCHAIN */}
+                        <div className="bg-gray-900 rounded-[2.5rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl">
+                            <div className="relative z-30">
+                                <h2 className="text-2xl font-bold text-white mb-3">Transparencia Radical</h2>
+                                <p className="text-gray-400 text-base mb-8 max-w-md mx-auto leading-relaxed">La trazabilidad de esta prenda ha sido registrada de forma permanente e inmutable en la blockchain.</p>
+                                <a href="#" className="inline-flex items-center gap-3 bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-sm hover:scale-105 transition-transform shadow-xl hover:shadow-2xl tracking-wide">
+                                    <span className="text-green-700">{Icons.Box}</span> Verificar Registro ↗
+                                </a>
+                            </div>
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-green-600/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/20 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4"></div>
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
