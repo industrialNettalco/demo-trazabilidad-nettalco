@@ -121,8 +121,19 @@
             const materialReal = detectarMaterial();
             const origenReal = detectarZona();
 
+            // --- AGREGA ESTO AQUÍ ABAJO 👇 ---
+            
+            // LÓGICA DE LOGO:
+            const nombreCliente = info.TNOMBCLIE || "nettalco";
+            // Quitamos espacios y pasamos a minúsculas (Ej: "LACOSTE" -> "lacoste")
+            const logoFilename = nombreCliente.toLowerCase().replace(/\s+/g, ''); 
+            const rutaLogo = `./assets/logos/${logoFilename}.png`;
+
+            // ---------------------------------
+
             return {
                 header: {
+                    logo: rutaLogo,
                     brand: info.TNOMBCLIE || "LACOSTE",
                     collection: `Temporada ${alma.TCODITEMP || "2026"}`,
                     item: (info.TDESCPREN || "Prenda Nettalco").toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
@@ -329,10 +340,29 @@
                 <div className="max-w-4xl mx-auto bg-white min-h-screen shadow-2xl relative overflow-hidden">
                     {/* HERO HEADER */}
                     <header className="relative h-[60vh] min-h-[500px] bg-gray-900 text-white overflow-hidden z-10">
+                        
+                        {/* 1. IMAGEN DE FONDO (Esta es la línea que faltaba) */}
                         <motion.img 
                             initial={{ scale: 1.1, opacity: 0 }} animate={{ scale: 1, opacity: 0.9 }} transition={{ duration: 1.5 }}
                             src={data.header.img} className="absolute inset-0 w-full h-full object-cover" 
                         />
+
+                        {/* 2. LOGO DE MARCA (Tu nuevo código - ¡Perfecto!) */}
+                        <div className="absolute top-0 left-0 right-0 p-6 z-20 flex justify-between items-start">
+                             <div className="bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-lg">
+                                <img 
+                                    src={data.header.logo} 
+                                    alt={data.header.brand} 
+                                    className="h-8 md:h-10 w-auto object-contain"
+                                    onError={(e) => { 
+                                        e.target.onerror = null; 
+                                        e.target.src='./assets/logos/nettalco.png'; 
+                                    }}
+                                />
+                             </div>
+                        </div>
+
+                        {/* Degradados y Textos (Esto estaba bien) */}
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent"></div>
                         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-transparent"></div>
                         
