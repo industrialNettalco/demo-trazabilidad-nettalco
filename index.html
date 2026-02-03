@@ -27,9 +27,7 @@
         const { useState, useEffect } = React;
         const { motion, AnimatePresence } = window.Motion;
 
-        // --- 1. MAPA DE IMÁGENES TEMÁTICAS (El toque V0) ---
-        // Aquí definimos la foto "editorial" para cada etapa.
-        // --- 1. MAPA DE IMÁGENES LOCALES (Assets) ---
+        // --- 1. MAPA DE IMÁGENES TEMÁTICAS ---
         const StageImages = {
             1: "./assets/fase1.png",
             2: "./assets/fase2.png",
@@ -49,10 +47,9 @@
             Box: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>,
         };
 
-      // --- 3. TRADUCTOR DE DATOS (FINAL V4: MATERIAL + ORIGEN GEOGRÁFICO) ---
+        // --- 3. TRADUCTOR DE DATOS ---
         const formatData = (raw) => {
             
-            // Helper 1: Extraer lista de personas
             const getPeople = (list, nameKey, idKey, roleDefault, roleKey = null) => {
                 if (!list) return [];
                 const unique = {};
@@ -74,14 +71,13 @@
             const alma = raw.tztotrazwebalma?.[0] || {};
             const hilo = raw.tztotrazwebhiloloteprin?.[0] || {};
 
-            // 1. EXTRAEMOS LOS EQUIPOS
+            // EXTRAEMOS LOS EQUIPOS
             const tejedores = getPeople(raw.tztotrazwebteje, 'TNOMBPERS', 'TCODIPERS', 'Tejedor');
             const tintoreros = getPeople(raw.tztotrazwebtint, 'TNOMBOPERACABINIC', 'TOPERACABINIC', 'Acabado').concat(getPeople(raw.tztotrazwebtint, 'TNOMBOPERCORTINIC', 'TOPERCORTINIC', 'Apertura'));
             const cortadores = getPeople(raw.tztotrazwebcortoper, 'TNOMBPERS', 'TCODIPERS', 'Corte');
             const confeccionistas = getPeople(raw.tztotrazwebcostoper, 'TNOMBPERS', 'TCODIPERS', 'Confección', 'TDESCOPERESPE').concat(getPeople(raw.tztotrazwebcost, 'TNOMBPERSSUPE', 'TCODIPERSSUPE', 'Supervisora'));
             const logistica = getPeople(raw.tztotrazwebacab, 'TNOMBPERSPESA', 'TCODIPERSPESA', 'Empaque').concat(getPeople(raw.tztotrazwebacab, 'TNOMBRECEBANDCOST', 'TCODIRECEBANDCOST', 'Recepción'));
 
-            // Helper 2: Generador de Frases de Equipo
             const mencionarEquipo = (lista, sujetoDefault) => {
                 if (!lista || lista.length === 0) return sujetoDefault;
                 const nombres = lista.map(p => p.name.split(' ')[0]);
@@ -92,7 +88,6 @@
                 return `Un gran equipo conformado por ${nombres[0]}, ${nombres[1]} y ${restantes} expertos más`;
             };
 
-            // Helper 3: DETECTIVE DE MATERIALES
             const detectarMaterial = () => {
                 let mat = hilo.TDESCHILO || hilo.TDESCMATERIA;
                 if (!mat && info.TDESCPREN) {
@@ -107,43 +102,35 @@
                 return "Fibras de alta calidad";
             };
 
-            // Helper 4: DETECTIVE DE ZONA (Nuevo!)
             const detectarZona = () => {
-                // Buscamos si existe el campo TDESCZONA o TPROCEDENCIA en la data de hilo
-                // Si no, usamos un fallback bonito.
                 let zona = hilo.TDESCZONA || hilo.TPROCEDENCIA; 
                 if (zona) return `los valles de ${zona.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())}`;
                 return "los valles de la costa peruana";
             };
 
-            // VARIABLES DINÁMICAS
             const colorReal = info.TDESCETIQCLIE ? `"${info.TDESCETIQCLIE}"` : "este tono";
             const materialReal = detectarMaterial();
             const origenReal = detectarZona();
 
-            // --- AGREGA ESTO AQUÍ ABAJO 👇 ---
+            // --- LÓGICA DE LOGO DINÁMICO (V3: Prioridad Link > Local) ---
+            const codCliente = info.TCODICLIE || ""; // Ej: "0266"
+            // 1. Intentamos URL dinámica
+            const urlLogoDinamico = `http://psrvjboss01:8080/trazaP/resources/img/logos/logo_${codCliente}.png?ver=1.0`;
             
-            // LÓGICA DE LOGO:
+            // 2. Fallback local (por si el servidor JBoss es interno y no carga fuera)
             const nombreCliente = info.TNOMBCLIE || "nettalco";
-            // Quitamos espacios y pasamos a minúsculas (Ej: "LACOSTE" -> "lacoste")
             const logoFilename = nombreCliente.toLowerCase().replace(/\s+/g, ''); 
-            const rutaLogo = `./assets/logos/${logoFilename}.png`;
+            const rutaLogoLocal = `./assets/logos/${logoFilename}.png`;
 
-            // 1. Extraemos el código completo (Ej: TH6709-23)
+            // --- LÓGICA DE CÓDIGO CLICKEABLE ---
             const rawCode = info.TCODIESTICLIE || "";
-            
-            // 2. Limpiamos: Tomamos solo lo que está ANTES del guión "-"
-            const styleCode = rawCode.split('-')[0]; // Queda: "TH6709"
-
-            // 3. Generamos el Link de Búsqueda
-            // Truco: Buscamos "Marca + Código" en Google. Es infalible.
+            const styleCode = rawCode.split('-')[0];
             const searchUrl = `https://www.google.com/search?q=${info.TNOMBCLIE}+${styleCode}+official+site`;
-            
-            // -----------------------------------------------------------
 
             return {
                 header: {
-                    logo: rutaLogo,
+                    logoMain: urlLogoDinamico,
+                    logoFallback: rutaLogoLocal,
                     styleCode: styleCode, 
                     styleUrl: searchUrl,
                     brand: info.TNOMBCLIE || "LACOSTE",
@@ -158,9 +145,7 @@
                         stage: "ORIGEN", 
                         title: "La Fibra Inicial", 
                         date: hilo.TFECHGUIAHILO ? hilo.TFECHGUIAHILO.split(" ")[0] : "Dic 2025", 
-                        // LOCATION DINÁMICA: Si hay zona, la pone. Si no, pone "Perú"
                         location: hilo.TDESCZONA ? hilo.TDESCZONA : "Valles del Perú", 
-                        // DESCRIPCIÓN CON ZONA Y MATERIAL:
                         desc: `El viaje comienza en ${origenReal}. Seleccionamos exclusivamente ${materialReal}, reconocido mundialmente por su pureza, resistencia y tacto inigualable.`, 
                         icon: Icons.MapPin, 
                         people: [] 
@@ -219,16 +204,15 @@
             };
         };
 
-        // --- 4. COMPONENTES UI ---
+        // --- 4. COMPONENTES UI ACTUALIZADOS ---
 
         const PersonCard = ({ person, index }) => {
-            // ANTES:
-            // const nettalcoPhoto = person.id ? `http://app.nettalco.com.pe/php/foto.php?codigo=${person.id}` : null;
-
-            // AHORA (Usando el Túnel Seguro):
-            const nettalcoPhoto = person.id ? `/api/foto/${person.id}` : null;
-            const fallbackAvatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${person.name}&backgroundColor=c0aede,b6e3f4`;
+            // NUEVO LINK PÚBLICO SEGURO
+            const nettalcoPhoto = person.id ? `https://sicb.nettalco.com.pe/TrazabilidadWSphpPublico/servicio/getFoto/${person.id}` : null;
+            const fallbackAvatar = "https://ui-avatars.com/api/?name=" + person.name + "&background=e2e8f0&color=64748b&font-size=0.33";
+            
             const [imgSrc, setImgSrc] = useState(nettalcoPhoto || fallbackAvatar);
+
             useEffect(() => { setImgSrc(nettalcoPhoto || fallbackAvatar); }, [person.id]);
 
             return (
@@ -243,9 +227,16 @@
                         <img 
                             src={imgSrc} 
                             alt={person.name} 
-                            className="w-full h-full rounded-full object-cover border-2 border-white shadow-sm"
-                            onError={() => setImgSrc(fallbackAvatar)} 
+                            className="w-full h-full rounded-full object-cover border-2 border-white shadow-sm bg-gray-100"
+                            // LOGICA DE FALLBACK: Si falla el link público, carga el avatar
+                            onError={(e) => {
+                                if (e.target.src !== fallbackAvatar) {
+                                    setImgSrc(fallbackAvatar);
+                                }
+                            }} 
                         />
+                        {/* Pequeño check de verificado */}
+                        <div className="absolute bottom-0 right-0 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
                     </div>
                     <h4 className="text-xs font-bold text-gray-800 text-center leading-tight mb-0.5">{person.name}</h4>
                     <span className="text-[10px] text-gray-500 uppercase tracking-wide truncate max-w-full">{person.role}</span>
@@ -253,11 +244,8 @@
             );
         };
 
-        // --- NUEVO STEPCARD: Layout de Revista (Texto Izq | Imagen Der) ---
         const StepCard = ({ step, index }) => {
-            // Obtenemos la imagen temática basada en el ID de la etapa
             const themeImage = StageImages[step.id];
-
             return (
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}
@@ -266,17 +254,10 @@
                     transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
                     className="relative pl-10 pb-16 last:pb-0 group"
                 >
-                    {/* Línea conectora */}
                     <div className="absolute left-[9px] top-8 bottom-0 w-px bg-gray-200 group-last:hidden"></div>
-                    
-                    {/* Icono del paso */}
-                    <div className="absolute left-0 top-0 w-5 h-5 bg-green-700 rounded-full flex items-center justify-center border-[3px] border-white shadow-md z-10 box-content">
-                    </div>
+                    <div className="absolute left-0 top-0 w-5 h-5 bg-green-700 rounded-full flex items-center justify-center border-[3px] border-white shadow-md z-10 box-content"></div>
 
-                    {/* TARJETA GRID (La magia del layout) */}
                     <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100/80 overflow-hidden grid md:grid-cols-5 hover:shadow-xl transition-shadow duration-500">
-                        
-                        {/* COLUMNA IZQUIERDA: Contenido (Texto y Personas) */}
                         <div className="p-8 md:col-span-3 flex flex-col justify-center relative z-10">
                              <div className="flex justify-between items-center mb-6">
                                 <div className="flex items-center gap-3">
@@ -301,7 +282,6 @@
                             )}
                         </div>
 
-                        {/* COLUMNA DERECHA: Imagen Temática */}
                         {themeImage && (
                             <div className="relative h-64 md:h-auto md:col-span-2 overflow-hidden bg-gray-200">
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 md:bg-gradient-to-l"></div>
@@ -310,7 +290,6 @@
                                     transition={{ duration: 2 }}
                                     src={themeImage} 
                                     className="absolute inset-0 w-full h-full object-cover transform scale-105 origin-center"
-                                    // EL ESCUDO: Si la imagen falla, la ocultamos para ver el fondo gris limpio
                                     onError={(e) => { e.target.style.display = 'none'; }} 
                                 />
                             </div>
@@ -352,12 +331,10 @@
             );
 
             return (
-                // Contenedor principal más ancho para que luzcan las dos columnas
                 <div className="max-w-4xl mx-auto bg-white min-h-screen shadow-2xl relative overflow-hidden">
                     {/* HERO HEADER MEJORADO V2 */}
                     <header className="relative h-[55vh] min-h-[450px] bg-gray-900 text-white overflow-hidden z-10 flex flex-col justify-end">
                         
-                        {/* 1. IMAGEN DE FONDO (Más visible ahora) */}
                         <motion.img 
                             initial={{ scale: 1.1, opacity: 0 }}
                             animate={{ scale: 1, opacity: 0.9 }}
@@ -366,32 +343,34 @@
                             className="absolute inset-0 w-full h-full object-cover" 
                         />
 
-                        {/* 2. LOGO DE MARCA (Top Left) */}
+                        {/* LOGO DE MARCA (CON FALLBACK INTELIGENTE) */}
                         <div className="absolute top-0 left-0 p-6 z-20">
                              <div className="bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-lg">
                                 <img 
-                                    src={data.header.logo} 
+                                    src={data.header.logoMain} 
                                     alt={data.header.brand} 
                                     className="h-8 w-auto object-contain"
-                                    onError={(e) => { e.target.onerror = null; e.target.src='./assets/logos/nettalco.png'; }}
+                                    // SI FALLA EL LINK DE JBOSS, CARGA EL LOCAL
+                                    onError={(e) => { 
+                                        e.target.onerror = null; 
+                                        e.target.src = data.header.logoFallback; 
+                                        // SI TAMBIÉN FALLA EL LOCAL, CARGA NETTALCO
+                                        e.target.onerror = (ev) => { ev.target.src='./assets/logos/nettalco.png'; }
+                                    }}
                                 />
                              </div>
                         </div>
 
-                        {/* Degradados (Ajustados para que no sean tan oscuros) */}
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
                         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-transparent"></div>
                         
-                        {/* CONTENIDO DEL HEADER */}
                         <div className="relative z-30 p-6 md:p-16 pb-20 w-full max-w-3xl">
                             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
                                 
-                                {/* Badge de Colección */}
                                 <span className="inline-block glass px-3 py-1 rounded-full text-xs font-bold mb-4 tracking-wider text-white/90 border border-white/20">
                                     {data.header.collection.toUpperCase()}
                                 </span>
 
-                                {/* TÍTULO + CÓDIGO (Arreglado para Mobile) */}
                                 <h1 className="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
                                     {data.header.item}
                                     {data.header.styleCode && (
@@ -406,21 +385,15 @@
                                     )}
                                 </h1>
 
-                                {/* DATOS ENRIQUECIDOS (Esto llena el vacío) */}
                                 <div className="flex flex-wrap gap-3 mt-4">
-                                    {/* Color */}
                                     <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
                                         <div className="w-3 h-3 rounded-full bg-green-500 border border-white shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
                                         <span className="text-sm font-medium text-gray-200">{data.header.color}</span>
                                     </div>
-
-                                    {/* Material (Extraído de la data) */}
                                     <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
                                         <span className="text-sm">🌿</span>
                                         <span className="text-sm font-medium text-gray-200">Algodón Premium</span>
                                     </div>
-
-                                    {/* Origen */}
                                     <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
                                         <span className="text-sm">🇵🇪</span>
                                         <span className="text-sm font-medium text-gray-200">Made in Perú</span>
@@ -431,13 +404,11 @@
                         </div>
                     </header>
 
-                    {/* CONTENIDO PRINCIPAL */}
                     <main className="px-6 md:px-16 py-16 -mt-16 relative z-20 bg-white rounded-t-[3rem]">
                         <div className="mb-16">
                             {data.steps.map((step, index) => <StepCard key={step.id} step={step} index={index} />)}
                         </div>
 
-                        {/* FOOTER BLOCKCHAIN */}
                         <div className="bg-gray-900 rounded-[2.5rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl">
                             <div className="relative z-30">
                                 <h2 className="text-2xl font-bold text-white mb-3">Transparencia Radical</h2>
