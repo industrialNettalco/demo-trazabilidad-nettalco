@@ -1,0 +1,23 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/foto/:codigo",
+      "destination": "http://app.nettalco.com.pe/php/foto.php?codigo=:codigo"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/foto/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://demo-trazabilidad-nettalco.vercel.app"
+        }
+      ]
+    }
+  ]
+}

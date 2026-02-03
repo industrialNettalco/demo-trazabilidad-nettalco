@@ -222,7 +222,11 @@
         // --- 4. COMPONENTES UI ---
 
         const PersonCard = ({ person, index }) => {
-            const nettalcoPhoto = person.id ? `http://app.nettalco.com.pe/php/foto.php?codigo=${person.id}` : null;
+            // ANTES:
+            // const nettalcoPhoto = person.id ? `http://app.nettalco.com.pe/php/foto.php?codigo=${person.id}` : null;
+
+            // AHORA (Usando el Túnel Seguro):
+            const nettalcoPhoto = person.id ? `/api/foto/${person.id}` : null;
             const fallbackAvatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${person.name}&backgroundColor=c0aede,b6e3f4`;
             const [imgSrc, setImgSrc] = useState(nettalcoPhoto || fallbackAvatar);
             useEffect(() => { setImgSrc(nettalcoPhoto || fallbackAvatar); }, [person.id]);
