@@ -24,7 +24,8 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        // Busca esta línea al principio y cámbiala:
+        const { useState, useEffect, useRef } = React;
         const { motion, AnimatePresence } = window.Motion;
 
         // --- 1. MAPA DE IMÁGENES TEMÁTICAS ---
@@ -254,10 +255,31 @@
         const StepCard = ({ step, index }) => {
             const imageSrc = StageImages[step.id];
             const videoSrc = StageVideos[step.id];
+            const videoRef = useRef(null); // Referencia al video
             
-            // Estado para controlar si mostramos video o imagen
-            // Iniciamos intentando video SOLO si existe en el mapa
             const [showVideo, setShowVideo] = useState(!!videoSrc);
+
+            // EFECTO DE FUERZA BRUTA PARA AUTOPLAY EN MÓVIL
+            useEffect(() => {
+                if (showVideo && videoRef.current) {
+                    // 1. Decirle al navegador "TE JURO que está en silencio"
+                    videoRef.current.defaultMuted = true;
+                    videoRef.current.muted = true;
+                    
+                    // 2. Intentar reproducir suavemente
+                    const playPromise = videoRef.current.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            // Si el celular está en "Modo Ahorro de Batería", esto puede fallar.
+                            // En ese caso, ocultamos el video y mostramos la foto.
+                            console.log("Autoplay bloqueado por el celular:", error);
+                            // Opcional: Si prefieres que se vea la foto si no arranca el video:
+                            // setShowVideo(false); 
+                        });
+                    }
+                }
+            }, [showVideo]);
 
             return (
                 <motion.div 
@@ -301,16 +323,16 @@
                         <div className="relative h-64 md:h-auto md:col-span-2 overflow-hidden bg-gray-200">
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 md:bg-gradient-to-l"></div>
                             
-                            {/* LÓGICA DE PRIORIDAD: VIDEO -> FOTO */}
                             {showVideo ? (
                                 <video
+                                    ref={videoRef}
                                     src={videoSrc}
                                     className="absolute inset-0 w-full h-full object-cover transform scale-105 origin-center"
                                     autoPlay
                                     loop
                                     muted
-                                    playsInline // Importante para iPhone
-                                    // SI EL VIDEO FALLA (404), CAMBIAMOS A MODO FOTO
+                                    playsInline={true} // Obligatorio para iOS
+                                    webkit-playsinline="true" // Obligatorio para iOS antiguos
                                     onError={() => setShowVideo(false)}
                                 />
                             ) : (
