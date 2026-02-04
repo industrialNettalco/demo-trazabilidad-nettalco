@@ -37,6 +37,17 @@
             6: "./assets/fase6.png"
         };
 
+        // --- 1.1 MAPA DE VIDEOS (Prioridad) ---
+        // Asegúrate de crear la carpeta /assets/videos/ y poner archivos .mp4
+        const StageVideos = {
+            1: "./assets/videos/fase1.mp4",
+            2: "./assets/videos/fase2.mp4",
+            3: "./assets/videos/fase3.mp4",
+            4: "./assets/videos/fase4.mp4",
+            5: "./assets/videos/fase5.mp4",
+            6: "./assets/videos/fase6.mp4"
+        };
+
         // --- 2. ICONOS SVG ---
         const Icons = {
             MapPin: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>,
@@ -241,7 +252,13 @@
         };
 
         const StepCard = ({ step, index }) => {
-            const themeImage = StageImages[step.id];
+            const imageSrc = StageImages[step.id];
+            const videoSrc = StageVideos[step.id];
+            
+            // Estado para controlar si mostramos video o imagen
+            // Iniciamos intentando video SOLO si existe en el mapa
+            const [showVideo, setShowVideo] = useState(!!videoSrc);
+
             return (
                 <motion.div 
                     initial={{ opacity: 0, y: 30 }}
@@ -254,6 +271,8 @@
                     <div className="absolute left-0 top-0 w-5 h-5 bg-green-700 rounded-full flex items-center justify-center border-[3px] border-white shadow-md z-10 box-content"></div>
 
                     <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100/80 overflow-hidden grid md:grid-cols-5 hover:shadow-xl transition-shadow duration-500">
+                        
+                        {/* COLUMNA IZQUIERDA: Texto */}
                         <div className="p-8 md:col-span-3 flex flex-col justify-center relative z-10">
                              <div className="flex justify-between items-center mb-6">
                                 <div className="flex items-center gap-3">
@@ -278,18 +297,34 @@
                             )}
                         </div>
 
-                        {themeImage && (
-                            <div className="relative h-64 md:h-auto md:col-span-2 overflow-hidden bg-gray-200">
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 md:bg-gradient-to-l"></div>
-                                <motion.img 
-                                    whileHover={{ scale: 1.05 }}
-                                    transition={{ duration: 2 }}
-                                    src={themeImage} 
+                        {/* COLUMNA DERECHA: Video o Imagen */}
+                        <div className="relative h-64 md:h-auto md:col-span-2 overflow-hidden bg-gray-200">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 md:bg-gradient-to-l"></div>
+                            
+                            {/* LÓGICA DE PRIORIDAD: VIDEO -> FOTO */}
+                            {showVideo ? (
+                                <video
+                                    src={videoSrc}
                                     className="absolute inset-0 w-full h-full object-cover transform scale-105 origin-center"
-                                    onError={(e) => { e.target.style.display = 'none'; }} 
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline // Importante para iPhone
+                                    // SI EL VIDEO FALLA (404), CAMBIAMOS A MODO FOTO
+                                    onError={() => setShowVideo(false)}
                                 />
-                            </div>
-                        )}
+                            ) : (
+                                imageSrc && (
+                                    <motion.img 
+                                        whileHover={{ scale: 1.05 }}
+                                        transition={{ duration: 2 }}
+                                        src={imageSrc} 
+                                        className="absolute inset-0 w-full h-full object-cover transform scale-105 origin-center"
+                                        onError={(e) => { e.target.style.display = 'none'; }} 
+                                    />
+                                )
+                            )}
+                        </div>
                     </div>
                 </motion.div>
             );
