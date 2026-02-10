@@ -23,12 +23,11 @@
 <body>
     <div id="root"></div>
 
-    <script type="text/babel">
-        // Busca esta línea al principio y cámbiala:
+   <script type="text/babel">
         const { useState, useEffect, useRef, useMemo } = React;
         const { motion, AnimatePresence } = window.Motion;
 
-        // --- 1. CONFIGURACIÓN DE IDIOMAS (DICCIONARIO MAESTRO) ---
+        // --- 1. CONFIGURACIÓN DE IDIOMAS (CON NUEVA ETIQUETA AUDITORÍA) ---
         const TRANSLATIONS = {
             es: {
                 loading: "Cargando trazabilidad...",
@@ -41,6 +40,7 @@
                 season: "Temporada",
                 made_in: "Hecho en Perú",
                 cotton: "Algodón Premium",
+                audit_label: "Auditoría Final", // <--- NUEVO
                 stages: {
                     1: { title: "Materia Prima", desc: "El proceso inicia con {material} de {origin}. Seleccionamos exclusivamente fibras de la más alta calidad para asegurar un producto superior." },
                     2: { title: "Tejeduría", desc: "Contamos con equipos de última generación que permiten desarrollar diversos tipos de telas. {team} supervisó cada revolución para crear una estructura textil perfecta." },
@@ -70,6 +70,7 @@
                 season: "Season",
                 made_in: "Made in Peru",
                 cotton: "Premium Cotton",
+                audit_label: "Final Audit", // <--- NEW
                 stages: {
                     1: { title: "Raw Material", desc: "The process begins with {material} from {origin}. We select exclusively high-quality fibers to ensure a superior product." },
                     2: { title: "Knitting", desc: "We use state-of-the-art equipment to develop various fabric types. {team} monitored every revolution to create a perfect textile structure." },
@@ -90,7 +91,6 @@
             }
         };
 
-        // --- 2. ASSETS (Imágenes y Videos) ---
         const StageImages = {
             1: "./assets/fase1.png", 2: "./assets/fase2.png", 3: "./assets/fase3.png",
             4: "./assets/fase4.png", 5: "./assets/fase5.png", 6: "./assets/fase6.png"
@@ -110,7 +110,7 @@
             Globe: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         };
 
-        // --- 3. LOGICA DE FORMATEO (AHORA BILINGÜE) ---
+        // --- 3. LÓGICA DE FORMATEO (AHORA EXTRACCIÓN DE AUDITORÍA) ---
         const formatData = (raw, lang) => {
             const T = TRANSLATIONS[lang];
 
@@ -121,7 +121,6 @@
                     const name = item[nameKey];
                     const id = item[idKey]; 
                     if (name && !unique[name]) {
-                        // Traducir el Rol: Si tiene rol especifico en data lo intentamos traducir, si no usamos el default
                         let roleDisplay = T.roles[roleKeyTrans]; 
                         unique[name] = {
                             name: name.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
@@ -136,6 +135,9 @@
             const info = raw.tztotrazwebinfo?.[0] || {};
             const alma = raw.tztotrazwebalma?.[0] || {};
             const hilo = raw.tztotrazwebhiloloteprin?.[0] || {};
+            
+            // EXTRAEMOS LA FECHA DE AUDITORÍA
+            const fechaAuditoria = raw.tztotrazwebacab?.[0]?.TFECHAUDI?.split(" ")[0] || null;
 
             const tejedores = getPeople(raw.tztotrazwebteje, 'TNOMBPERS', 'TCODIPERS', 'tejedor');
             const tintoreros = getPeople(raw.tztotrazwebtint, 'TNOMBOPERACABINIC', 'TOPERACABINIC', 'acabado').concat(getPeople(raw.tztotrazwebtint, 'TNOMBOPERCORTINIC', 'TOPERCORTINIC', 'apertura'));
@@ -143,7 +145,6 @@
             const confeccionistas = getPeople(raw.tztotrazwebcostoper, 'TNOMBPERS', 'TCODIPERS', 'confeccion', 'TDESCOPERESPE').concat(getPeople(raw.tztotrazwebcost, 'TNOMBPERSSUPE', 'TCODIPERSSUPE', 'supervisora'));
             const logistica = getPeople(raw.tztotrazwebacab, 'TNOMBPERSPESA', 'TCODIPERSPESA', 'empaque').concat(getPeople(raw.tztotrazwebacab, 'TNOMBRECEBANDCOST', 'TCODIRECEBANDCOST', 'recepcion'));
 
-            // Constructor de frases de equipo Bilingüe
             const mencionarEquipo = (lista) => {
                 if (!lista || lista.length === 0) return lang === 'en' ? "Our team" : "Nuestro equipo";
                 const nombres = lista.map(p => p.name.split(' ')[0]);
@@ -156,7 +157,6 @@
 
             const detectarMaterial = () => {
                 let mat = hilo.TDESCHILO || hilo.TDESCMATERIA;
-                // Lógica simple de traducción de materiales conocidos
                 if (!mat && info.TDESCPREN) {
                     const nombre = info.TDESCPREN.toUpperCase();
                     if (lang === 'en') {
@@ -273,7 +273,8 @@
                         location: lang === 'en' ? "Distribution Center" : "Centro de Distribución", 
                         desc: T.stages[6].desc.replace('{team}', mencionarEquipo(logistica)), 
                         icon: Icons.Box, 
-                        people: logistica 
+                        people: logistica,
+                        auditDate: fechaAuditoria // <--- AQUÍ PASAMOS EL DATO
                     }
                 ]
             };
@@ -362,6 +363,15 @@
                             </div>
                             
                             <h3 className="text-2xl font-extrabold text-gray-900 mb-3 tracking-tight">{step.title}</h3>
+
+                            {/* MOSTRAR FECHA DE AUDITORÍA SI EXISTE */}
+                            {step.auditDate && (
+                                <div className="mb-4 flex items-center gap-2">
+                                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">{T.audit_label}:</span>
+                                    <span className="text-sm font-semibold text-gray-800 bg-gray-100 px-2 py-0.5 rounded-md border border-gray-200">{step.auditDate}</span>
+                                </div>
+                            )}
+
                             <p className="text-base text-gray-600 mb-8 leading-relaxed font-medium">{step.desc}</p>
                             
                             {step.people.length > 0 && (
@@ -405,7 +415,7 @@
 
         const App = () => {
             const [rawData, setRawData] = useState(null);
-            const [lang, setLang] = useState('es'); // ESTADO DEL IDIOMA
+            const [lang, setLang] = useState('es'); 
             const [loading, setLoading] = useState(true);
 
             useEffect(() => {
@@ -424,7 +434,6 @@
                 loadData();
             }, []);
 
-            // Recalcular datos cada vez que cambia el idioma o la data
             const data = useMemo(() => {
                 if (!rawData) return null;
                 return formatData(rawData, lang);
@@ -445,7 +454,6 @@
             return (
                 <div className="max-w-4xl mx-auto bg-white min-h-screen shadow-2xl relative overflow-hidden">
                     
-                    {/* BOTÓN FLOTANTE DE IDIOMA (NUEVO) */}
                     <button 
                         onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
                         className="fixed bottom-6 right-6 z-50 bg-gray-900 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 font-bold hover:scale-105 transition-transform border border-gray-700"
