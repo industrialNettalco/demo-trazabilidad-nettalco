@@ -43,6 +43,13 @@
                 audit_label: "Auditoría Final",
                 audit_role: "Auditor de Calidad",
                 certified_by: "Certificado por",
+                
+                // NUEVO ---
+                mrsl_title: "Certificación MRSL / ZDHC",
+                mrsl_desc: "Insumos químicos certificados que cumplen con estándares de sostenibilidad y cero descarga de sustancias peligrosas.",
+                chemical_list: "Insumos Utilizados:",
+                // ---------
+
                 stages: {
                     1: { title: "Materia Prima", desc: "El proceso inicia con {material} de {origin}. Seleccionamos exclusivamente fibras de la más alta calidad para asegurar un producto superior." },
                     2: { title: "Tejeduría", desc: "Contamos con equipos de última generación que permiten desarrollar diversos tipos de telas. {team} supervisó cada revolución para crear una estructura textil perfecta." },
@@ -75,6 +82,13 @@
                 audit_label: "Final Audit",
                 audit_role: "Quality Auditor",
                 certified_by: "Certified by",
+                
+                // NUEVO ---
+                mrsl_title: "MRSL / ZDHC Compliance",
+                mrsl_desc: "Certified chemical inputs that meet sustainability standards and zero discharge of hazardous chemicals.",
+                chemical_list: "Chemical Inputs Used:",
+                // ---------
+                
                 stages: {
                     1: { title: "Raw Material", desc: "The process begins with {material} from {origin}. We select exclusively high-quality fibers to ensure a superior product." },
                     2: { title: "Knitting", desc: "We use state-of-the-art equipment to develop various fabric types. {team} monitored every revolution to create a perfect textile structure." },
@@ -99,6 +113,7 @@
             1: "./assets/fase1.png", 2: "./assets/fase2.png", 3: "./assets/fase3.png",
             4: "./assets/fase4.png", 5: "./assets/fase5.png", 6: "./assets/fase6.png"
         };
+
         const StageVideos = {
             1: "./assets/videos/fase1.mp4", 2: "./assets/videos/fase2.mp4", 3: "./assets/videos/fase3.mp4",
             4: "./assets/videos/fase4.mp4", 5: "./assets/videos/fase5.mp4", 6: "./assets/videos/fase6.mp4"
@@ -112,10 +127,11 @@
             CheckCircle2: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>,
             Box: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>,
             Globe: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-            Award: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            Award: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>,
+            Flask: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><line x1="8.5" x2="15.5" y1="2" y2="2"/><path d="M8.5 2h7"/><path d="M9 2v4"/><path d="M15 2v4"/></svg>
         };
 
-        // --- 3. LÓGICA DE FORMATEO ---
+        // --- 3. LÓGICA DE FORMATEO (FINAL CON MRSL) ---
         const formatData = (raw, lang) => {
             const T = TRANSLATIONS[lang];
 
@@ -141,9 +157,8 @@
             const alma = raw.tztotrazwebalma?.[0] || {};
             const hilo = raw.tztotrazwebhiloloteprin?.[0] || {};
             
+            // --- 1. LÓGICA AUDITOR ---
             const fechaAuditoria = raw.tztotrazwebacab?.[0]?.TFECHAUDI?.split(" ")[0] || null;
-
-            // --- EXTRACCIÓN DEL AUDITOR (CORREGIDO) ---
             const nombreAuditorRaw = raw.tztotrazwebacab?.[0]?.TNOMBPERSAUDI; 
             const idAuditorRaw = raw.tztotrazwebacab?.[0]?.TCODIPERSAUDI;
             
@@ -156,8 +171,11 @@
                     date: fechaAuditoria
                 };
             }
-            // -----------------------------
 
+            // --- 2. LÓGICA QUÍMICOS (MRSL) ---
+            const quimicos = raw.quimicos_certificados || []; 
+
+            // --- 3. LÓGICA CALIDAD ---
             const detectarCalidad = () => {
                 const rawQ = info.TDESCCLASPREN; 
                 if (!rawQ) return lang === 'en' ? "Export Quality" : "Calidad de Exportación";
@@ -171,9 +189,9 @@
                 } 
                 return rawQ.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
             };
-
             const calidadDisplay = detectarCalidad(); 
 
+            // --- 4. EQUIPOS Y PERSONAL ---
             const tejedores = getPeople(raw.tztotrazwebteje, 'TNOMBPERS', 'TCODIPERS', 'tejedor');
             const tintoreros = getPeople(raw.tztotrazwebtint, 'TNOMBOPERACABINIC', 'TOPERACABINIC', 'acabado').concat(getPeople(raw.tztotrazwebtint, 'TNOMBOPERCORTINIC', 'TOPERCORTINIC', 'apertura'));
             const cortadores = getPeople(raw.tztotrazwebcortoper, 'TNOMBPERS', 'TCODIPERS', 'corte');
@@ -190,6 +208,7 @@
                 return T.team_templates.big_team.replace('{n1}', nombres[0]).replace('{n2}', nombres[1]).replace('{n3}', restantes);
             };
 
+            // --- 5. DETALLES TÉCNICOS ---
             const detectarMaterial = () => {
                 let mat = hilo.TDESCHILO || hilo.TDESCMATERIA;
                 if (!mat && info.TDESCPREN) {
@@ -279,7 +298,8 @@
                         location: lang === 'en' ? "Dyeing Plant" : "Planta de Teñido", 
                         desc: T.stages[3].desc.replace('{color}', colorReal), 
                         icon: Icons.Droplets, 
-                        people: tintoreros 
+                        people: tintoreros,
+                        chemicals: quimicos 
                     },
                     { 
                         id: 4, 
@@ -446,6 +466,39 @@
                                     label={T.audit_label} 
                                     certifiedLabel={T.certified_by}
                                 />
+                            )}
+
+                            {/* --- NUEVO: SECCIÓN QUÍMICOS MRSL (Si existe) --- */}
+                            {step.chemicals && step.chemicals.length > 0 && (
+                                <div className="mb-6 bg-teal-50/50 rounded-xl p-4 border border-teal-100/60 animate-fade-in-up">
+                                    <div className="flex items-start gap-3 mb-3">
+                                        <div className="bg-teal-100 text-teal-600 p-2 rounded-lg shadow-sm">
+                                            {Icons.Flask}
+                                        </div>
+                                        <div>
+                                            <h4 className="text-sm font-bold text-teal-800 leading-tight flex items-center gap-2">
+                                                {T.mrsl_title}
+                                                <span className="text-[10px] bg-teal-600 text-white px-1.5 py-0.5 rounded-full shadow-sm tracking-wide">COMPLIANT</span>
+                                            </h4>
+                                            <p className="text-xs text-teal-600/80 mt-1 leading-snug font-medium">{T.mrsl_desc}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="mt-3 pt-3 border-t border-teal-100/60">
+                                        <p className="text-[10px] font-bold text-teal-800 uppercase mb-2 tracking-wider flex items-center gap-1">
+                                            {T.chemical_list}
+                                        </p>
+                                        <ul className="grid grid-cols-1 gap-2">
+                                            {step.chemicals.map((q, i) => (
+                                                <li key={i} className="flex items-center gap-2 text-xs text-gray-600 bg-white/60 px-2 py-1 rounded border border-teal-50">
+                                                    <span className="text-teal-500 font-bold text-sm">✓</span>
+                                                    <span className="font-semibold text-gray-700 truncate flex-1" title={q.nombre}>{q.nombre}</span>
+                                                    {q.proveedor && <span className="text-[9px] text-gray-400 border border-gray-200 px-1.5 py-0.5 rounded ml-auto uppercase tracking-wide bg-gray-50">{q.proveedor}</span>}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
                             )}
 
                             <p className="text-base text-gray-600 mb-8 leading-relaxed font-medium">{step.desc}</p>
