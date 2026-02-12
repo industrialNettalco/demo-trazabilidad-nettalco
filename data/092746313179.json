@@ -3882,5 +3882,12 @@
    "TZONAORIGHILO": "La Libertad (Perú)"
   },
   {}
- ]
+ ],
+ "quimicos_certificados": [],
+ "stats_mrsl": {
+  "total": 0,
+  "cumple": 0,
+  "no_cumple": 0,
+  "porcentaje": 0
+ }
 }
