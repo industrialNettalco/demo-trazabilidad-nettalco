@@ -77,8 +77,8 @@ if __name__ == "__main__":
     
     lote = [
         {
-            "tick": "092686113013", 
-            "hash": "json_rescatados" 
+            "tick": "092583907531", 
+            "hash": "092583907531" 
         }
     ]
 
