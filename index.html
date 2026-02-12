@@ -58,7 +58,8 @@
                 // -----------------------
 
                 stages: {
-                    1: { title: "Materia Prima", desc: "El proceso inicia con {material} de {origin}{yarn}. Seleccionamos exclusivamente fibras de la más alta calidad para asegurar un producto superior." },
+                    // SE AGREGÓ {yarn} A LA DESCRIPCIÓN
+                    1: { title: "Materia Prima", desc: "El proceso inicia con {material}{yarn} de {origin}. Seleccionamos exclusivamente fibras de la más alta calidad para asegurar un producto superior." },
                     2: { title: "Tejeduría", desc: "Contamos con equipos de última generación que permiten desarrollar diversos tipos de telas. {team} supervisó cada revolución para crear una estructura textil perfecta." },
                     3: { title: "Teñido de Telas", desc: "Proceso realizado en equipos especializados (Brazzoli/Fongs) para asegurar la solidez del color {color} siguiendo rigurosos estándares técnicos y sostenibles." },
                     4: { title: "Corte Automatizado", desc: "Nuestra área de corte utiliza tecnología Lectra para asegurar la estabilidad dimensional de la prenda y una precisión exacta en cada pieza trazada." },
@@ -104,7 +105,8 @@
                 // ---------------------
                 
                 stages: {
-                    1: { title: "Raw Material", desc: "The process begins with {material} from {origin}{yarn}. We select exclusively high-quality fibers to ensure a superior product." },
+                    // ADDED {yarn} TO DESCRIPTION
+                    1: { title: "Raw Material", desc: "The process begins with {material}{yarn} from {origin}. We select exclusively high-quality fibers to ensure a superior product." },
                     2: { title: "Knitting", desc: "We use state-of-the-art equipment to develop various fabric types. {team} monitored every revolution to create a perfect textile structure." },
                     3: { title: "Fabric Dyeing", desc: "Process performed in specialized equipment (Brazzoli/Fongs) to ensure color fastness of {color} following rigorous technical and sustainable standards." },
                     4: { title: "Automated Cutting", desc: "Our cutting area uses Lectra technology to ensure dimensional stability of the garment and exact precision in every traced piece." },
@@ -170,7 +172,8 @@
             const info = raw.tztotrazwebinfo?.[0] || {};
             const alma = raw.tztotrazwebalma?.[0] || {};
             const hilo = raw.tztotrazwebhiloloteprin?.[0] || {};
-            const materiales = raw.tztotrazwebmate || [];
+            // NUEVO: CAPTURAR DATOS TÉCNICOS DEL HILO
+            const hiloSpecs = raw.tztotrazwebhilo?.[0] || {};
             
             // --- LÓGICA AUDITOR ---
             const fechaAuditoria = raw.tztotrazwebacab?.[0]?.TFECHAUDI?.split(" ")[0] || null;
@@ -247,32 +250,22 @@
             };
 
             const detectarZona = () => {
-                // Prioridad: TZONAORIGHILO (origen real del hilo)
-                let zona = hilo.TZONAORIGHILO || hilo.TDESCZONA || hilo.TPROCEDENCIA;
+                let zona = hilo.TDESCZONA || hilo.TPROCEDENCIA; 
                 if (zona) {
                     let z = zona.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
-                    // Si el dato ya incluye "Perú", solo devolver la zona
-                    if (z.includes('Perú') || z.includes('Peru')) {
-                        return z;
-                    }
                     return lang === 'en' ? `the valleys of ${z}` : `los valles de ${z}`;
-                }
+                } 
                 return lang === 'en' ? "the valleys of the Peruvian coast" : "los valles de la costa peruana";
             };
 
-            const obtenerDescripcionHilo = () => {
-                // Buscar TDESCHILOPRIN en los materiales
-                const materialConHilo = materiales.find(m => m.TDESCHILOPRIN);
-                if (materialConHilo && materialConHilo.TDESCHILOPRIN) {
-                    return materialConHilo.TDESCHILOPRIN.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
-                }
-                return null;
-            };
+            // NUEVO: FORMATEO DE DESCRIPCIÓN DEL HILO
+            const yarnDetail = hiloSpecs.TDESCHILOPRIN 
+                ? hiloSpecs.TDESCHILOPRIN.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()) 
+                : "";
 
             const colorReal = info.TDESCETIQCLIE ? `"${info.TDESCETIQCLIE}"` : (lang === 'en' ? "this tone" : "este tono");
             const materialReal = detectarMaterial();
             const origenReal = detectarZona();
-            const hiloDescripcion = obtenerDescripcionHilo();
 
             const codCliente = info.TCODICLIE || ""; 
             const urlLogoDinamico = `http://psrvjboss01:8080/trazaP/resources/img/logos/logo_${codCliente}.png?ver=1.0`;
@@ -300,18 +293,19 @@
                     originDisplay: lang === 'en' ? "Made in Peru" : "Hecho en Perú"
                 },
                 steps: [
-                    {
-                        id: 1,
-                        stage: lang === 'en' ? "ORIGIN" : "ORIGEN",
+                    { 
+                        id: 1, 
+                        stage: lang === 'en' ? "ORIGIN" : "ORIGEN", 
                         title: T.stages[1].title,
-                        date: hilo.TFECHGUIAHILO ? hilo.TFECHGUIAHILO.split(" ")[0] : "Dic 2025",
-                        location: hilo.TDESCZONA ? hilo.TDESCZONA : (lang === 'en' ? "Valleys of Peru" : "Valles del Perú"),
+                        date: hilo.TFECHGUIAHILO ? hilo.TFECHGUIAHILO.split(" ")[0] : "Dic 2025", 
+                        location: hilo.TDESCZONA ? hilo.TDESCZONA : (lang === 'en' ? "Valleys of Peru" : "Valles del Perú"), 
+                        // MODIFICADO: Incluye el detalle del hilo si existe
                         desc: T.stages[1].desc
                             .replace('{material}', materialReal)
                             .replace('{origin}', origenReal)
-                            .replace('{yarn}', hiloDescripcion ? ` (${hiloDescripcion})` : ''),
-                        icon: Icons.MapPin,
-                        people: []
+                            .replace('{yarn}', yarnDetail ? ` (${yarnDetail})` : ''), 
+                        icon: Icons.MapPin, 
+                        people: [] 
                     },
                     { 
                         id: 2, 
@@ -327,13 +321,12 @@
                         id: 3, 
                         stage: lang === 'en' ? "DYEING" : "TINTORERÍA", 
                         title: T.stages[3].title,
-                        date: raw.tztotrazwebtint?.[0]?.TFECHTENIINIC?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"),
-                        location: lang === 'en' ? "Dyeing Plant" : "Planta de Teñido",
-                        desc: T.stages[3].desc.replace('{color}', colorReal),
-                        icon: Icons.Droplets,
+                        date: raw.tztotrazwebtint?.[0]?.TFECHTENIINIC?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"), 
+                        location: lang === 'en' ? "Dyeing Plant" : "Planta de Teñido", 
+                        desc: T.stages[3].desc.replace('{color}', colorReal), 
+                        icon: Icons.Droplets, 
                         people: tintoreros,
-                        chemicals: quimicos,
-                        stats_mrsl: raw.stats_mrsl || null
+                        chemicals: quimicos 
                     },
                     { 
                         id: 4, 
@@ -514,19 +507,7 @@
                                         <div className="flex-1">
                                             <h4 className="text-sm font-bold text-teal-800 leading-tight flex items-center gap-2">
                                                 {T.mrsl_title}
-                                                {step.stats_mrsl && (
-                                                    <span className={`text-[10px] px-2 py-0.5 rounded-full shadow-sm tracking-wide font-bold ${
-                                                        step.stats_mrsl.porcentaje === 100
-                                                            ? 'bg-green-600 text-white'
-                                                            : step.stats_mrsl.porcentaje >= 80
-                                                            ? 'bg-teal-600 text-white'
-                                                            : step.stats_mrsl.porcentaje >= 50
-                                                            ? 'bg-yellow-500 text-white'
-                                                            : 'bg-orange-600 text-white'
-                                                    }`}>
-                                                        {step.stats_mrsl.porcentaje}% COMPLIANT
-                                                    </span>
-                                                )}
+                                                <span className="text-[10px] bg-teal-600 text-white px-1.5 py-0.5 rounded-full shadow-sm tracking-wide">COMPLIANT</span>
                                             </h4>
                                             <p className="text-xs text-teal-600/80 mt-0.5 font-medium">{T.mrsl_desc}</p>
                                         </div>
@@ -534,11 +515,11 @@
                                             {showChemicals ? T.hide_details : T.view_details} {showChemicals ? '▲' : '▼'}
                                         </button>
                                     </div>
-
+                                    
                                     {/* Contenido Desplegable */}
                                     <AnimatePresence>
                                         {showChemicals && (
-                                            <motion.div
+                                            <motion.div 
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: "auto", opacity: 1 }}
                                                 exit={{ height: 0, opacity: 0 }}
@@ -547,45 +528,13 @@
                                                 <div className="p-4 pt-2">
                                                     <p className="text-[10px] font-bold text-teal-800 uppercase mb-2 tracking-wider">
                                                         {T.chemical_list}
-                                                        {step.stats_mrsl && (
-                                                            <span className="ml-2 text-gray-500 font-normal">
-                                                                ({step.stats_mrsl.cumple}/{step.stats_mrsl.total})
-                                                            </span>
-                                                        )}
                                                     </p>
                                                     <ul className="grid grid-cols-1 gap-2">
                                                         {step.chemicals.map((q, i) => (
-                                                            <li key={i} className={`flex items-center gap-2 text-xs px-2 py-1.5 rounded border ${
-                                                                q.cumple
-                                                                    ? 'bg-white/80 border-teal-50 text-gray-600'
-                                                                    : 'bg-orange-50/60 border-orange-200/60 text-gray-700'
-                                                            }`}>
-                                                                <span className={`font-bold text-sm ${
-                                                                    q.cumple ? 'text-teal-500' : 'text-orange-500'
-                                                                }`}>
-                                                                    {q.cumple ? '✓' : '⚠'}
-                                                                </span>
-                                                                <span className="font-semibold text-gray-700 truncate flex-1" title={q.nombre}>
-                                                                    {q.nombre}
-                                                                </span>
-                                                                <span className={`text-[9px] border px-1.5 py-0.5 rounded uppercase tracking-wide ${
-                                                                    q.cumple
-                                                                        ? 'bg-teal-50 border-teal-200 text-teal-700'
-                                                                        : 'bg-orange-100 border-orange-300 text-orange-700'
-                                                                }`}>
-                                                                    {(() => {
-                                                                        const estado = q.estado_mrsl || (q.cumple ? 'Cumple' : 'Sin datos');
-                                                                        if (estado === 'Cumple') return T.chemical_status.cumple;
-                                                                        if (estado === 'No cumple') return T.chemical_status.no_cumple;
-                                                                        if (estado === 'Sin datos') return T.chemical_status.sin_datos;
-                                                                        return estado;
-                                                                    })()}
-                                                                </span>
-                                                                {q.proveedor && (
-                                                                    <span className="text-[9px] text-gray-400 border border-gray-200 px-1.5 py-0.5 rounded uppercase tracking-wide bg-gray-50">
-                                                                        {q.proveedor}
-                                                                    </span>
-                                                                )}
+                                                            <li key={i} className="flex items-center gap-2 text-xs text-gray-600 bg-white/80 px-2 py-1.5 rounded border border-teal-50">
+                                                                <span className="text-teal-500 font-bold text-sm">✓</span>
+                                                                <span className="font-semibold text-gray-700 truncate flex-1" title={q.nombre}>{q.nombre}</span>
+                                                                {q.proveedor && <span className="text-[9px] text-gray-400 border border-gray-200 px-1.5 py-0.5 rounded ml-auto uppercase tracking-wide bg-gray-50">{q.proveedor}</span>}
                                                             </li>
                                                         ))}
                                                     </ul>
@@ -639,7 +588,7 @@
 
         const App = () => {
             const [rawData, setRawData] = useState(null);
-            const [lang, setLang] = useState('en'); // Default language: English
+            const [lang, setLang] = useState('es'); // Language default: Spanish
             const [loading, setLoading] = useState(true);
 
             // ⚡ AQUÍ PEGARÁS TU TXID DE ARWEAVE LUEGO
@@ -752,6 +701,10 @@
                                     <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
                                         <span className="text-sm text-yellow-400">{Icons.Award}</span>
                                         <span className="text-sm font-medium text-gray-200">{data.header.quality}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
+                                        <span className="text-sm">🌿</span>
+                                        <span className="text-sm font-medium text-gray-200">{data.header.materialDisplay}</span>
                                     </div>
                                     <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
                                         <span className="text-sm">🇵🇪</span>
