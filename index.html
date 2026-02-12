@@ -50,6 +50,11 @@
                 chemical_list: "Insumos Utilizados:",
                 view_details: "Ver detalle",
                 hide_details: "Ocultar",
+                chemical_status: {
+                    cumple: "Cumple",
+                    no_cumple: "No cumple",
+                    sin_datos: "Sin datos"
+                },
                 // -----------------------
 
                 stages: {
@@ -91,6 +96,11 @@
                 chemical_list: "Chemical Inputs Used:",
                 view_details: "View details",
                 hide_details: "Hide",
+                chemical_status: {
+                    cumple: "Compliant",
+                    no_cumple: "Non-compliant",
+                    sin_datos: "No data"
+                },
                 // ---------------------
                 
                 stages: {
@@ -549,7 +559,13 @@
                                                                         ? 'bg-teal-50 border-teal-200 text-teal-700'
                                                                         : 'bg-orange-100 border-orange-300 text-orange-700'
                                                                 }`}>
-                                                                    {q.estado_mrsl || (q.cumple ? 'Cumple' : 'Sin datos')}
+                                                                    {(() => {
+                                                                        const estado = q.estado_mrsl || (q.cumple ? 'Cumple' : 'Sin datos');
+                                                                        if (estado === 'Cumple') return T.chemical_status.cumple;
+                                                                        if (estado === 'No cumple') return T.chemical_status.no_cumple;
+                                                                        if (estado === 'Sin datos') return T.chemical_status.sin_datos;
+                                                                        return estado;
+                                                                    })()}
                                                                 </span>
                                                                 {q.proveedor && (
                                                                     <span className="text-[9px] text-gray-400 border border-gray-200 px-1.5 py-0.5 rounded uppercase tracking-wide bg-gray-50">
