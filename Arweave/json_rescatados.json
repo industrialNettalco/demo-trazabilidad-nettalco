@@ -2042,50 +2042,63 @@
    "nombre": "ANTIMUSSOL UDF.BR LIQ.",
    "proveedor": "",
    "origen": "BRASIL",
-   "certificado": true,
-   "estado_mrsl": "Cumple"
+   "estado_mrsl": "Cumple",
+   "cumple": true
+  },
+  {
+   "nombre": "SARABID LDR",
+   "proveedor": "",
+   "origen": "PERÚ",
+   "estado_mrsl": "Sin datos",
+   "cumple": false
   },
   {
    "nombre": "SAL MOLIDA EXTRA (NACL)/CLORUR",
    "proveedor": "",
    "origen": "PERÚ",
-   "certificado": true,
-   "estado_mrsl": "Cumple"
+   "estado_mrsl": "Cumple",
+   "cumple": true
   },
   {
    "nombre": "ACIDO ACETICO GLACIAL",
    "proveedor": "",
    "origen": "CHINA",
-   "certificado": true,
-   "estado_mrsl": "Cumple"
+   "estado_mrsl": "Cumple",
+   "cumple": true
   },
   {
    "nombre": "NEUTRACID NCS",
    "proveedor": "",
    "origen": "PERÚ",
-   "certificado": true,
-   "estado_mrsl": "Cumple"
+   "estado_mrsl": "Cumple",
+   "cumple": true
   },
   {
    "nombre": "BIAVIN BPA",
    "proveedor": "",
    "origen": "PERÚ",
-   "certificado": true,
-   "estado_mrsl": "Cumple"
+   "estado_mrsl": "Cumple",
+   "cumple": true
   },
   {
    "nombre": "SODA CAUSTICA PERLAS(LABOR)",
    "proveedor": "",
    "origen": "TAIWAN",
-   "certificado": true,
-   "estado_mrsl": "Cumple"
+   "estado_mrsl": "Cumple",
+   "cumple": true
   },
   {
    "nombre": "COTOBLANC PCA",
    "proveedor": "",
    "origen": "PERÚ",
-   "certificado": true,
-   "estado_mrsl": "Cumple"
+   "estado_mrsl": "Cumple",
+   "cumple": true
   }
- ]
+ ],
+ "stats_mrsl": {
+  "total": 8,
+  "cumple": 7,
+  "no_cumple": 1,
+  "porcentaje": 87.5
+ }
 }

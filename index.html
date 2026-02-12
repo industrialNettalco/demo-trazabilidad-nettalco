@@ -303,12 +303,13 @@
                         id: 3, 
                         stage: lang === 'en' ? "DYEING" : "TINTORERÍA", 
                         title: T.stages[3].title,
-                        date: raw.tztotrazwebtint?.[0]?.TFECHTENIINIC?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"), 
-                        location: lang === 'en' ? "Dyeing Plant" : "Planta de Teñido", 
-                        desc: T.stages[3].desc.replace('{color}', colorReal), 
-                        icon: Icons.Droplets, 
+                        date: raw.tztotrazwebtint?.[0]?.TFECHTENIINIC?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"),
+                        location: lang === 'en' ? "Dyeing Plant" : "Planta de Teñido",
+                        desc: T.stages[3].desc.replace('{color}', colorReal),
+                        icon: Icons.Droplets,
                         people: tintoreros,
-                        chemicals: quimicos 
+                        chemicals: quimicos,
+                        stats_mrsl: raw.stats_mrsl || null
                     },
                     { 
                         id: 4, 
@@ -489,7 +490,19 @@
                                         <div className="flex-1">
                                             <h4 className="text-sm font-bold text-teal-800 leading-tight flex items-center gap-2">
                                                 {T.mrsl_title}
-                                                <span className="text-[10px] bg-teal-600 text-white px-1.5 py-0.5 rounded-full shadow-sm tracking-wide">COMPLIANT</span>
+                                                {step.stats_mrsl && (
+                                                    <span className={`text-[10px] px-2 py-0.5 rounded-full shadow-sm tracking-wide font-bold ${
+                                                        step.stats_mrsl.porcentaje === 100
+                                                            ? 'bg-green-600 text-white'
+                                                            : step.stats_mrsl.porcentaje >= 80
+                                                            ? 'bg-teal-600 text-white'
+                                                            : step.stats_mrsl.porcentaje >= 50
+                                                            ? 'bg-yellow-500 text-white'
+                                                            : 'bg-orange-600 text-white'
+                                                    }`}>
+                                                        {step.stats_mrsl.porcentaje}% COMPLIANT
+                                                    </span>
+                                                )}
                                             </h4>
                                             <p className="text-xs text-teal-600/80 mt-0.5 font-medium">{T.mrsl_desc}</p>
                                         </div>
@@ -497,11 +510,11 @@
                                             {showChemicals ? T.hide_details : T.view_details} {showChemicals ? '▲' : '▼'}
                                         </button>
                                     </div>
-                                    
+
                                     {/* Contenido Desplegable */}
                                     <AnimatePresence>
                                         {showChemicals && (
-                                            <motion.div 
+                                            <motion.div
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: "auto", opacity: 1 }}
                                                 exit={{ height: 0, opacity: 0 }}
@@ -510,13 +523,39 @@
                                                 <div className="p-4 pt-2">
                                                     <p className="text-[10px] font-bold text-teal-800 uppercase mb-2 tracking-wider">
                                                         {T.chemical_list}
+                                                        {step.stats_mrsl && (
+                                                            <span className="ml-2 text-gray-500 font-normal">
+                                                                ({step.stats_mrsl.cumple}/{step.stats_mrsl.total})
+                                                            </span>
+                                                        )}
                                                     </p>
                                                     <ul className="grid grid-cols-1 gap-2">
                                                         {step.chemicals.map((q, i) => (
-                                                            <li key={i} className="flex items-center gap-2 text-xs text-gray-600 bg-white/80 px-2 py-1.5 rounded border border-teal-50">
-                                                                <span className="text-teal-500 font-bold text-sm">✓</span>
-                                                                <span className="font-semibold text-gray-700 truncate flex-1" title={q.nombre}>{q.nombre}</span>
-                                                                {q.proveedor && <span className="text-[9px] text-gray-400 border border-gray-200 px-1.5 py-0.5 rounded ml-auto uppercase tracking-wide bg-gray-50">{q.proveedor}</span>}
+                                                            <li key={i} className={`flex items-center gap-2 text-xs px-2 py-1.5 rounded border ${
+                                                                q.cumple
+                                                                    ? 'bg-white/80 border-teal-50 text-gray-600'
+                                                                    : 'bg-orange-50/60 border-orange-200/60 text-gray-700'
+                                                            }`}>
+                                                                <span className={`font-bold text-sm ${
+                                                                    q.cumple ? 'text-teal-500' : 'text-orange-500'
+                                                                }`}>
+                                                                    {q.cumple ? '✓' : '⚠'}
+                                                                </span>
+                                                                <span className="font-semibold text-gray-700 truncate flex-1" title={q.nombre}>
+                                                                    {q.nombre}
+                                                                </span>
+                                                                <span className={`text-[9px] border px-1.5 py-0.5 rounded uppercase tracking-wide ${
+                                                                    q.cumple
+                                                                        ? 'bg-teal-50 border-teal-200 text-teal-700'
+                                                                        : 'bg-orange-100 border-orange-300 text-orange-700'
+                                                                }`}>
+                                                                    {q.estado_mrsl || (q.cumple ? 'Cumple' : 'Sin datos')}
+                                                                </span>
+                                                                {q.proveedor && (
+                                                                    <span className="text-[9px] text-gray-400 border border-gray-200 px-1.5 py-0.5 rounded uppercase tracking-wide bg-gray-50">
+                                                                        {q.proveedor}
+                                                                    </span>
+                                                                )}
                                                             </li>
                                                         ))}
                                                     </ul>
