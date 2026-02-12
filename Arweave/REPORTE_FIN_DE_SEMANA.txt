@@ -1,0 +1,46 @@
+📅 BITÁCORA DEL FIN DE SEMANA - NETTALCO
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-29
+========================================
+✅ Extracción completada para 2026-01-29.
+⚠️ No se pudo ejecutar la simulación: 'charmap' codec can't decode byte 0x8f in position 446: character maps to <undefined>
+💾 Se guardaron 0 archivos JSON en la carpeta de respaldo.
+🏁 Día 2026-01-29 finalizado en 3.27 horas.
+
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-01
+========================================
+✅ Extracción completada para 2026-01-01.
+⚠️ No se pudo ejecutar la simulación: 'charmap' codec can't decode byte 0x90 in position 56: character maps to <undefined>
+💾 Se guardaron 0 archivos JSON en la carpeta de respaldo.
+🏁 Día 2026-01-01 finalizado en 3.14 horas.
+
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-30
+========================================
+✅ Extracción completada para 2026-01-30.
+⚠️ No se pudo ejecutar la simulación: 'charmap' codec can't decode byte 0x8f in position 58: character maps to <undefined>
+💾 Se guardaron 0 archivos JSON en la carpeta de respaldo.
+🏁 Día 2026-01-30 finalizado en 3.31 horas.
+
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-02
+========================================
+✅ Extracción completada para 2026-01-02.
+⚠️ No se pudo ejecutar la simulación: 'charmap' codec can't decode byte 0x8f in position 58: character maps to <undefined>
+💾 Se guardaron 0 archivos JSON en la carpeta de respaldo.
+🏁 Día 2026-01-02 finalizado en 3.28 horas.
+
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-312026-01-03
+========================================
+✅ Extracción completada para 2026-01-312026-01-03.
+⚠️ No se pudo ejecutar la simulación: 'charmap' codec can't decode byte 0x8f in position 439: character maps to <undefined>
+💾 Se guardaron 0 archivos JSON en la carpeta de respaldo.
+🏁 Día 2026-01-312026-01-03 finalizado en 3.23 horas.
+

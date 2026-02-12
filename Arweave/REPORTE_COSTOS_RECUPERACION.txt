@@ -1,0 +1,138 @@
+📅 BITÁCORA DE RECUPERACIÓN - NETTALCO
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-20
+========================================
+✅ Extracción completada para 2026-01-20.
+
+--- 📊 REPORTE DE COSTOS (2026-01-20) ---
+[dotenv@17.2.3] injecting env (19) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+
+===================================================
+🧪 NETTALCO - SIMULADOR DE COSTOS (MODO AHORRO)
+===================================================
+📦 Analizando 14139 archivos generados...
+
+📊 REPORTE DE PRODUCCIÓN DIARIA:
+---------------------------------------------------
+   📅 Archivos Únicos:    14139
+   ⚖️  Peso de Datos:      774.78 MB
+   💲 Precio ETH Hoy:     $2067.05 USD
+---------------------------------------------------
+   💰 COSTO EVITADO:      $15.1597 USD
+---------------------------------------------------
+   🚫 ESTO ES UN SIMULACRO. NO SE SUBIÓ NADA A BLOCKCHAIN.
+
+🧹 Limpiando zona de trabajo para el día siguiente...
+✨ Carpeta 'cola_de_envio' vacía. Lista para procesar otro día.
+===================================================
+
+
+----------------------------------
+💾 Se guardaron 0 archivos JSON en la carpeta de respaldo.
+🏁 Día 2026-01-20 finalizado en 8.05 horas.
+
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-21
+========================================
+✅ Extracción completada para 2026-01-21.
+
+--- 📊 REPORTE DE COSTOS (2026-01-21) ---
+[dotenv@17.2.3] injecting env (19) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+
+===================================================
+🧪 NETTALCO - SIMULADOR DE COSTOS (MODO AHORRO)
+===================================================
+📦 Analizando 8740 archivos generados...
+
+📊 REPORTE DE PRODUCCIÓN DIARIA:
+---------------------------------------------------
+   📅 Archivos Únicos:    8740
+   ⚖️  Peso de Datos:      484.07 MB
+   💲 Precio ETH Hoy:     $2010.29 USD
+---------------------------------------------------
+   💰 COSTO EVITADO:      $9.3844 USD
+---------------------------------------------------
+   🚫 ESTO ES UN SIMULACRO. NO SE SUBIÓ NADA A BLOCKCHAIN.
+
+🧹 Limpiando zona de trabajo para el día siguiente...
+✨ Carpeta 'cola_de_envio' vacía. Lista para procesar otro día.
+===================================================
+
+
+----------------------------------
+💾 Se guardaron 0 archivos JSON en la carpeta de respaldo.
+🏁 Día 2026-01-21 finalizado en 4.34 horas.
+
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-22
+========================================
+✅ Extracción completada para 2026-01-22.
+
+--- 📊 REPORTE DE COSTOS (2026-01-22) ---
+[dotenv@17.2.3] injecting env (19) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+
+===================================================
+🧪 NETTALCO - SIMULADOR DE COSTOS (MODO AHORRO)
+===================================================
+📦 Analizando 6356 archivos generados...
+
+📊 REPORTE DE PRODUCCIÓN DIARIA:
+---------------------------------------------------
+   📅 Archivos Únicos:    6356
+   ⚖️  Peso de Datos:      423.25 MB
+   💲 Precio ETH Hoy:     $2010.83 USD
+---------------------------------------------------
+   💰 COSTO EVITADO:      $8.2168 USD
+---------------------------------------------------
+   🚫 ESTO ES UN SIMULACRO. NO SE SUBIÓ NADA A BLOCKCHAIN.
+
+🧹 Limpiando zona de trabajo para el día siguiente...
+✨ Carpeta 'cola_de_envio' vacía. Lista para procesar otro día.
+===================================================
+
+
+----------------------------------
+💾 Se guardaron 0 archivos JSON en la carpeta de respaldo.
+🏁 Día 2026-01-22 finalizado en 3.46 horas.
+
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-23
+========================================
+✅ Extracción completada para 2026-01-23.
+
+--- 📊 REPORTE DE COSTOS (2026-01-23) ---
+[dotenv@17.2.3] injecting env (19) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+
+===================================================
+🧪 NETTALCO - SIMULADOR DE COSTOS (MODO AHORRO)
+===================================================
+📦 Analizando 10085 archivos generados...
+
+📊 REPORTE DE PRODUCCIÓN DIARIA:
+---------------------------------------------------
+   📅 Archivos Únicos:    10085
+   ⚖️  Peso de Datos:      700.49 MB
+   💲 Precio ETH Hoy:     $2011.87 USD
+---------------------------------------------------
+   💰 COSTO EVITADO:      $13.2511 USD
+---------------------------------------------------
+   🚫 ESTO ES UN SIMULACRO. NO SE SUBIÓ NADA A BLOCKCHAIN.
+
+🧹 Limpiando zona de trabajo para el día siguiente...
+✨ Carpeta 'cola_de_envio' vacía. Lista para procesar otro día.
+===================================================
+
+
+----------------------------------
+💾 Se guardaron 0 archivos JSON en la carpeta de respaldo.
+🏁 Día 2026-01-23 finalizado en 7.89 horas.
+
+
+========================================
+🚀 INICIANDO PROCESO PARA: 2026-01-24
+========================================
+❌ ERROR en main_mariadb.py para 2026-01-24: Command '['python', 'main_mariadb.py']' returned non-zero exit status 1073807364.
