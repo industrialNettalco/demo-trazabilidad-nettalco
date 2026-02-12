@@ -58,7 +58,7 @@
                 // -----------------------
 
                 stages: {
-                    1: { title: "Materia Prima", desc: "El proceso inicia con {material} de {origin}. Seleccionamos exclusivamente fibras de la más alta calidad para asegurar un producto superior." },
+                    1: { title: "Materia Prima", desc: "El proceso inicia con {material} de {origin}{yarn}. Seleccionamos exclusivamente fibras de la más alta calidad para asegurar un producto superior." },
                     2: { title: "Tejeduría", desc: "Contamos con equipos de última generación que permiten desarrollar diversos tipos de telas. {team} supervisó cada revolución para crear una estructura textil perfecta." },
                     3: { title: "Teñido de Telas", desc: "Proceso realizado en equipos especializados (Brazzoli/Fongs) para asegurar la solidez del color {color} siguiendo rigurosos estándares técnicos y sostenibles." },
                     4: { title: "Corte Automatizado", desc: "Nuestra área de corte utiliza tecnología Lectra para asegurar la estabilidad dimensional de la prenda y una precisión exacta en cada pieza trazada." },
@@ -104,7 +104,7 @@
                 // ---------------------
                 
                 stages: {
-                    1: { title: "Raw Material", desc: "The process begins with {material} from {origin}. We select exclusively high-quality fibers to ensure a superior product." },
+                    1: { title: "Raw Material", desc: "The process begins with {material} from {origin}{yarn}. We select exclusively high-quality fibers to ensure a superior product." },
                     2: { title: "Knitting", desc: "We use state-of-the-art equipment to develop various fabric types. {team} monitored every revolution to create a perfect textile structure." },
                     3: { title: "Fabric Dyeing", desc: "Process performed in specialized equipment (Brazzoli/Fongs) to ensure color fastness of {color} following rigorous technical and sustainable standards." },
                     4: { title: "Automated Cutting", desc: "Our cutting area uses Lectra technology to ensure dimensional stability of the garment and exact precision in every traced piece." },
@@ -170,6 +170,7 @@
             const info = raw.tztotrazwebinfo?.[0] || {};
             const alma = raw.tztotrazwebalma?.[0] || {};
             const hilo = raw.tztotrazwebhiloloteprin?.[0] || {};
+            const materiales = raw.tztotrazwebmate || [];
             
             // --- LÓGICA AUDITOR ---
             const fechaAuditoria = raw.tztotrazwebacab?.[0]?.TFECHAUDI?.split(" ")[0] || null;
@@ -259,9 +260,19 @@
                 return lang === 'en' ? "the valleys of the Peruvian coast" : "los valles de la costa peruana";
             };
 
+            const obtenerDescripcionHilo = () => {
+                // Buscar TDESCHILOPRIN en los materiales
+                const materialConHilo = materiales.find(m => m.TDESCHILOPRIN);
+                if (materialConHilo && materialConHilo.TDESCHILOPRIN) {
+                    return materialConHilo.TDESCHILOPRIN.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+                }
+                return null;
+            };
+
             const colorReal = info.TDESCETIQCLIE ? `"${info.TDESCETIQCLIE}"` : (lang === 'en' ? "this tone" : "este tono");
             const materialReal = detectarMaterial();
             const origenReal = detectarZona();
+            const hiloDescripcion = obtenerDescripcionHilo();
 
             const codCliente = info.TCODICLIE || ""; 
             const urlLogoDinamico = `http://psrvjboss01:8080/trazaP/resources/img/logos/logo_${codCliente}.png?ver=1.0`;
@@ -289,15 +300,18 @@
                     originDisplay: lang === 'en' ? "Made in Peru" : "Hecho en Perú"
                 },
                 steps: [
-                    { 
-                        id: 1, 
-                        stage: lang === 'en' ? "ORIGIN" : "ORIGEN", 
+                    {
+                        id: 1,
+                        stage: lang === 'en' ? "ORIGIN" : "ORIGEN",
                         title: T.stages[1].title,
-                        date: hilo.TFECHGUIAHILO ? hilo.TFECHGUIAHILO.split(" ")[0] : "Dic 2025", 
-                        location: hilo.TDESCZONA ? hilo.TDESCZONA : (lang === 'en' ? "Valleys of Peru" : "Valles del Perú"), 
-                        desc: T.stages[1].desc.replace('{material}', materialReal).replace('{origin}', origenReal), 
-                        icon: Icons.MapPin, 
-                        people: [] 
+                        date: hilo.TFECHGUIAHILO ? hilo.TFECHGUIAHILO.split(" ")[0] : "Dic 2025",
+                        location: hilo.TDESCZONA ? hilo.TDESCZONA : (lang === 'en' ? "Valleys of Peru" : "Valles del Perú"),
+                        desc: T.stages[1].desc
+                            .replace('{material}', materialReal)
+                            .replace('{origin}', origenReal)
+                            .replace('{yarn}', hiloDescripcion ? ` (${hiloDescripcion})` : ''),
+                        icon: Icons.MapPin,
+                        people: []
                     },
                     { 
                         id: 2, 
