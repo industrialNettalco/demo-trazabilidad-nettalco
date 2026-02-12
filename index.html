@@ -246,7 +246,7 @@
                     }
                 }
                 if (mat) return mat.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
-                return lang === 'en' ? "" : "";
+                return lang === 'en' ? "High Quality Fibers" : "Fibras de alta calidad";
             };
 
             const detectarZona = () => {
@@ -701,10 +701,6 @@
                                     <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
                                         <span className="text-sm text-yellow-400">{Icons.Award}</span>
                                         <span className="text-sm font-medium text-gray-200">{data.header.quality}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
-                                        <span className="text-sm">🌿</span>
-                                        <span className="text-sm font-medium text-gray-200">{data.header.materialDisplay}</span>
                                     </div>
                                     <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
                                         <span className="text-sm">🇵🇪</span>
