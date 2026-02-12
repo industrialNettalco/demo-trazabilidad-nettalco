@@ -236,11 +236,16 @@
             };
 
             const detectarZona = () => {
-                let zona = hilo.TDESCZONA || hilo.TPROCEDENCIA; 
+                // Prioridad: TZONAORIGHILO (origen real del hilo)
+                let zona = hilo.TZONAORIGHILO || hilo.TDESCZONA || hilo.TPROCEDENCIA;
                 if (zona) {
                     let z = zona.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+                    // Si el dato ya incluye "Perú", solo devolver la zona
+                    if (z.includes('Perú') || z.includes('Peru')) {
+                        return z;
+                    }
                     return lang === 'en' ? `the valleys of ${z}` : `los valles de ${z}`;
-                } 
+                }
                 return lang === 'en' ? "the valleys of the Peruvian coast" : "los valles de la costa peruana";
             };
 
