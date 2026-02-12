@@ -260,10 +260,37 @@
         return lang === 'en' ? "the valleys of the Peruvian coast" : "los valles de la costa peruana";
       };
 
+      const traducirDescripcionHilo = (descripcion) => {
+        if (lang !== 'en') return descripcion; // Si no es inglés, devolver original
+
+        // Diccionario de traducciones ES → EN
+        const traducciones = {
+          'Alg.': 'Cotton',
+          'Algodón': 'Cotton',
+          'Australiano': 'Australian',
+          'Peinado': 'Combed',
+          'Parafinado': 'Waxed',
+          'Con Parafina': 'With Wax',
+          'Local': 'Local',
+          'Pima': 'Pima',
+          'Tangüis': 'Tanguis',
+          'Tanguis': 'Tanguis'
+        };
+
+        let traducido = descripcion;
+        for (const [esp, eng] of Object.entries(traducciones)) {
+          const regex = new RegExp(esp, 'gi');
+          traducido = traducido.replace(regex, eng);
+        }
+
+        return traducido;
+      };
+
       const obtenerDescripcionHilo = () => {
         const hiloConDesc = hilosData.find(h => h?.TDESCHILOPRIN);
         if (hiloConDesc?.TDESCHILOPRIN) {
-          return String(hiloConDesc.TDESCHILOPRIN).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+          const desc = String(hiloConDesc.TDESCHILOPRIN).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+          return traducirDescripcionHilo(desc);
         }
         return null;
       };
