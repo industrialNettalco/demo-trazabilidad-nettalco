@@ -171,7 +171,7 @@
       const info = raw.tztotrazwebinfo?.[0] || {};
       const alma = raw.tztotrazwebalma?.[0] || {};
       const hilo = raw.tztotrazwebhiloloteprin?.[0] || {};
-      const materiales = raw.tztotrazwebmate || [];
+      const hilosData = raw.tztotrazwebhilo || [];
 
       // --- LÓGICA AUDITOR ---
       const fechaAuditoria = raw.tztotrazwebacab?.[0]?.TFECHAUDI?.split(" ")[0] || null;
@@ -261,9 +261,9 @@
       };
 
       const obtenerDescripcionHilo = () => {
-        const materialConHilo = materiales.find(m => m?.TDESCHILOPRIN);
-        if (materialConHilo?.TDESCHILOPRIN) {
-          return String(materialConHilo.TDESCHILOPRIN).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+        const hiloConDesc = hilosData.find(h => h?.TDESCHILOPRIN);
+        if (hiloConDesc?.TDESCHILOPRIN) {
+          return String(hiloConDesc.TDESCHILOPRIN).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
         }
         return null;
       };
