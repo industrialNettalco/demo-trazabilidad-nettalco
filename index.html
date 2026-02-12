@@ -663,15 +663,26 @@
       const [rawData, setRawData] = useState(null);
       const [lang, setLang] = useState('en');
       const [loading, setLoading] = useState(true);
-
-      const ARWEAVE_MAP = {
-        "ff48d9ca5592d872113131718d83c5d8962ed2a26148830dee2062bd062a09ee": "AQUI_IRÁ_TU_TXID_CUANDO_SUBAS"
-      };
+      const [arweaveMap, setArweaveMap] = useState({});
 
       useEffect(() => {
         const loadData = async () => {
           const params = new URLSearchParams(window.location.search);
           const id = params.get('id');
+
+          // Load Arweave transaction map
+          try {
+            const mapResponse = await fetch('./arweave_map.json');
+            if (mapResponse.ok) {
+              const mapData = await mapResponse.json();
+              setArweaveMap(mapData);
+              console.log('✅ Arweave map loaded:', Object.keys(mapData).length, 'transactions');
+            }
+          } catch (err) {
+            console.warn('⚠️ Could not load arweave_map.json, verification button will be disabled');
+          }
+
+          // Load garment data
           if (!id) { setLoading(false); return; }
 
           try {
@@ -796,7 +807,7 @@
                 {(() => {
                   const params = new URLSearchParams(window.location.search);
                   const currentId = params.get('id');
-                  const arweaveTx = ARWEAVE_MAP[currentId];
+                  const arweaveTx = arweaveMap[currentId];
                   const verifyLink = arweaveTx ? `https://viewblock.io/arweave/tx/${arweaveTx}` : "#";
 
                   return (
