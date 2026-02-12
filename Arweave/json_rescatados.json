@@ -2036,5 +2036,56 @@
    "TNOMBPROV": "CHT PERUANA S.A.",
    "TORIGPROD": "PERÚ"
   }
+ ],
+ "quimicos_certificados": [
+  {
+   "nombre": "ANTIMUSSOL UDF.BR LIQ.",
+   "proveedor": "",
+   "origen": "BRASIL",
+   "certificado": true,
+   "estado_mrsl": "Cumple"
+  },
+  {
+   "nombre": "SAL MOLIDA EXTRA (NACL)/CLORUR",
+   "proveedor": "",
+   "origen": "PERÚ",
+   "certificado": true,
+   "estado_mrsl": "Cumple"
+  },
+  {
+   "nombre": "ACIDO ACETICO GLACIAL",
+   "proveedor": "",
+   "origen": "CHINA",
+   "certificado": true,
+   "estado_mrsl": "Cumple"
+  },
+  {
+   "nombre": "NEUTRACID NCS",
+   "proveedor": "",
+   "origen": "PERÚ",
+   "certificado": true,
+   "estado_mrsl": "Cumple"
+  },
+  {
+   "nombre": "BIAVIN BPA",
+   "proveedor": "",
+   "origen": "PERÚ",
+   "certificado": true,
+   "estado_mrsl": "Cumple"
+  },
+  {
+   "nombre": "SODA CAUSTICA PERLAS(LABOR)",
+   "proveedor": "",
+   "origen": "TAIWAN",
+   "certificado": true,
+   "estado_mrsl": "Cumple"
+  },
+  {
+   "nombre": "COTOBLANC PCA",
+   "proveedor": "",
+   "origen": "PERÚ",
+   "certificado": true,
+   "estado_mrsl": "Cumple"
+  }
  ]
 }

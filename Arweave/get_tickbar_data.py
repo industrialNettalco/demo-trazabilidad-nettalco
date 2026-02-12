@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import json
 import math
 import warnings
+import csv
 
 load_dotenv()
 os.environ["NLS_LANG"] = ".AL32UTF8"
@@ -59,6 +60,48 @@ list_temp_dfs = [
     "tztotrazwebcortoper",
     "tztotrazwebtintqyc"
 ]
+
+
+def cargar_maestro_quimicos():
+    """
+    Lee db_quimicos_simple.csv
+    Detecta automáticamente si es ';' o ','
+    Retorna un diccionario {NOMBRE_QUIMICO: ESTADO_MRSL}
+    """
+    ruta_csv = "db_quimicos_simple.csv"
+    dicc = {}
+
+    if not os.path.exists(ruta_csv):
+        print(f"[!] No se encontro {ruta_csv}. Se omitira filtrado MRSL.")
+        return {}
+
+    try:
+        # 1. Detectar separador automáticamente
+        delimiter = ',' # Por defecto
+        with open(ruta_csv, 'r', encoding='latin-1', errors='ignore') as f:
+            if ';' in f.readline():
+                delimiter = ';'
+
+        print(f"[CSV] Maestro Quimicos: Usando separador '{delimiter}'")
+
+        # 2. Leer archivo
+        with open(ruta_csv, mode='r', encoding='latin-1') as f:
+            reader = csv.reader(f, delimiter=delimiter)
+            next(reader, None) # Saltar cabecera
+
+            for row in reader:
+                if len(row) >= 2:
+                    nombre = row[0].strip().upper() # Col A
+                    estado = row[1].strip()         # Col B
+                    if nombre:
+                        dicc[nombre] = estado
+
+        print(f"[OK] Maestro Quimicos cargado: {len(dicc)} registros.")
+        return dicc
+
+    except Exception as e:
+        print(f"[ERROR] Error leyendo CSV: {e}")
+        return {}
 
 
 def connect():
@@ -179,11 +222,93 @@ def clean_relevant_json(json_data):
     return resultado
 
 def get_clean_json_from_tickbar(tickbarr: str):
+    """
+    Obtiene JSON limpio de un tickbarr específico
+    Incluye validación de químicos contra ZDHC MRSL
+    """
+    # 1. Obtener datos de Oracle
     dicc_df = get_tickbar(tickbarr, "es", None)
     main_json = make_json_from_dfs(dicc_df)
-    clean_json = clean_relevant_json(json.loads(main_json))
-    # #print(clean_json)
-    return clean_json
+    clean_json_dict = json.loads(clean_relevant_json(json.loads(main_json)))
+
+    # 2. VALIDACIÓN DE QUÍMICOS (ZDHC MRSL)
+    print(f"\n[MRSL] Validando quimicos para {tickbarr}...")
+    maestro_quimicos = cargar_maestro_quimicos()
+
+    # Obtener lista de químicos de la prenda
+    lista_raw_q = clean_json_dict.get("tztotrazwebtintqyc", [])
+    lista_todos_quimicos = []
+    contador_cumple = 0
+    contador_total = 0
+    errores_quimicos = set()
+
+    for q in lista_raw_q:
+        nombre_real = q.get("TDESCPROD", "").strip().upper()
+
+        if not nombre_real:
+            continue
+
+        contador_total += 1
+
+        # Buscar en el CSV maestro
+        estado_mrsl = maestro_quimicos.get(nombre_real)
+
+        if estado_mrsl:
+            # Agregar químico con su estado real
+            cumple = (estado_mrsl == "Cumple")
+            if cumple:
+                contador_cumple += 1
+
+            lista_todos_quimicos.append({
+                "nombre": q.get("TDESCPROD", ""),
+                "proveedor": q.get("TPROVPROD", ""),
+                "origen": q.get("TORIGPROD", ""),
+                "estado_mrsl": estado_mrsl,
+                "cumple": cumple
+            })
+
+            if not cumple:
+                print(f"   [!] {nombre_real}: {estado_mrsl}")
+        else:
+            # No existe en el CSV - marcarlo como "Sin datos"
+            lista_todos_quimicos.append({
+                "nombre": q.get("TDESCPROD", ""),
+                "proveedor": q.get("TPROVPROD", ""),
+                "origen": q.get("TORIGPROD", ""),
+                "estado_mrsl": "Sin datos",
+                "cumple": False
+            })
+            errores_quimicos.add(nombre_real)
+
+    # 3. Calcular porcentaje de cumplimiento
+    porcentaje_cumplimiento = (contador_cumple / contador_total * 100) if contador_total > 0 else 0
+
+    # 4. Agregar lista completa y stats al JSON
+    clean_json_dict["quimicos_certificados"] = lista_todos_quimicos
+    clean_json_dict["stats_mrsl"] = {
+        "total": contador_total,
+        "cumple": contador_cumple,
+        "no_cumple": contador_total - contador_cumple,
+        "porcentaje": round(porcentaje_cumplimiento, 2)
+    }
+
+    # 5. Reportar estadísticas
+    print(f"   [OK] {contador_cumple}/{contador_total} quimicos cumplen ZDHC MRSL ({porcentaje_cumplimiento:.2f}%)")
+
+    # 6. Reportar errores si existen
+    if errores_quimicos:
+        print(f"   [!] {len(errores_quimicos)} quimicos sin datos en CSV:")
+        for err in sorted(errores_quimicos):
+            print(f"      - {err}")
+
+        # Guardar en archivo de alertas
+        with open("alertas_quimicos.txt", "a", encoding="utf-8") as f:
+            f.write(f"\n--- Tickbarr: {tickbarr} ---\n")
+            for err in sorted(errores_quimicos):
+                f.write(f"NO ENCONTRADO: {err}\n")
+
+    # 7. Retornar JSON final con químicos validados y estadísticas
+    return json.dumps(clean_json_dict, ensure_ascii=False, indent=1)
 
 
 # mi_json = get_clean_json_from_tickbar("089853705010")
