@@ -1,812 +1,804 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nettalco | Pasaporte Digital</title>
-    
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nettalco | Pasaporte Digital</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
-        .loader { width: 48px; height: 48px; border: 5px solid #004526; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
-        @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
+  <!-- ✅ Framer Motion UMD -->
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+    .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+    .loader { width: 48px; height: 48px; border: 5px solid #004526; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box; animation: rotation 1s linear infinite; }
+    @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
 </head>
+
 <body>
-    <div id="root"></div>
+  <div id="root"></div>
 
-   <script type="text/babel">
-        const { useState, useEffect, useRef, useMemo } = React;
-        const { motion, AnimatePresence } = window.Motion;
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useMemo } = React;
 
-        // --- 1. CONFIGURACIÓN DE IDIOMAS ---
-        const TRANSLATIONS = {
-            es: {
-                loading: "Cargando trazabilidad...",
-                scan_title: "Escanea el QR",
-                scan_desc: "Acerca tu cámara a la etiqueta de la prenda para descubrir su historia.",
-                verify: "Verificar Registro",
-                transparency_title: "Transparencia Radical",
-                transparency_desc: "La trazabilidad de esta prenda ha sido registrada de forma permanente e inmutable en la blockchain.",
-                protagonists: "Protagonistas",
-                season: "Temporada",
-                made_in: "Hecho en Perú",
-                cotton: "Algodón Premium",
-                audit_label: "Auditoría Final",
-                audit_role: "Auditor de Calidad",
-                certified_by: "Certificado por",
-                
-                // NUEVO: CAMBIOS ZDHC ---
-                mrsl_title: "Certificado ZDHC MRSL V3.1",
-                mrsl_desc: "Cumplimiento nivel 3 con los estándares de descarga cero de sustancias peligrosas.",
-                chemical_list: "Insumos Utilizados:",
-                view_details: "Ver detalle",
-                hide_details: "Ocultar",
-                chemical_status: {
-                    cumple: "Cumple",
-                    no_cumple: "No cumple",
-                    sin_datos: "Sin datos"
-                },
-                // -----------------------
+    // ✅ FIX 1: el global correcto es window.framerMotion (fallback por si tu build expone window.Motion)
+    const { motion, AnimatePresence } = (window.framerMotion || window.Motion);
 
-                stages: {
-                    1: { title: "Materia Prima", desc: "El proceso inicia con {material} de {origin}{yarn}. Seleccionamos exclusivamente fibras de la más alta calidad para asegurar un producto superior." },
-                    2: { title: "Tejeduría", desc: "Contamos con equipos de última generación que permiten desarrollar diversos tipos de telas. {team} supervisó cada revolución para crear una estructura textil perfecta." },
-                    3: { title: "Teñido de Telas", desc: "Proceso realizado en equipos especializados (Brazzoli/Fongs) para asegurar la solidez del color {color} siguiendo rigurosos estándares técnicos y sostenibles." },
-                    4: { title: "Corte Automatizado", desc: "Nuestra área de corte utiliza tecnología Lectra para asegurar la estabilidad dimensional de la prenda y una precisión exacta en cada pieza trazada." },
-                    5: { title: "Costura", desc: "Nuestra área de costura cuenta con maquinaria automática de alta eficiencia. {team} ensambló esta prenda cumpliendo los lineamientos más rigurosos de calidad." },
-                    6: { title: "Acabado", desc: "Etapa final diseñada para asegurar la calidad del producto y su confiabilidad. {team} inspeccionó y preparó tu prenda lista para exportación." }
-                },
-                roles: {
-                    tejedor: "Tejedor", acabado: "Acabado", apertura: "Apertura", corte: "Corte", confeccion: "Confección", supervisora: "Supervisora", empaque: "Empaque", recepcion: "Recepción"
-                },
-                team_templates: {
-                    dedication: "La dedicación de {n1}",
-                    joint: "El trabajo conjunto de {n1} y {n2}",
-                    labor: "La labor de {n1}, {n2} y {n3}",
-                    big_team: "Un gran equipo conformado por {n1}, {n2} y {n3} expertos más"
-                }
-            },
-            en: {
-                loading: "Loading traceability...",
-                scan_title: "Scan the QR",
-                scan_desc: "Point your camera at the garment label to discover its story.",
-                verify: "Verify Record",
-                transparency_title: "Radical Transparency",
-                transparency_desc: "The traceability of this garment has been permanently and immutably registered on the blockchain.",
-                protagonists: "Protagonists",
-                season: "Season",
-                made_in: "Made in Peru",
-                cotton: "Premium Cotton",
-                audit_label: "Final Audit",
-                audit_role: "Quality Auditor",
-                certified_by: "Certified by",
-                
-                // NEW: ZDHC CHANGES ---
-                mrsl_title: "ZDHC MRSL V3.1 Certified",
-                mrsl_desc: "Level 3 compliance with zero discharge of hazardous chemicals standards.",
-                chemical_list: "Chemical Inputs Used:",
-                view_details: "View details",
-                hide_details: "Hide",
-                chemical_status: {
-                    cumple: "Compliant",
-                    no_cumple: "Non-compliant",
-                    sin_datos: "No data"
-                },
-                // ---------------------
-                
-                stages: {
-                    1: { title: "Raw Material", desc: "The process begins with {material} from {origin}{yarn}. We select exclusively high-quality fibers to ensure a superior product." },
-                    2: { title: "Knitting", desc: "We use state-of-the-art equipment to develop various fabric types. {team} monitored every revolution to create a perfect textile structure." },
-                    3: { title: "Fabric Dyeing", desc: "Process performed in specialized equipment (Brazzoli/Fongs) to ensure color fastness of {color} following rigorous technical and sustainable standards." },
-                    4: { title: "Automated Cutting", desc: "Our cutting area uses Lectra technology to ensure dimensional stability of the garment and exact precision in every traced piece." },
-                    5: { title: "Sewing", desc: "Our sewing area features high-efficiency automatic machinery. {team} assembled this garment complying with the strictest quality guidelines." },
-                    6: { title: "Finishing", desc: "Final stage designed to ensure product quality and reliability. {team} inspected and prepared your garment ready for export." }
-                },
-                roles: {
-                    tejedor: "Knitter", acabado: "Finishing", apertura: "Opening", corte: "Cutter", confeccion: "Sewer", supervisora: "Supervisor", empaque: "Packing", recepcion: "Reception"
-                },
-                team_templates: {
-                    dedication: "The dedication of {n1}",
-                    joint: "The joint work of {n1} and {n2}",
-                    labor: "The labor of {n1}, {n2} and {n3}",
-                    big_team: "A great team formed by {n1}, {n2} and {n3} more experts"
-                }
-            }
+    // --- 1. CONFIGURACIÓN DE IDIOMAS ---
+    const TRANSLATIONS = {
+      es: {
+        loading: "Cargando trazabilidad...",
+        scan_title: "Escanea el QR",
+        scan_desc: "Acerca tu cámara a la etiqueta de la prenda para descubrir su historia.",
+        verify: "Verificar Registro",
+        transparency_title: "Transparencia Radical",
+        transparency_desc: "La trazabilidad de esta prenda ha sido registrada de forma permanente e inmutable en la blockchain.",
+        protagonists: "Protagonistas",
+        season: "Temporada",
+        made_in: "Hecho en Perú",
+        cotton: "Algodón Premium",
+        audit_label: "Auditoría Final",
+        audit_role: "Auditor de Calidad",
+        certified_by: "Certificado por",
+
+        mrsl_title: "Certificado ZDHC MRSL V3.1",
+        mrsl_desc: "Cumplimiento nivel 3 con los estándares de descarga cero de sustancias peligrosas.",
+        chemical_list: "Insumos Utilizados:",
+        view_details: "Ver detalle",
+        hide_details: "Ocultar",
+        chemical_status: {
+          cumple: "Cumple",
+          no_cumple: "No cumple",
+          sin_datos: "Sin datos"
+        },
+
+        stages: {
+          1: { title: "Materia Prima", desc: "El proceso inicia con {material} de {origin}{yarn}. Seleccionamos exclusivamente fibras de la más alta calidad para asegurar un producto superior." },
+          2: { title: "Tejeduría", desc: "Contamos con equipos de última generación que permiten desarrollar diversos tipos de telas. {team} supervisó cada revolución para crear una estructura textil perfecta." },
+          3: { title: "Teñido de Telas", desc: "Proceso realizado en equipos especializados (Brazzoli/Fongs) para asegurar la solidez del color {color} siguiendo rigurosos estándares técnicos y sostenibles." },
+          4: { title: "Corte Automatizado", desc: "Nuestra área de corte utiliza tecnología Lectra para asegurar la estabilidad dimensional de la prenda y una precisión exacta en cada pieza trazada." },
+          5: { title: "Costura", desc: "Nuestra área de costura cuenta con maquinaria automática de alta eficiencia. {team} ensambló esta prenda cumpliendo los lineamientos más rigurosos de calidad." },
+          6: { title: "Acabado", desc: "Etapa final diseñada para asegurar la calidad del producto y su confiabilidad. {team} inspeccionó y preparó tu prenda lista para exportación." }
+        },
+        roles: {
+          tejedor: "Tejedor", acabado: "Acabado", apertura: "Apertura", corte: "Corte", confeccion: "Confección", supervisora: "Supervisora", empaque: "Empaque", recepcion: "Recepción"
+        },
+        team_templates: {
+          dedication: "La dedicación de {n1}",
+          joint: "El trabajo conjunto de {n1} y {n2}",
+          labor: "La labor de {n1}, {n2} y {n3}",
+          big_team: "Un gran equipo conformado por {n1}, {n2} y {n3} expertos más"
+        }
+      },
+      en: {
+        loading: "Loading traceability...",
+        scan_title: "Scan the QR",
+        scan_desc: "Point your camera at the garment label to discover its story.",
+        verify: "Verify Record",
+        transparency_title: "Radical Transparency",
+        transparency_desc: "The traceability of this garment has been permanently and immutably registered on the blockchain.",
+        protagonists: "Protagonists",
+        season: "Season",
+        made_in: "Made in Peru",
+        cotton: "Premium Cotton",
+        audit_label: "Final Audit",
+        audit_role: "Quality Auditor",
+        certified_by: "Certified by",
+
+        mrsl_title: "ZDHC MRSL V3.1 Certified",
+        mrsl_desc: "Level 3 compliance with zero discharge of hazardous chemicals standards.",
+        chemical_list: "Chemical Inputs Used:",
+        view_details: "View details",
+        hide_details: "Hide",
+        chemical_status: {
+          cumple: "Compliant",
+          no_cumple: "Non-compliant",
+          sin_datos: "No data"
+        },
+
+        stages: {
+          1: { title: "Raw Material", desc: "The process begins with {material} from {origin}{yarn}. We select exclusively high-quality fibers to ensure a superior product." },
+          2: { title: "Knitting", desc: "We use state-of-the-art equipment to develop various fabric types. {team} monitored every revolution to create a perfect textile structure." },
+          3: { title: "Fabric Dyeing", desc: "Process performed in specialized equipment (Brazzoli/Fongs) to ensure color fastness of {color} following rigorous technical and sustainable standards." },
+          4: { title: "Automated Cutting", desc: "Our cutting area uses Lectra technology to ensure dimensional stability of the garment and exact precision in every traced piece." },
+          5: { title: "Sewing", desc: "Our sewing area features high-efficiency automatic machinery. {team} assembled this garment complying with the strictest quality guidelines." },
+          6: { title: "Finishing", desc: "Final stage designed to ensure product quality and reliability. {team} inspected and prepared your garment ready for export." }
+        },
+        roles: {
+          tejedor: "Knitter", acabado: "Finishing", apertura: "Opening", corte: "Cutter", confeccion: "Sewer", supervisora: "Supervisor", empaque: "Packing", recepcion: "Reception"
+        },
+        team_templates: {
+          dedication: "The dedication of {n1}",
+          joint: "The joint work of {n1} and {n2}",
+          labor: "The labor of {n1}, {n2} and {n3}",
+          big_team: "A great team formed by {n1}, {n2} and {n3} more experts"
+        }
+      }
+    };
+
+    const StageImages = {
+      1: "./assets/fase1.png", 2: "./assets/fase2.png", 3: "./assets/fase3.png",
+      4: "./assets/fase4.png", 5: "./assets/fase5.png", 6: "./assets/fase6.png"
+    };
+
+    const StageVideos = {
+      1: "./assets/videos/fase1.mp4", 2: "./assets/videos/fase2.mp4", 3: "./assets/videos/fase3.mp4",
+      4: "./assets/videos/fase4.mp4", 5: "./assets/videos/fase5.mp4", 6: "./assets/videos/fase6.mp4"
+    };
+
+    const Icons = {
+      MapPin: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>,
+      Shirt: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.38 3.4a2 2 0 0 0-1.2-1.28l-3.11-1a2 2 0 0 0-1.34 0l-3.11 1a2 2 0 0 0-1.2 1.28L9 16.2V22h6v-5.8l-1.38-12.8Z"/><path d="M9 3 4 5v13h5"/></svg>,
+      Droplets: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.8-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>,
+      Scissors: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" x2="8.12" y1="4" y2="15.88"/><line x1="14.47" x2="20" y1="14.48" y2="20"/><line x1="8.12" x2="12" y1="8.12" y2="12"/></svg>,
+      CheckCircle2: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>,
+      Box: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>,
+      Globe: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
+      Award: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>,
+      Flask: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><line x1="8.5" x2="15.5" y1="2" y2="2"/><path d="M8.5 2h7"/><path d="M9 2v4"/><path d="M15 2v4"/></svg>
+    };
+
+    // --- 3. LÓGICA DE FORMATEO ---
+    const formatData = (raw, lang) => {
+      const T = TRANSLATIONS[lang];
+
+      const getPeople = (list, nameKey, idKey, roleKeyTrans) => {
+        if (!list) return [];
+        const unique = {};
+        list.forEach(item => {
+          const name = item?.[nameKey];
+          const id = item?.[idKey];
+          if (name && !unique[name]) {
+            const roleDisplay = T.roles[roleKeyTrans];
+            unique[name] = {
+              name: String(name).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
+              role: roleDisplay,
+              id: id
+            };
+          }
+        });
+        return Object.values(unique);
+      };
+
+      const info = raw.tztotrazwebinfo?.[0] || {};
+      const alma = raw.tztotrazwebalma?.[0] || {};
+      const hilo = raw.tztotrazwebhiloloteprin?.[0] || {};
+      const materiales = raw.tztotrazwebmate || [];
+
+      // --- LÓGICA AUDITOR ---
+      const fechaAuditoria = raw.tztotrazwebacab?.[0]?.TFECHAUDI?.split(" ")[0] || null;
+      const nombreAuditorRaw = raw.tztotrazwebacab?.[0]?.TNOMBPERSAUDI;
+      const idAuditorRaw = raw.tztotrazwebacab?.[0]?.TCODIPERSAUDI;
+
+      let auditorData = null;
+      if (nombreAuditorRaw && fechaAuditoria) {
+        auditorData = {
+          name: String(nombreAuditorRaw).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
+          role: T.audit_role,
+          id: idAuditorRaw,
+          date: fechaAuditoria
         };
+      }
 
-        const StageImages = {
-            1: "./assets/fase1.png", 2: "./assets/fase2.png", 3: "./assets/fase3.png",
-            4: "./assets/fase4.png", 5: "./assets/fase5.png", 6: "./assets/fase6.png"
-        };
+      // --- LÓGICA QUÍMICOS (MRSL) ---
+      const quimicos = raw.quimicos_certificados || [];
 
-        const StageVideos = {
-            1: "./assets/videos/fase1.mp4", 2: "./assets/videos/fase2.mp4", 3: "./assets/videos/fase3.mp4",
-            4: "./assets/videos/fase4.mp4", 5: "./assets/videos/fase5.mp4", 6: "./assets/videos/fase6.mp4"
-        };
+      // --- LÓGICA CALIDAD ---
+      const detectarCalidad = () => {
+        const rawQ = info.TDESCCLASPREN;
+        if (!rawQ) return lang === 'en' ? "Export Quality" : "Calidad de Exportación";
+        const upperQ = String(rawQ).toUpperCase();
+        if (lang === 'en') {
+          if (upperQ.includes("PRIMERA") || upperQ.includes("1RA")) return "First Quality Garment";
+          if (upperQ.includes("SEGUNDA") || upperQ.includes("2DA")) return "Second Quality Garment";
+          if (upperQ.includes("EXPORT")) return "Export Quality";
+          if (upperQ.includes("MUESTRA") || upperQ.includes("SAMPLE")) return "Sample Garment";
+          return String(rawQ).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+        }
+        return String(rawQ).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+      };
+      const calidadDisplay = detectarCalidad();
 
-        const Icons = {
-            MapPin: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>,
-            Shirt: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.38 3.4a2 2 0 0 0-1.2-1.28l-3.11-1a2 2 0 0 0-1.34 0l-3.11 1a2 2 0 0 0-1.2 1.28L9 16.2V22h6v-5.8l-1.38-12.8Z"/><path d="M9 3 4 5v13h5"/></svg>,
-            Droplets: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.8-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></svg>,
-            Scissors: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" x2="8.12" y1="4" y2="15.88"/><line x1="14.47" x2="20" y1="14.48" y2="20"/><line x1="8.12" x2="12" y1="8.12" y2="12"/></svg>,
-            CheckCircle2: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>,
-            Box: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>,
-            Globe: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
-            Award: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>,
-            Flask: <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><line x1="8.5" x2="15.5" y1="2" y2="2"/><path d="M8.5 2h7"/><path d="M9 2v4"/><path d="M15 2v4"/></svg>
-        };
+      // --- EQUIPOS Y PERSONAL ---
+      const tejedores = getPeople(raw.tztotrazwebteje, 'TNOMBPERS', 'TCODIPERS', 'tejedor');
+      const tintoreros = getPeople(raw.tztotrazwebtint, 'TNOMBOPERACABINIC', 'TOPERACABINIC', 'acabado')
+        .concat(getPeople(raw.tztotrazwebtint, 'TNOMBOPERCORTINIC', 'TOPERCORTINIC', 'apertura'));
+      const cortadores = getPeople(raw.tztotrazwebcortoper, 'TNOMBPERS', 'TCODIPERS', 'corte');
+      const confeccionistas = getPeople(raw.tztotrazwebcostoper, 'TNOMBPERS', 'TCODIPERS', 'confeccion')
+        .concat(getPeople(raw.tztotrazwebcost, 'TNOMBPERSSUPE', 'TCODIPERSSUPE', 'supervisora'));
+      const logistica = getPeople(raw.tztotrazwebacab, 'TNOMBPERSPESA', 'TCODIPERSPESA', 'empaque')
+        .concat(getPeople(raw.tztotrazwebacab, 'TNOMBRECEBANDCOST', 'TCODIRECEBANDCOST', 'recepcion'));
 
-        // --- 3. LÓGICA DE FORMATEO ---
-        const formatData = (raw, lang) => {
-            const T = TRANSLATIONS[lang];
+      const mencionarEquipo = (lista) => {
+        if (!lista || lista.length === 0) return lang === 'en' ? "Our team" : "Nuestro equipo";
+        const nombres = lista.map(p => p.name.split(' ')[0]);
+        if (nombres.length === 1) return T.team_templates.dedication.replace('{n1}', nombres[0]);
+        if (nombres.length === 2) return T.team_templates.joint.replace('{n1}', nombres[0]).replace('{n2}', nombres[1]);
+        if (nombres.length === 3) return T.team_templates.labor.replace('{n1}', nombres[0]).replace('{n2}', nombres[1]).replace('{n3}', nombres[2]);
+        const restantes = lista.length - 2;
+        return T.team_templates.big_team.replace('{n1}', nombres[0]).replace('{n2}', nombres[1]).replace('{n3}', restantes);
+      };
 
-            const getPeople = (list, nameKey, idKey, roleKeyTrans, roleKeyRaw = null) => {
-                if (!list) return [];
-                const unique = {};
-                list.forEach(item => {
-                    const name = item[nameKey];
-                    const id = item[idKey]; 
-                    if (name && !unique[name]) {
-                        let roleDisplay = T.roles[roleKeyTrans]; 
-                        unique[name] = {
-                            name: name.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
-                            role: roleDisplay,
-                            id: id 
-                        };
-                    }
-                });
-                return Object.values(unique);
-            };
+      // --- DETALLES TÉCNICOS ---
+      const detectarMaterial = () => {
+        let mat = hilo.TDESCHILO || hilo.TDESCMATERIA;
+        if (!mat && info.TDESCPREN) {
+          const nombre = String(info.TDESCPREN).toUpperCase();
+          if (lang === 'en') {
+            if (nombre.includes("PIMA")) return "Pima Cotton";
+            if (nombre.includes("TANGUIS")) return "Tanguis Cotton";
+            if (nombre.includes("COTTON") || nombre.includes("ALGODON")) return "Premium Cotton";
+            if (nombre.includes("POLY") || nombre.includes("POLIESTER")) return "Tech Polyester";
+            if (nombre.includes("MODAL")) return "Modal Fiber";
+          } else {
+            if (nombre.includes("PIMA")) return "Algodón Pima";
+            if (nombre.includes("TANGUIS")) return "Algodón Tangüis";
+            if (nombre.includes("COTTON") || nombre.includes("ALGODON")) return "Algodón Premium";
+            if (nombre.includes("POLY") || nombre.includes("POLIESTER")) return "Poliéster Tecnológico";
+            if (nombre.includes("MODAL")) return "Fibra Modal";
+          }
+        }
+        if (mat) return String(mat).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+        return lang === 'en' ? "High Quality Fibers" : "Fibras de alta calidad";
+      };
 
-            const info = raw.tztotrazwebinfo?.[0] || {};
-            const alma = raw.tztotrazwebalma?.[0] || {};
-            const hilo = raw.tztotrazwebhiloloteprin?.[0] || {};
-            const materiales = raw.tztotrazwebmate || [];
-            
-            // --- LÓGICA AUDITOR ---
-            const fechaAuditoria = raw.tztotrazwebacab?.[0]?.TFECHAUDI?.split(" ")[0] || null;
-            const nombreAuditorRaw = raw.tztotrazwebacab?.[0]?.TNOMBPERSAUDI; 
-            const idAuditorRaw = raw.tztotrazwebacab?.[0]?.TCODIPERSAUDI;
-            
-            let auditorData = null;
-            if (nombreAuditorRaw && fechaAuditoria) {
-                auditorData = {
-                    name: nombreAuditorRaw.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
-                    role: T.audit_role,
-                    id: idAuditorRaw,
-                    date: fechaAuditoria
-                };
-            }
+      const detectarZona = () => {
+        let zona = hilo.TZONAORIGHILO || hilo.TDESCZONA || hilo.TPROCEDENCIA;
+        if (zona) {
+          let z = String(zona).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+          if (z.includes('Perú') || z.includes('Peru')) return z;
+          return lang === 'en' ? `the valleys of ${z}` : `los valles de ${z}`;
+        }
+        return lang === 'en' ? "the valleys of the Peruvian coast" : "los valles de la costa peruana";
+      };
 
-            // --- LÓGICA QUÍMICOS (MRSL) ---
-            const quimicos = raw.quimicos_certificados || []; 
+      const obtenerDescripcionHilo = () => {
+        const materialConHilo = materiales.find(m => m?.TDESCHILOPRIN);
+        if (materialConHilo?.TDESCHILOPRIN) {
+          return String(materialConHilo.TDESCHILOPRIN).toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
+        }
+        return null;
+      };
 
-            // --- LÓGICA CALIDAD ---
-            const detectarCalidad = () => {
-                const rawQ = info.TDESCCLASPREN; 
-                if (!rawQ) return lang === 'en' ? "Export Quality" : "Calidad de Exportación";
-                const upperQ = rawQ.toUpperCase();
-                if (lang === 'en') {
-                    if (upperQ.includes("PRIMERA") || upperQ.includes("1RA")) return "First Quality Garment";
-                    if (upperQ.includes("SEGUNDA") || upperQ.includes("2DA")) return "Second Quality Garment";
-                    if (upperQ.includes("EXPORT")) return "Export Quality";
-                    if (upperQ.includes("MUESTRA") || upperQ.includes("SAMPLE")) return "Sample Garment";
-                    return rawQ.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
-                } 
-                return rawQ.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
-            };
-            const calidadDisplay = detectarCalidad(); 
+      // ✅ FIX 2: antes usabas hiloSpecs (no existía). Ahora usamos el helper.
+      const yarnDetail = obtenerDescripcionHilo() || "";
 
-            // --- EQUIPOS Y PERSONAL ---
-            const tejedores = getPeople(raw.tztotrazwebteje, 'TNOMBPERS', 'TCODIPERS', 'tejedor');
-            const tintoreros = getPeople(raw.tztotrazwebtint, 'TNOMBOPERACABINIC', 'TOPERACABINIC', 'acabado').concat(getPeople(raw.tztotrazwebtint, 'TNOMBOPERCORTINIC', 'TOPERCORTINIC', 'apertura'));
-            const cortadores = getPeople(raw.tztotrazwebcortoper, 'TNOMBPERS', 'TCODIPERS', 'corte');
-            const confeccionistas = getPeople(raw.tztotrazwebcostoper, 'TNOMBPERS', 'TCODIPERS', 'confeccion', 'TDESCOPERESPE').concat(getPeople(raw.tztotrazwebcost, 'TNOMBPERSSUPE', 'TCODIPERSSUPE', 'supervisora'));
-            const logistica = getPeople(raw.tztotrazwebacab, 'TNOMBPERSPESA', 'TCODIPERSPESA', 'empaque').concat(getPeople(raw.tztotrazwebacab, 'TNOMBRECEBANDCOST', 'TCODIRECEBANDCOST', 'recepcion'));
+      const colorReal = info.TDESCETIQCLIE ? `"${info.TDESCETIQCLIE}"` : (lang === 'en' ? "this tone" : "este tono");
+      const materialReal = detectarMaterial();
+      const origenReal = detectarZona();
 
-            const mencionarEquipo = (lista) => {
-                if (!lista || lista.length === 0) return lang === 'en' ? "Our team" : "Nuestro equipo";
-                const nombres = lista.map(p => p.name.split(' ')[0]);
-                if (nombres.length === 1) return T.team_templates.dedication.replace('{n1}', nombres[0]);
-                if (nombres.length === 2) return T.team_templates.joint.replace('{n1}', nombres[0]).replace('{n2}', nombres[1]);
-                if (nombres.length === 3) return T.team_templates.labor.replace('{n1}', nombres[0]).replace('{n2}', nombres[1]).replace('{n3}', nombres[2]);
-                const restantes = lista.length - 2; 
-                return T.team_templates.big_team.replace('{n1}', nombres[0]).replace('{n2}', nombres[1]).replace('{n3}', restantes);
-            };
+      const codCliente = info.TCODICLIE || "";
+      const urlLogoDinamico = `http://psrvjboss01:8080/trazaP/resources/img/logos/logo_${codCliente}.png?ver=1.0`;
+      const nombreCliente = info.TNOMBCLIE || "nettalco";
+      const logoFilename = String(nombreCliente).toLowerCase().replace(/\s+/g, '');
+      const rutaLogoLocal = `./assets/logos/${logoFilename}.png`;
 
-            // --- DETALLES TÉCNICOS ---
-            const detectarMaterial = () => {
-                let mat = hilo.TDESCHILO || hilo.TDESCMATERIA;
-                if (!mat && info.TDESCPREN) {
-                    const nombre = info.TDESCPREN.toUpperCase();
-                    if (lang === 'en') {
-                        if (nombre.includes("PIMA")) return "Pima Cotton";
-                        if (nombre.includes("TANGUIS")) return "Tanguis Cotton";
-                        if (nombre.includes("COTTON") || nombre.includes("ALGODON")) return "Premium Cotton";
-                        if (nombre.includes("POLY") || nombre.includes("POLIESTER")) return "Tech Polyester";
-                        if (nombre.includes("MODAL")) return "Modal Fiber";
-                    } else {
-                        if (nombre.includes("PIMA")) return "Algodón Pima";
-                        if (nombre.includes("TANGUIS")) return "Algodón Tangüis";
-                        if (nombre.includes("COTTON") || nombre.includes("ALGODON")) return "Algodón Premium";
-                        if (nombre.includes("POLY") || nombre.includes("POLIESTER")) return "Poliéster Tecnológico";
-                        if (nombre.includes("MODAL")) return "Fibra Modal";
-                    }
-                }
-                if (mat) return mat.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
-                return lang === 'en' ? "High Quality Fibers" : "Fibras de alta calidad";
-            };
+      const rawCode = info.TCODIESTICLIE || "";
+      const styleCode = String(rawCode).split('-')[0];
+      const searchUrl = `https://www.google.com/search?q=${info.TNOMBCLIE}+${styleCode}+official+site`;
 
-            const detectarZona = () => {
-                // Prioridad: TZONAORIGHILO (origen real del hilo)
-                let zona = hilo.TZONAORIGHILO || hilo.TDESCZONA || hilo.TPROCEDENCIA;
-                if (zona) {
-                    let z = zona.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
-                    // Si el dato ya incluye "Perú", solo devolver la zona
-                    if (z.includes('Perú') || z.includes('Peru')) {
-                        return z;
-                    }
-                    return lang === 'en' ? `the valleys of ${z}` : `los valles de ${z}`;
-                }
-                return lang === 'en' ? "the valleys of the Peruvian coast" : "los valles de la costa peruana";
-            };
+      return {
+        header: {
+          logoMain: urlLogoDinamico,
+          logoFallback: rutaLogoLocal,
+          styleCode: styleCode,
+          styleUrl: searchUrl,
+          brand: info.TNOMBCLIE || "LACOSTE",
+          collection: `${T.season} ${alma.TCODITEMP || "2026"}`,
+          item: (info.TDESCPREN || "Prenda Nettalco").toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
+          color: info.TDESCETIQCLIE || "Original",
+          quality: calidadDisplay,
+          img: "",
+          materialDisplay: materialReal,
+          originDisplay: lang === 'en' ? "Made in Peru" : "Hecho en Perú"
+        },
+        steps: [
+          {
+            id: 1,
+            stage: lang === 'en' ? "ORIGIN" : "ORIGEN",
+            title: T.stages[1].title,
+            date: hilo.TFECHGUIAHILO ? hilo.TFECHGUIAHILO.split(" ")[0] : "Dic 2025",
+            location: hilo.TDESCZONA ? hilo.TDESCZONA : (lang === 'en' ? "Valleys of Peru" : "Valles del Perú"),
+            desc: T.stages[1].desc
+              .replace('{material}', materialReal)
+              .replace('{origin}', origenReal)
+              .replace('{yarn}', yarnDetail ? ` (${yarnDetail})` : ''),
+            icon: Icons.MapPin,
+            people: []
+          },
+          {
+            id: 2,
+            stage: lang === 'en' ? "KNITTING" : "TEJEDURÍA",
+            title: T.stages[2].title,
+            date: raw.tztotrazwebteje?.[0]?.TFECHTEJE?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"),
+            location: lang === 'en' ? "Circular Knitting Plant" : "Planta Tejido Circular",
+            desc: T.stages[2].desc.replace('{team}', mencionarEquipo(tejedores)),
+            icon: Icons.Shirt,
+            people: tejedores
+          },
+          {
+            id: 3,
+            stage: lang === 'en' ? "DYEING" : "TINTORERÍA",
+            title: T.stages[3].title,
+            date: raw.tztotrazwebtint?.[0]?.TFECHTENIINIC?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"),
+            location: lang === 'en' ? "Dyeing Plant" : "Planta de Teñido",
+            desc: T.stages[3].desc.replace('{color}', colorReal),
+            icon: Icons.Droplets,
+            people: tintoreros,
+            chemicals: quimicos,
+            stats_mrsl: raw.stats_mrsl || null
+          },
+          {
+            id: 4,
+            stage: lang === 'en' ? "CUTTING" : "CORTE",
+            title: T.stages[4].title,
+            date: raw.tztotrazwebcort?.[0]?.TFECHDESPCORT?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"),
+            location: lang === 'en' ? "Automated Cutting Room" : "Sala de Corte Automático",
+            desc: T.stages[4].desc,
+            icon: Icons.Scissors,
+            people: cortadores
+          },
+          {
+            id: 5,
+            stage: lang === 'en' ? "SEWING" : "CONFECCIÓN",
+            title: T.stages[5].title,
+            date: lang === 'en' ? "Artisanal Process" : "Proceso Artesanal",
+            location: lang === 'en' ? "Sewing Lines" : "Líneas de Costura",
+            desc: T.stages[5].desc.replace('{team}', mencionarEquipo(confeccionistas)),
+            icon: Icons.CheckCircle2,
+            people: confeccionistas
+          },
+          {
+            id: 6,
+            stage: lang === 'en' ? "FINISHING" : "ACABADO",
+            title: T.stages[6].title,
+            date: raw.tztotrazwebacab?.[0]?.TFECHEMPA?.split(" ")[0] || (lang === 'en' ? "Finished" : "Finalizado"),
+            location: lang === 'en' ? "Distribution Center" : "Centro de Distribución",
+            desc: T.stages[6].desc.replace('{team}', mencionarEquipo(logistica)),
+            icon: Icons.Box,
+            people: logistica,
+            auditor: auditorData
+          }
+        ]
+      };
+    };
 
-            const obtenerDescripcionHilo = () => {
-                // Buscar TDESCHILOPRIN en los materiales
-                const materialConHilo = materiales.find(m => m.TDESCHILOPRIN);
-                if (materialConHilo && materialConHilo.TDESCHILOPRIN) {
-                    return materialConHilo.TDESCHILOPRIN.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
-                }
-                return null;
-            };
+    // --- 4. COMPONENTES UI ---
+    const PersonCard = ({ person }) => {
+      const localPhoto = `./assets/staff/${person.id}.jpg`;
+      const nettalcoPhoto = `https://sicb.nettalco.com.pe/TrazabilidadWSphpPublico/servicio/getFoto/${person.id}`;
+      const fallbackAvatar = "https://ui-avatars.com/api/?name=" + person.name + "&background=e2e8f0&color=64748b&font-size=0.33";
 
-             const yarnDetail = hiloSpecs.TDESCHILOPRIN 
-                ? hiloSpecs.TDESCHILOPRIN.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()) 
-                : "";
-            const colorReal = info.TDESCETIQCLIE ? `"${info.TDESCETIQCLIE}"` : (lang === 'en' ? "this tone" : "este tono");
-            const materialReal = detectarMaterial();
-            const origenReal = detectarZona();
-            const hiloDescripcion = obtenerDescripcionHilo();
+      const [imgSrc, setImgSrc] = useState(localPhoto);
 
-            const codCliente = info.TCODICLIE || ""; 
-            const urlLogoDinamico = `http://psrvjboss01:8080/trazaP/resources/img/logos/logo_${codCliente}.png?ver=1.0`;
-            const nombreCliente = info.TNOMBCLIE || "nettalco";
-            const logoFilename = nombreCliente.toLowerCase().replace(/\s+/g, ''); 
-            const rutaLogoLocal = `./assets/logos/${logoFilename}.png`;
+      useEffect(() => { setImgSrc(localPhoto); }, [person.id]);
 
-            const rawCode = info.TCODIESTICLIE || "";
-            const styleCode = rawCode.split('-')[0];
-            const searchUrl = `https://www.google.com/search?q=${info.TNOMBCLIE}+${styleCode}+official+site`;
+      const handleError = () => {
+        if (imgSrc === localPhoto) setImgSrc(nettalcoPhoto);
+        else setImgSrc(fallbackAvatar);
+      };
 
-            return {
-                header: {
-                    logoMain: urlLogoDinamico,
-                    logoFallback: rutaLogoLocal,
-                    styleCode: styleCode, 
-                    styleUrl: searchUrl,
-                    brand: info.TNOMBCLIE || "LACOSTE",
-                    collection: `${T.season} ${alma.TCODITEMP || "2026"}`,
-                    item: (info.TDESCPREN || "Prenda Nettalco").toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()),
-                    color: info.TDESCETIQCLIE || "Original",
-                    quality: calidadDisplay, 
-                    img: "",
-                    materialDisplay: materialReal,
-                    originDisplay: lang === 'en' ? "Made in Peru" : "Hecho en Perú"
-                },
-                steps: [
-                    {
-                        id: 1,
-                        stage: lang === 'en' ? "ORIGIN" : "ORIGEN",
-                        title: T.stages[1].title,
-                        date: hilo.TFECHGUIAHILO ? hilo.TFECHGUIAHILO.split(" ")[0] : "Dic 2025",
-                        location: hilo.TDESCZONA ? hilo.TDESCZONA : (lang === 'en' ? "Valleys of Peru" : "Valles del Perú"),
-                        desc: T.stages[1].desc
-                            .replace('{material}', materialReal)
-                            .replace('{origin}', origenReal)
-                            .replace('{yarn}', yarnDetail ? ` (${yarnDetail})` : ''),
-                        icon: Icons.MapPin,
-                        people: []
-                    },
-                    { 
-                        id: 2, 
-                        stage: lang === 'en' ? "KNITTING" : "TEJEDURÍA", 
-                        title: T.stages[2].title,
-                        date: raw.tztotrazwebteje?.[0]?.TFECHTEJE?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"), 
-                        location: lang === 'en' ? "Circular Knitting Plant" : "Planta Tejido Circular", 
-                        desc: T.stages[2].desc.replace('{team}', mencionarEquipo(tejedores)), 
-                        icon: Icons.Shirt, 
-                        people: tejedores 
-                    },
-                    { 
-                        id: 3, 
-                        stage: lang === 'en' ? "DYEING" : "TINTORERÍA", 
-                        title: T.stages[3].title,
-                        date: raw.tztotrazwebtint?.[0]?.TFECHTENIINIC?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"),
-                        location: lang === 'en' ? "Dyeing Plant" : "Planta de Teñido",
-                        desc: T.stages[3].desc.replace('{color}', colorReal),
-                        icon: Icons.Droplets,
-                        people: tintoreros,
-                        chemicals: quimicos,
-                        stats_mrsl: raw.stats_mrsl || null
-                    },
-                    { 
-                        id: 4, 
-                        stage: lang === 'en' ? "CUTTING" : "CORTE", 
-                        title: T.stages[4].title,
-                        date: raw.tztotrazwebcort?.[0]?.TFECHDESPCORT?.split(" ")[0] || (lang === 'en' ? "Continuous" : "Proceso Continuo"), 
-                        location: lang === 'en' ? "Automated Cutting Room" : "Sala de Corte Automático", 
-                        desc: T.stages[4].desc, 
-                        icon: Icons.Scissors, 
-                        people: cortadores 
-                    },
-                    { 
-                        id: 5, 
-                        stage: lang === 'en' ? "SEWING" : "CONFECCIÓN", 
-                        title: T.stages[5].title,
-                        date: lang === 'en' ? "Artisanal Process" : "Proceso Artesanal", 
-                        location: lang === 'en' ? "Sewing Lines" : "Líneas de Costura", 
-                        desc: T.stages[5].desc.replace('{team}', mencionarEquipo(confeccionistas)), 
-                        icon: Icons.CheckCircle2, 
-                        people: confeccionistas 
-                    },
-                    { 
-                        id: 6, 
-                        stage: lang === 'en' ? "FINISHING" : "ACABADO", 
-                        title: T.stages[6].title,
-                        date: raw.tztotrazwebacab?.[0]?.TFECHEMPA?.split(" ")[0] || (lang === 'en' ? "Finished" : "Finalizado"), 
-                        location: lang === 'en' ? "Distribution Center" : "Centro de Distribución", 
-                        desc: T.stages[6].desc.replace('{team}', mencionarEquipo(logistica)), 
-                        icon: Icons.Box, 
-                        people: logistica,
-                        auditor: auditorData 
-                    }
-                ]
-            };
-        };
+      return (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          whileHover={{ y: -3 }}
+          className="flex flex-col items-center p-3 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all"
+        >
+          <div className="relative w-16 h-16 mb-2">
+            <img
+              src={imgSrc}
+              alt={person.name}
+              className="w-full h-full rounded-full object-cover border-2 border-white shadow-sm bg-gray-100"
+              onError={handleError}
+            />
+            {imgSrc !== fallbackAvatar && (
+              <div className="absolute bottom-0 right-0 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
+            )}
+          </div>
+          <h4 className="text-xs font-bold text-gray-800 text-center leading-tight mb-0.5">{person.name}</h4>
+          <span className="text-[10px] text-gray-500 uppercase tracking-wide truncate max-w-full">{person.role}</span>
+        </motion.div>
+      );
+    };
 
-        // --- 4. COMPONENTES UI ---
+    const AuditorBadge = ({ auditor, certifiedLabel }) => {
+      const localPhoto = `./assets/staff/${auditor.id}.jpg`;
+      const nettalcoPhoto = `https://sicb.nettalco.com.pe/TrazabilidadWSphpPublico/servicio/getFoto/${auditor.id}`;
+      const fallbackAvatar = "https://ui-avatars.com/api/?name=" + auditor.name + "&background=10b981&color=ffffff&font-size=0.33";
 
-        const PersonCard = ({ person, index }) => {
-            const localPhoto = `./assets/staff/${person.id}.jpg`;
-            const nettalcoPhoto = `https://sicb.nettalco.com.pe/TrazabilidadWSphpPublico/servicio/getFoto/${person.id}`;
-            const fallbackAvatar = "https://ui-avatars.com/api/?name=" + person.name + "&background=e2e8f0&color=64748b&font-size=0.33";
-            
-            const [imgSrc, setImgSrc] = useState(localPhoto);
-            const [hasError, setHasError] = useState(false);
+      const [imgSrc, setImgSrc] = useState(localPhoto);
 
-            useEffect(() => { setImgSrc(localPhoto); }, [person.id]);
+      useEffect(() => { setImgSrc(localPhoto); }, [auditor.id]);
 
-            const handleError = (e) => {
+      return (
+        <div className="mt-6 mb-8 bg-green-50/50 rounded-2xl p-4 border border-green-100 flex items-center gap-4 animate-fade-in-up">
+          <div className="relative">
+            <img
+              src={imgSrc}
+              className="w-14 h-14 rounded-full object-cover border-2 border-green-500 shadow-sm"
+              onError={() => {
                 if (imgSrc === localPhoto) setImgSrc(nettalcoPhoto);
-                else if (imgSrc === nettalcoPhoto) {
-                    setImgSrc(fallbackAvatar);
-                    setHasError(true);
-                }
-            };
+                else setImgSrc(fallbackAvatar);
+              }}
+            />
+            <div className="absolute -bottom-1 -right-1 bg-green-500 text-white rounded-full p-0.5 border-2 border-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-green-700">{certifiedLabel}</span>
+              <span className="text-[10px] bg-green-200 text-green-800 px-1.5 rounded-md font-mono">{auditor.date}</span>
+            </div>
+            <h4 className="text-sm font-bold text-gray-900 leading-tight">{auditor.name}</h4>
+            <span className="text-xs text-green-600 font-medium">{auditor.role}</span>
+          </div>
+        </div>
+      );
+    };
 
-            return (
-                <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    whileHover={{ y: -3 }}
-                    className="flex flex-col items-center p-3 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all"
-                >
-                    <div className="relative w-16 h-16 mb-2">
-                        <img 
-                            src={imgSrc} 
-                            alt={person.name} 
-                            className="w-full h-full rounded-full object-cover border-2 border-white shadow-sm bg-gray-100"
-                            onError={handleError} 
-                        />
-                        {imgSrc !== fallbackAvatar && (
-                            <div className="absolute bottom-0 right-0 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></div>
+    const StepCard = ({ step, index, lang }) => {
+      const imageSrc = StageImages[step.id];
+      const videoSrc = StageVideos[step.id];
+      const videoRef = useRef(null);
+
+      const [showVideo, setShowVideo] = useState(!!videoSrc);
+      const [showChemicals, setShowChemicals] = useState(false);
+
+      useEffect(() => {
+        if (showVideo && videoRef.current) {
+          videoRef.current.defaultMuted = true;
+          videoRef.current.muted = true;
+          const playPromise = videoRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(error => { console.log("Autoplay bloqueado:", error); });
+          }
+        }
+      }, [showVideo]);
+
+      const T = TRANSLATIONS[lang];
+
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+          className="relative pl-10 pb-16 last:pb-0 group"
+        >
+          <div className="absolute left-[9px] top-8 bottom-0 w-px bg-gray-200 group-last:hidden"></div>
+          <div className="absolute left-0 top-0 w-5 h-5 bg-green-700 rounded-full flex items-center justify-center border-[3px] border-white shadow-md z-10 box-content"></div>
+
+          <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100/80 overflow-hidden grid md:grid-cols-5 hover:shadow-xl transition-shadow duration-500">
+            <div className="p-8 md:col-span-3 flex flex-col justify-center relative z-10">
+              <div className="flex justify-between items-center mb-6">
+                <div className="flex items-center gap-3">
+                  <span className="bg-green-50 text-green-700 p-2 rounded-xl shadow-sm">{step.icon}</span>
+                  <span className="text-xs font-bold tracking-widest text-green-800 uppercase">{step.stage}</span>
+                </div>
+                <span className="text-xs font-medium text-gray-400 bg-gray-100/80 px-3 py-1 rounded-full backdrop-blur-sm">{step.date}</span>
+              </div>
+
+              <h3 className="text-2xl font-extrabold text-gray-900 mb-3 tracking-tight">{step.title}</h3>
+
+              {step.auditor && (
+                <AuditorBadge auditor={step.auditor} certifiedLabel={T.certified_by} />
+              )}
+
+              {/* --- SECCIÓN QUÍMICOS (ACORDEÓN ZDHC) --- */}
+              {step.chemicals && step.chemicals.length > 0 && (
+                <div className="mb-6 bg-teal-50/40 rounded-xl border border-teal-100/60 overflow-hidden transition-all duration-300">
+                  <div
+                    className="p-4 flex items-center gap-3 cursor-pointer hover:bg-teal-50/80 transition-colors"
+                    onClick={() => setShowChemicals(!showChemicals)}
+                  >
+                    <div className="bg-teal-100 text-teal-600 p-2 rounded-lg shadow-sm">
+                      {Icons.Flask}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-sm font-bold text-teal-800 leading-tight flex items-center gap-2">
+                        {T.mrsl_title}
+                        {step.stats_mrsl && (
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full shadow-sm tracking-wide font-bold ${
+                            step.stats_mrsl.porcentaje === 100
+                              ? 'bg-green-600 text-white'
+                              : step.stats_mrsl.porcentaje >= 80
+                              ? 'bg-teal-600 text-white'
+                              : step.stats_mrsl.porcentaje >= 50
+                              ? 'bg-yellow-500 text-white'
+                              : 'bg-orange-600 text-white'
+                          }`}>
+                            {step.stats_mrsl.porcentaje}% COMPLIANT
+                          </span>
                         )}
+                      </h4>
+                      <p className="text-xs text-teal-600/80 mt-0.5 font-medium">{T.mrsl_desc}</p>
                     </div>
-                    <h4 className="text-xs font-bold text-gray-800 text-center leading-tight mb-0.5">{person.name}</h4>
-                    <span className="text-[10px] text-gray-500 uppercase tracking-wide truncate max-w-full">{person.role}</span>
-                </motion.div>
-            );
-        };
-
-        const AuditorBadge = ({ auditor, label, certifiedLabel }) => {
-            const localPhoto = `./assets/staff/${auditor.id}.jpg`;
-            const nettalcoPhoto = `https://sicb.nettalco.com.pe/TrazabilidadWSphpPublico/servicio/getFoto/${auditor.id}`;
-            const fallbackAvatar = "https://ui-avatars.com/api/?name=" + auditor.name + "&background=10b981&color=ffffff&font-size=0.33";
-            
-            const [imgSrc, setImgSrc] = useState(localPhoto);
-            
-            useEffect(() => { setImgSrc(localPhoto); }, [auditor.id]);
-            
-            return (
-                <div className="mt-6 mb-8 bg-green-50/50 rounded-2xl p-4 border border-green-100 flex items-center gap-4 animate-fade-in-up">
-                    <div className="relative">
-                        <img 
-                            src={imgSrc}
-                            className="w-14 h-14 rounded-full object-cover border-2 border-green-500 shadow-sm"
-                            onError={(e) => { 
-                                if(imgSrc === localPhoto) setImgSrc(nettalcoPhoto);
-                                else setImgSrc(fallbackAvatar);
-                            }}
-                        />
-                        <div className="absolute -bottom-1 -right-1 bg-green-500 text-white rounded-full p-0.5 border-2 border-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-2 mb-0.5">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-green-700">{certifiedLabel}</span>
-                            <span className="text-[10px] bg-green-200 text-green-800 px-1.5 rounded-md font-mono">{auditor.date}</span>
-                        </div>
-                        <h4 className="text-sm font-bold text-gray-900 leading-tight">{auditor.name}</h4>
-                        <span className="text-xs text-green-600 font-medium">{auditor.role}</span>
-                    </div>
-                </div>
-            );
-        };
-
-        const StepCard = ({ step, index, lang }) => {
-            const imageSrc = StageImages[step.id];
-            const videoSrc = StageVideos[step.id];
-            const videoRef = useRef(null);
-            
-            const [showVideo, setShowVideo] = useState(!!videoSrc);
-            const [showChemicals, setShowChemicals] = useState(false); // <--- ESTADO PARA EL ACORDEÓN
-
-            useEffect(() => {
-                if (showVideo && videoRef.current) {
-                    videoRef.current.defaultMuted = true;
-                    videoRef.current.muted = true;
-                    const playPromise = videoRef.current.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(error => { console.log("Autoplay bloqueado:", error); });
-                    }
-                }
-            }, [showVideo]);
-
-            const T = TRANSLATIONS[lang];
-
-            return (
-                <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-                    className="relative pl-10 pb-16 last:pb-0 group"
-                >
-                    <div className="absolute left-[9px] top-8 bottom-0 w-px bg-gray-200 group-last:hidden"></div>
-                    <div className="absolute left-0 top-0 w-5 h-5 bg-green-700 rounded-full flex items-center justify-center border-[3px] border-white shadow-md z-10 box-content"></div>
-
-                    <div className="bg-white rounded-[2rem] shadow-sm border border-gray-100/80 overflow-hidden grid md:grid-cols-5 hover:shadow-xl transition-shadow duration-500">
-                        <div className="p-8 md:col-span-3 flex flex-col justify-center relative z-10">
-                             <div className="flex justify-between items-center mb-6">
-                                <div className="flex items-center gap-3">
-                                    <span className="bg-green-50 text-green-700 p-2 rounded-xl shadow-sm">{step.icon}</span>
-                                    <span className="text-xs font-bold tracking-widest text-green-800 uppercase">{step.stage}</span>
-                                </div>
-                                <span className="text-xs font-medium text-gray-400 bg-gray-100/80 px-3 py-1 rounded-full backdrop-blur-sm">{step.date}</span>
-                            </div>
-                            
-                            <h3 className="text-2xl font-extrabold text-gray-900 mb-3 tracking-tight">{step.title}</h3>
-
-                            {step.auditor && (
-                                <AuditorBadge 
-                                    auditor={step.auditor} 
-                                    label={T.audit_label} 
-                                    certifiedLabel={T.certified_by}
-                                />
-                            )}
-
-                            {/* --- SECCIÓN QUÍMICOS (ACORDEÓN ZDHC) --- */}
-                            {step.chemicals && step.chemicals.length > 0 && (
-                                <div className="mb-6 bg-teal-50/40 rounded-xl border border-teal-100/60 overflow-hidden transition-all duration-300">
-                                    {/* Cabecera del Badge (Clickeable) */}
-                                    <div className="p-4 flex items-center gap-3 cursor-pointer hover:bg-teal-50/80 transition-colors" onClick={() => setShowChemicals(!showChemicals)}>
-                                        <div className="bg-teal-100 text-teal-600 p-2 rounded-lg shadow-sm">
-                                            {Icons.Flask}
-                                        </div>
-                                        <div className="flex-1">
-                                            <h4 className="text-sm font-bold text-teal-800 leading-tight flex items-center gap-2">
-                                                {T.mrsl_title}
-                                                {step.stats_mrsl && (
-                                                    <span className={`text-[10px] px-2 py-0.5 rounded-full shadow-sm tracking-wide font-bold ${
-                                                        step.stats_mrsl.porcentaje === 100
-                                                            ? 'bg-green-600 text-white'
-                                                            : step.stats_mrsl.porcentaje >= 80
-                                                            ? 'bg-teal-600 text-white'
-                                                            : step.stats_mrsl.porcentaje >= 50
-                                                            ? 'bg-yellow-500 text-white'
-                                                            : 'bg-orange-600 text-white'
-                                                    }`}>
-                                                        {step.stats_mrsl.porcentaje}% COMPLIANT
-                                                    </span>
-                                                )}
-                                            </h4>
-                                            <p className="text-xs text-teal-600/80 mt-0.5 font-medium">{T.mrsl_desc}</p>
-                                        </div>
-                                        <button className="text-teal-600 text-xs font-bold">
-                                            {showChemicals ? T.hide_details : T.view_details} {showChemicals ? '▲' : '▼'}
-                                        </button>
-                                    </div>
-
-                                    {/* Contenido Desplegable */}
-                                    <AnimatePresence>
-                                        {showChemicals && (
-                                            <motion.div
-                                                initial={{ height: 0, opacity: 0 }}
-                                                animate={{ height: "auto", opacity: 1 }}
-                                                exit={{ height: 0, opacity: 0 }}
-                                                className="bg-white/40 border-t border-teal-100/50"
-                                            >
-                                                <div className="p-4 pt-2">
-                                                    <p className="text-[10px] font-bold text-teal-800 uppercase mb-2 tracking-wider">
-                                                        {T.chemical_list}
-                                                        {step.stats_mrsl && (
-                                                            <span className="ml-2 text-gray-500 font-normal">
-                                                                ({step.stats_mrsl.cumple}/{step.stats_mrsl.total})
-                                                            </span>
-                                                        )}
-                                                    </p>
-                                                    <ul className="grid grid-cols-1 gap-2">
-                                                        {step.chemicals.map((q, i) => (
-                                                            <li key={i} className={`flex items-center gap-2 text-xs px-2 py-1.5 rounded border ${
-                                                                q.cumple
-                                                                    ? 'bg-white/80 border-teal-50 text-gray-600'
-                                                                    : 'bg-orange-50/60 border-orange-200/60 text-gray-700'
-                                                            }`}>
-                                                                <span className={`font-bold text-sm ${
-                                                                    q.cumple ? 'text-teal-500' : 'text-orange-500'
-                                                                }`}>
-                                                                    {q.cumple ? '✓' : '⚠'}
-                                                                </span>
-                                                                <span className="font-semibold text-gray-700 truncate flex-1" title={q.nombre}>
-                                                                    {q.nombre}
-                                                                </span>
-                                                                <span className={`text-[9px] border px-1.5 py-0.5 rounded uppercase tracking-wide ${
-                                                                    q.cumple
-                                                                        ? 'bg-teal-50 border-teal-200 text-teal-700'
-                                                                        : 'bg-orange-100 border-orange-300 text-orange-700'
-                                                                }`}>
-                                                                    {(() => {
-                                                                        const estado = q.estado_mrsl || (q.cumple ? 'Cumple' : 'Sin datos');
-                                                                        if (estado === 'Cumple') return T.chemical_status.cumple;
-                                                                        if (estado === 'No cumple') return T.chemical_status.no_cumple;
-                                                                        if (estado === 'Sin datos') return T.chemical_status.sin_datos;
-                                                                        return estado;
-                                                                    })()}
-                                                                </span>
-                                                                {q.proveedor && (
-                                                                    <span className="text-[9px] text-gray-400 border border-gray-200 px-1.5 py-0.5 rounded uppercase tracking-wide bg-gray-50">
-                                                                        {q.proveedor}
-                                                                    </span>
-                                                                )}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </div>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
-                            )}
-
-                            <p className="text-base text-gray-600 mb-8 leading-relaxed font-medium">{step.desc}</p>
-                            
-                            {step.people.length > 0 && (
-                                <div className="mt-auto pt-6 border-t border-gray-100">
-                                    <p className="text-[11px] font-bold text-gray-400 mb-4 uppercase tracking-wider flex items-center gap-2">
-                                        {T.protagonists} <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[10px]">{step.people.length}</span>
-                                    </p>
-                                    <div className={`grid gap-3 ${step.people.length > 3 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2'}`}>
-                                        {step.people.map((p, i) => <PersonCard key={i} person={p} index={i} />)}
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="relative h-64 md:h-auto md:col-span-2 overflow-hidden bg-gray-200">
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 md:bg-gradient-to-l"></div>
-                            {showVideo ? (
-                                <video
-                                    ref={videoRef}
-                                    src={videoSrc}
-                                    className="absolute inset-0 w-full h-full object-cover transform scale-105 origin-center"
-                                    autoPlay loop muted playsInline={true} webkit-playsinline="true"
-                                    onError={() => setShowVideo(false)}
-                                />
-                            ) : (
-                                imageSrc && (
-                                    <motion.img 
-                                        whileHover={{ scale: 1.05 }}
-                                        transition={{ duration: 2 }}
-                                        src={imageSrc} 
-                                        className="absolute inset-0 w-full h-full object-cover transform scale-105 origin-center"
-                                        onError={(e) => { e.target.style.display = 'none'; }} 
-                                    />
-                                )
-                            )}
-                        </div>
-                    </div>
-                </motion.div>
-            );
-        };
-
-        const App = () => {
-            const [rawData, setRawData] = useState(null);
-            const [lang, setLang] = useState('en'); // Default language: English
-            const [loading, setLoading] = useState(true);
-
-            // ⚡ AQUÍ PEGARÁS TU TXID DE ARWEAVE LUEGO
-            const ARWEAVE_MAP = {
-                // "NOMBRE_DEL_JSON_SIN_EXTENSION": "TXID_LARGO"
-                "ff48d9ca5592d872113131718d83c5d8962ed2a26148830dee2062bd062a09ee": "AQUI_IRÁ_TU_TXID_CUANDO_SUBAS"
-            };
-
-            useEffect(() => {
-                const loadData = async () => {
-                    const params = new URLSearchParams(window.location.search);
-                    const id = params.get('id');
-                    if (!id) { setLoading(false); return; }
-                    try {
-                        const response = await fetch(`./data/${id}.json`);
-                        if (!response.ok) throw new Error("File not found");
-                        const jsonRaw = await response.json();
-                        setRawData(jsonRaw);
-                    } catch (err) { console.error(err); } 
-                    finally { setLoading(false); }
-                };
-                loadData();
-            }, []);
-
-            const data = useMemo(() => {
-                if (!rawData) return null;
-                return formatData(rawData, lang);
-            }, [rawData, lang]);
-
-            const T = TRANSLATIONS[lang];
-
-            if (loading) return <div className="h-screen flex items-center justify-center bg-gray-50"><span className="loader"></span></div>;
-
-            if (!data) return (
-                <div className="h-screen flex flex-col items-center justify-center text-center p-6 bg-gradient-to-b from-gray-50 to-white">
-                    <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6 shadow-sm text-3xl">📷</div>
-                    <h2 className="text-2xl font-bold text-gray-900 mb-2">{T.scan_title}</h2>
-                    <p className="text-gray-500 max-w-xs">{T.scan_desc}</p>
-                </div>
-            );
-
-            return (
-                <div className="max-w-4xl mx-auto bg-white min-h-screen shadow-2xl relative overflow-hidden">
-                    
-                    <button 
-                        onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
-                        className="fixed bottom-6 right-6 z-50 bg-gray-900 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 font-bold hover:scale-105 transition-transform border border-gray-700"
-                    >
-                        {Icons.Globe}
-                        <span>{lang === 'es' ? 'EN' : 'ES'}</span>
+                    <button className="text-teal-600 text-xs font-bold" type="button">
+                      {showChemicals ? T.hide_details : T.view_details} {showChemicals ? '▲' : '▼'}
                     </button>
+                  </div>
 
-                    <header className="relative h-[55vh] min-h-[450px] bg-gray-900 text-white overflow-hidden z-10 flex flex-col justify-end">
-                        
-                        {data.header.img && (
-                            <motion.img 
-                                initial={{ scale: 1.1, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 0.9 }}
-                                transition={{ duration: 1.5 }}
-                                src={data.header.img} 
-                                className="absolute inset-0 w-full h-full object-cover" 
-                                onError={(e) => { e.target.style.display = 'none'; }} 
-                            />
-                        )}
-
-                        <div className="absolute top-0 left-0 p-6 z-20">
-                             <div className="bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-lg">
-                                <img 
-                                    src={data.header.logoMain} 
-                                    alt={data.header.brand} 
-                                    className="h-8 w-auto object-contain"
-                                    onError={(e) => { 
-                                        e.target.onerror = null; 
-                                        e.target.src = data.header.logoFallback; 
-                                        e.target.onerror = (ev) => { ev.target.src='./assets/logos/nettalco.png'; }
-                                    }}
-                                />
-                             </div>
-                        </div>
-
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-transparent"></div>
-                        
-                        <div className="relative z-30 p-6 md:p-16 pb-20 w-full max-w-3xl">
-                            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
-                                
-                                <span className="inline-block glass px-3 py-1 rounded-full text-xs font-bold mb-4 tracking-wider text-white/90 border border-white/20">
-                                    {data.header.collection.toUpperCase()}
+                  <AnimatePresence>
+                    {showChemicals && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="bg-white/40 border-t border-teal-100/50"
+                      >
+                        <div className="p-4 pt-2">
+                          <p className="text-[10px] font-bold text-teal-800 uppercase mb-2 tracking-wider">
+                            {T.chemical_list}
+                            {step.stats_mrsl && (
+                              <span className="ml-2 text-gray-500 font-normal">
+                                ({step.stats_mrsl.cumple}/{step.stats_mrsl.total})
+                              </span>
+                            )}
+                          </p>
+                          <ul className="grid grid-cols-1 gap-2">
+                            {step.chemicals.map((q, i) => (
+                              <li key={i} className={`flex items-center gap-2 text-xs px-2 py-1.5 rounded border ${
+                                q.cumple
+                                  ? 'bg-white/80 border-teal-50 text-gray-600'
+                                  : 'bg-orange-50/60 border-orange-200/60 text-gray-700'
+                              }`}>
+                                <span className={`font-bold text-sm ${q.cumple ? 'text-teal-500' : 'text-orange-500'}`}>
+                                  {q.cumple ? '✓' : '⚠'}
                                 </span>
-
-                                <h1 className="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
-                                    {data.header.item}
-                                    {data.header.styleCode && (
-                                        <a 
-                                            href={data.header.styleUrl} 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center ml-2 align-baseline text-green-400 hover:text-green-300 underline decoration-2 underline-offset-4 transition-colors cursor-pointer text-2xl md:text-4xl"
-                                        >
-                                            #{data.header.styleCode}
-                                        </a>
-                                    )}
-                                </h1>
-
-                                <div className="flex flex-wrap gap-3 mt-4">
-                                    <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
-                                        <div className="w-3 h-3 rounded-full bg-green-500 border border-white shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-                                        <span className="text-sm font-medium text-gray-200">{data.header.color}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
-                                        <span className="text-sm text-yellow-400">{Icons.Award}</span>
-                                        <span className="text-sm font-medium text-gray-200">{data.header.quality}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
-                                        <span className="text-sm">🇵🇪</span>
-                                        <span className="text-sm font-medium text-gray-200">{data.header.originDisplay}</span>
-                                    </div>
-                                </div>
-
-                            </motion.div>
+                                <span className="font-semibold text-gray-700 truncate flex-1" title={q.nombre}>
+                                  {q.nombre}
+                                </span>
+                                <span className={`text-[9px] border px-1.5 py-0.5 rounded uppercase tracking-wide ${
+                                  q.cumple
+                                    ? 'bg-teal-50 border-teal-200 text-teal-700'
+                                    : 'bg-orange-100 border-orange-300 text-orange-700'
+                                }`}>
+                                  {(() => {
+                                    const estado = q.estado_mrsl || (q.cumple ? 'Cumple' : 'Sin datos');
+                                    if (estado === 'Cumple') return T.chemical_status.cumple;
+                                    if (estado === 'No cumple') return T.chemical_status.no_cumple;
+                                    if (estado === 'Sin datos') return T.chemical_status.sin_datos;
+                                    return estado;
+                                  })()}
+                                </span>
+                                {q.proveedor && (
+                                  <span className="text-[9px] text-gray-400 border border-gray-200 px-1.5 py-0.5 rounded uppercase tracking-wide bg-gray-50">
+                                    {q.proveedor}
+                                  </span>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
                         </div>
-                    </header>
-
-                    <main className="px-6 md:px-16 py-16 -mt-16 relative z-20 bg-white rounded-t-[3rem]">
-                        <div className="mb-16">
-                            {data.steps.map((step, index) => <StepCard key={step.id} step={step} index={index} lang={lang} />)}
-                        </div>
-
-                        <div className="bg-gray-900 rounded-[2.5rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl">
-                            <div className="relative z-30">
-                                <h2 className="text-2xl font-bold text-white mb-3">{T.transparency_title}</h2>
-                                <p className="text-gray-400 text-base mb-8 max-w-md mx-auto leading-relaxed">{T.transparency_desc}</p>
-                                
-                                {/* BOTÓN CONECTADO AL MAPA DE ARWEAVE */}
-                                {(() => {
-                                    const params = new URLSearchParams(window.location.search);
-                                    const currentId = params.get('id');
-                                    const arweaveTx = ARWEAVE_MAP[currentId];
-                                    const verifyLink = arweaveTx ? `https://viewblock.io/arweave/tx/${arweaveTx}` : "#";
-
-                                    return (
-                                        <a 
-                                            href={verifyLink} 
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-sm transition-transform shadow-xl tracking-wide ${arweaveTx ? 'bg-white text-gray-900 hover:scale-105 hover:shadow-2xl cursor-pointer' : 'bg-gray-700 text-gray-500 cursor-not-allowed'}`}
-                                        >
-                                            <span className={arweaveTx ? "text-green-700" : "text-gray-600"}>{Icons.Box}</span> 
-                                            {T.verify} {arweaveTx ? "↗" : ""}
-                                        </a>
-                                    );
-                                })()}
-
-                            </div>
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-green-600/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
-                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/20 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4"></div>
-                        </div>
-                    </main>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-            );
-        };
+              )}
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+              <p className="text-base text-gray-600 mb-8 leading-relaxed font-medium">{step.desc}</p>
+
+              {step.people && step.people.length > 0 && (
+                <div className="mt-auto pt-6 border-t border-gray-100">
+                  <p className="text-[11px] font-bold text-gray-400 mb-4 uppercase tracking-wider flex items-center gap-2">
+                    {T.protagonists} <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[10px]">{step.people.length}</span>
+                  </p>
+                  <div className={`grid gap-3 ${step.people.length > 3 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2'}`}>
+                    {step.people.map((p, i) => <PersonCard key={i} person={p} />)}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="relative h-64 md:h-auto md:col-span-2 overflow-hidden bg-gray-200">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 md:bg-gradient-to-l"></div>
+              {showVideo ? (
+                <video
+                  ref={videoRef}
+                  src={videoSrc}
+                  className="absolute inset-0 w-full h-full object-cover transform scale-105 origin-center"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline={true}
+                  webkit-playsinline="true"
+                  onError={() => setShowVideo(false)}
+                />
+              ) : (
+                imageSrc && (
+                  <motion.img
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 2 }}
+                    src={imageSrc}
+                    className="absolute inset-0 w-full h-full object-cover transform scale-105 origin-center"
+                    onError={(e) => { e.target.style.display = 'none'; }}
+                  />
+                )
+              )}
+            </div>
+          </div>
+        </motion.div>
+      );
+    };
+
+    const App = () => {
+      const [rawData, setRawData] = useState(null);
+      const [lang, setLang] = useState('en');
+      const [loading, setLoading] = useState(true);
+
+      const ARWEAVE_MAP = {
+        "ff48d9ca5592d872113131718d83c5d8962ed2a26148830dee2062bd062a09ee": "AQUI_IRÁ_TU_TXID_CUANDO_SUBAS"
+      };
+
+      useEffect(() => {
+        const loadData = async () => {
+          const params = new URLSearchParams(window.location.search);
+          const id = params.get('id');
+          if (!id) { setLoading(false); return; }
+
+          try {
+            const response = await fetch(`./data/${id}.json`);
+            if (!response.ok) throw new Error("File not found");
+            const jsonRaw = await response.json();
+            setRawData(jsonRaw);
+          } catch (err) {
+            console.error(err);
+          } finally {
+            setLoading(false);
+          }
+        };
+        loadData();
+      }, []);
+
+      const data = useMemo(() => {
+        if (!rawData) return null;
+        return formatData(rawData, lang);
+      }, [rawData, lang]);
+
+      const T = TRANSLATIONS[lang];
+
+      if (loading) return <div className="h-screen flex items-center justify-center bg-gray-50"><span className="loader"></span></div>;
+
+      if (!data) return (
+        <div className="h-screen flex flex-col items-center justify-center text-center p-6 bg-gradient-to-b from-gray-50 to-white">
+          <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mb-6 shadow-sm text-3xl">📷</div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">{T.scan_title}</h2>
+          <p className="text-gray-500 max-w-xs">{T.scan_desc}</p>
+        </div>
+      );
+
+      return (
+        <div className="max-w-4xl mx-auto bg-white min-h-screen shadow-2xl relative overflow-hidden">
+          <button
+            onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
+            className="fixed bottom-6 right-6 z-50 bg-gray-900 text-white px-4 py-3 rounded-full shadow-2xl flex items-center gap-2 font-bold hover:scale-105 transition-transform border border-gray-700"
+          >
+            {Icons.Globe}
+            <span>{lang === 'es' ? 'EN' : 'ES'}</span>
+          </button>
+
+          <header className="relative h-[55vh] min-h-[450px] bg-gray-900 text-white overflow-hidden z-10 flex flex-col justify-end">
+            {data.header.img && (
+              <motion.img
+                initial={{ scale: 1.1, opacity: 0 }}
+                animate={{ scale: 1, opacity: 0.9 }}
+                transition={{ duration: 1.5 }}
+                src={data.header.img}
+                className="absolute inset-0 w-full h-full object-cover"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
+            )}
+
+            <div className="absolute top-0 left-0 p-6 z-20">
+              <div className="bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-lg">
+                <img
+                  src={data.header.logoMain}
+                  alt={data.header.brand}
+                  className="h-8 w-auto object-contain"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = data.header.logoFallback;
+                    e.target.onerror = (ev) => { ev.target.src = './assets/logos/nettalco.png'; }
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/70 to-transparent"></div>
+
+            <div className="relative z-30 p-6 md:p-16 pb-20 w-full max-w-3xl">
+              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.8 }}>
+                <span className="inline-block glass px-3 py-1 rounded-full text-xs font-bold mb-4 tracking-wider text-white/90 border border-white/20">
+                  {data.header.collection.toUpperCase()}
+                </span>
+
+                <h1 className="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight text-white">
+                  {data.header.item}
+                  {data.header.styleCode && (
+                    <a
+                      href={data.header.styleUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center ml-2 align-baseline text-green-400 hover:text-green-300 underline decoration-2 underline-offset-4 transition-colors cursor-pointer text-2xl md:text-4xl"
+                    >
+                      #{data.header.styleCode}
+                    </a>
+                  )}
+                </h1>
+
+                <div className="flex flex-wrap gap-3 mt-4">
+                  <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
+                    <div className="w-3 h-3 rounded-full bg-green-500 border border-white shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+                    <span className="text-sm font-medium text-gray-200">{data.header.color}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
+                    <span className="text-sm text-yellow-400">{Icons.Award}</span>
+                    <span className="text-sm font-medium text-gray-200">{data.header.quality}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 backdrop-blur-sm">
+                    <span className="text-sm">🇵🇪</span>
+                    <span className="text-sm font-medium text-gray-200">{data.header.originDisplay}</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </header>
+
+          <main className="px-6 md:px-16 py-16 -mt-16 relative z-20 bg-white rounded-t-[3rem]">
+            <div className="mb-16">
+              {data.steps.map((step, index) => <StepCard key={step.id} step={step} index={index} lang={lang} />)}
+            </div>
+
+            <div className="bg-gray-900 rounded-[2.5rem] p-10 md:p-16 text-center relative overflow-hidden shadow-2xl">
+              <div className="relative z-30">
+                <h2 className="text-2xl font-bold text-white mb-3">{T.transparency_title}</h2>
+                <p className="text-gray-400 text-base mb-8 max-w-md mx-auto leading-relaxed">{T.transparency_desc}</p>
+
+                {(() => {
+                  const params = new URLSearchParams(window.location.search);
+                  const currentId = params.get('id');
+                  const arweaveTx = ARWEAVE_MAP[currentId];
+                  const verifyLink = arweaveTx ? `https://viewblock.io/arweave/tx/${arweaveTx}` : "#";
+
+                  return (
+                    <a
+                      href={verifyLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-3 px-8 py-4 rounded-full font-bold text-sm transition-transform shadow-xl tracking-wide ${
+                        arweaveTx ? 'bg-white text-gray-900 hover:scale-105 hover:shadow-2xl cursor-pointer'
+                                  : 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                      }`}
+                    >
+                      <span className={arweaveTx ? "text-green-700" : "text-gray-600"}>{Icons.Box}</span>
+                      {T.verify} {arweaveTx ? "↗" : ""}
+                    </a>
+                  );
+                })()}
+              </div>
+
+              <div className="absolute top-0 right-0 w-64 h-64 bg-green-600/30 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/20 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/4"></div>
+            </div>
+          </main>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 </html>
