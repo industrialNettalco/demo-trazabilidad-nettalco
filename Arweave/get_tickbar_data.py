@@ -194,7 +194,7 @@ def get_json_from_tickbarr(tickbarr: str):
         return None
 
     main_json = clean_relevant_json(json.loads(first_json))
-    return main_json
+    return first_json
 
 
 def clean_relevant_json(json_data):
