@@ -28,10 +28,10 @@ mariadb_config = {
 }
 
 list_temp_dfs = [
-    "tztotrazwebinfo", "tztotrazwebalma", "tztotrazwebacab", "tztotrazwebacabmedi",
-    "tztotrazwebteje", "tztotrazwebtint", "tztodetateje", "tztotrazwebhilo",
-    "tztotrazwebhilolote", "tztotrazwebhiloloteprin", "tztotrazwebcostoper",
-    "tztotrazwebcost", "tztotrazwebcort", "tztotrazwebcortoper", "tztotrazwebtintqyc"
+    "tztotrazwebinfo", "tztotrazwebhilo", "tztotrazwebhilolote", "tztotrazwebhiloloteprin",
+    "tztotrazwebteje", "tztodetateje", "tztotrazwebtint", "tztotrazwebcort",
+    "tztotrazwebcortoper", "tztotrazwebcost", "tztotrazwebcostoper", "tztotrazwebacab",
+    "tztotrazwebacabmedi", "tztotrazwebalma", "tztotrazwebtintqyc"
 ]
 
 # --- CONEXIONES ---

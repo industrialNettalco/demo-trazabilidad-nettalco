@@ -45,19 +45,19 @@ db_config = {
 
 list_temp_dfs = [
     "tztotrazwebinfo",
-    "tztotrazwebalma",
-    "tztotrazwebacab",
-    "tztotrazwebacabmedi",
-    "tztotrazwebteje",
-    "tztotrazwebtint",
-    "tztodetateje",
     "tztotrazwebhilo",
     "tztotrazwebhilolote",
     "tztotrazwebhiloloteprin",
-    "tztotrazwebcostoper",
-    "tztotrazwebcost",
+    "tztotrazwebteje",
+    "tztodetateje",
+    "tztotrazwebtint",
     "tztotrazwebcort",
     "tztotrazwebcortoper",
+    "tztotrazwebcost",
+    "tztotrazwebcostoper",
+    "tztotrazwebacab",
+    "tztotrazwebacabmedi",
+    "tztotrazwebalma",
     "tztotrazwebtintqyc"
 ]
 
@@ -72,7 +72,7 @@ def cargar_maestro_quimicos():
     dicc = {}
 
     if not os.path.exists(ruta_csv):
-        print(f"[!] No se encontro {ruta_csv}. Se omitira filtrado MRSL.")
+        print(f"⚠️ No se encontró {ruta_csv}. Se omitirá filtrado MRSL.")
         return {}
 
     try:
@@ -82,7 +82,7 @@ def cargar_maestro_quimicos():
             if ';' in f.readline():
                 delimiter = ';'
 
-        print(f"[CSV] Maestro Quimicos: Usando separador '{delimiter}'")
+        print(f"📊 Maestro Químicos: Usando separador '{delimiter}'")
 
         # 2. Leer archivo
         with open(ruta_csv, mode='r', encoding='latin-1') as f:
@@ -96,11 +96,11 @@ def cargar_maestro_quimicos():
                     if nombre:
                         dicc[nombre] = estado
 
-        print(f"[OK] Maestro Quimicos cargado: {len(dicc)} registros.")
+        print(f"✅ Maestro Químicos cargado: {len(dicc)} registros.")
         return dicc
 
     except Exception as e:
-        print(f"[ERROR] Error leyendo CSV: {e}")
+        print(f"❌ Error leyendo CSV: {e}")
         return {}
 
 
@@ -194,7 +194,7 @@ def get_json_from_tickbarr(tickbarr: str):
         return None
 
     main_json = clean_relevant_json(json.loads(first_json))
-    return first_json
+    return main_json
 
 
 def clean_relevant_json(json_data):
@@ -237,67 +237,39 @@ def get_clean_json_from_tickbar(tickbarr: str):
 
     # Obtener lista de químicos de la prenda
     lista_raw_q = clean_json_dict.get("tztotrazwebtintqyc", [])
-    lista_todos_quimicos = []
-    contador_cumple = 0
-    contador_total = 0
+    lista_certificada = []
     errores_quimicos = set()
 
     for q in lista_raw_q:
         nombre_real = q.get("TDESCPROD", "").strip().upper()
 
-        if not nombre_real:
-            continue
-
-        contador_total += 1
-
         # Buscar en el CSV maestro
         estado_mrsl = maestro_quimicos.get(nombre_real)
 
         if estado_mrsl:
-            # Agregar químico con su estado real
-            cumple = (estado_mrsl == "Cumple")
-            if cumple:
-                contador_cumple += 1
-
-            lista_todos_quimicos.append({
-                "nombre": q.get("TDESCPROD", ""),
-                "proveedor": q.get("TPROVPROD", ""),
-                "origen": q.get("TORIGPROD", ""),
-                "estado_mrsl": estado_mrsl,
-                "cumple": cumple
-            })
-
-            if not cumple:
-                print(f"   [!] {nombre_real}: {estado_mrsl}")
+            # Solo agregar si cumple exactamente "Cumple"
+            if estado_mrsl == "Cumple":
+                lista_certificada.append({
+                    "nombre": q.get("TDESCPROD", ""),
+                    "proveedor": q.get("TPROVPROD", ""),
+                    "origen": q.get("TORIGPROD", ""),
+                    "certificado": True,
+                    "estado_mrsl": estado_mrsl
+                })
+            else:
+                # Existe en CSV pero NO cumple
+                print(f"   ⚠️ {nombre_real}: {estado_mrsl}")
         else:
-            # No existe en el CSV - marcarlo como "Sin datos"
-            lista_todos_quimicos.append({
-                "nombre": q.get("TDESCPROD", ""),
-                "proveedor": q.get("TPROVPROD", ""),
-                "origen": q.get("TORIGPROD", ""),
-                "estado_mrsl": "Sin datos",
-                "cumple": False
-            })
-            errores_quimicos.add(nombre_real)
+            # No existe en el CSV
+            if nombre_real:
+                errores_quimicos.add(nombre_real)
 
-    # 3. Calcular porcentaje de cumplimiento
-    porcentaje_cumplimiento = (contador_cumple / contador_total * 100) if contador_total > 0 else 0
+    # 3. Agregar lista certificada al JSON
+    clean_json_dict["quimicos_certificados"] = lista_certificada
 
-    # 4. Agregar lista completa y stats al JSON
-    clean_json_dict["quimicos_certificados"] = lista_todos_quimicos
-    clean_json_dict["stats_mrsl"] = {
-        "total": contador_total,
-        "cumple": contador_cumple,
-        "no_cumple": contador_total - contador_cumple,
-        "porcentaje": round(porcentaje_cumplimiento, 2)
-    }
-
-    # 5. Reportar estadísticas
-    print(f"   [OK] {contador_cumple}/{contador_total} quimicos cumplen ZDHC MRSL ({porcentaje_cumplimiento:.2f}%)")
-
-    # 6. Reportar errores si existen
+    # 4. Reportar errores si existen
     if errores_quimicos:
-        print(f"   [!] {len(errores_quimicos)} quimicos sin datos en CSV:")
+        print(f"   ⚠️ {len(errores_quimicos)} químicos NO encontrados en CSV:")
         for err in sorted(errores_quimicos):
             print(f"      - {err}")
 
@@ -307,7 +279,9 @@ def get_clean_json_from_tickbar(tickbarr: str):
             for err in sorted(errores_quimicos):
                 f.write(f"NO ENCONTRADO: {err}\n")
 
-    # 7. Retornar JSON final con químicos validados y estadísticas
+    print(f"   ✅ {len(lista_certificada)} químicos certificados ZDHC MRSL")
+
+    # 5. Retornar JSON final con químicos validados
     return json.dumps(clean_json_dict, ensure_ascii=False, indent=1)
 
 
