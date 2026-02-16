@@ -182,7 +182,93 @@ def save_json_to_file(json_data, filename="output.json"):
     # print(f"JSON guardado en {filename}")
 
 
+def validar_quimicos_mrsl(clean_json_dict, tickbarr):
+    """
+    Valida químicos contra ZDHC MRSL y agrega resultados al JSON
+    """
+    print(f"\n[MRSL] Validando quimicos para {tickbarr}...")
+    maestro_quimicos = cargar_maestro_quimicos()
+
+    # Obtener lista de químicos de la prenda
+    lista_raw_q = clean_json_dict.get("tztotrazwebtintqyc", [])
+    lista_todos_quimicos = []
+    contador_cumple = 0
+    contador_total = 0
+    errores_quimicos = set()
+
+    for q in lista_raw_q:
+        nombre_real = q.get("TDESCPROD", "").strip().upper()
+
+        if not nombre_real:
+            continue
+
+        contador_total += 1
+
+        # Buscar en el CSV maestro
+        estado_mrsl = maestro_quimicos.get(nombre_real)
+
+        if estado_mrsl:
+            # Agregar químico con su estado real
+            cumple = (estado_mrsl == "Cumple")
+            if cumple:
+                contador_cumple += 1
+
+            lista_todos_quimicos.append({
+                "nombre": q.get("TDESCPROD", ""),
+                "proveedor": q.get("TPROVPROD", ""),
+                "origen": q.get("TORIGPROD", ""),
+                "estado_mrsl": estado_mrsl,
+                "cumple": cumple
+            })
+
+            if not cumple:
+                print(f"   [!] {nombre_real}: {estado_mrsl}")
+        else:
+            # No existe en el CSV - marcarlo como "Sin datos"
+            lista_todos_quimicos.append({
+                "nombre": q.get("TDESCPROD", ""),
+                "proveedor": q.get("TPROVPROD", ""),
+                "origen": q.get("TORIGPROD", ""),
+                "estado_mrsl": "Sin datos",
+                "cumple": False
+            })
+            errores_quimicos.add(nombre_real)
+
+    # Calcular porcentaje de cumplimiento
+    porcentaje_cumplimiento = (contador_cumple / contador_total * 100) if contador_total > 0 else 0
+
+    # Agregar lista completa y stats al JSON
+    clean_json_dict["quimicos_certificados"] = lista_todos_quimicos
+    clean_json_dict["stats_mrsl"] = {
+        "total": contador_total,
+        "cumple": contador_cumple,
+        "no_cumple": contador_total - contador_cumple,
+        "porcentaje": round(porcentaje_cumplimiento, 2)
+    }
+
+    # Reportar estadísticas
+    print(f"   [OK] {contador_cumple}/{contador_total} quimicos cumplen ZDHC MRSL ({porcentaje_cumplimiento:.2f}%)")
+
+    # Reportar errores si existen
+    if errores_quimicos:
+        print(f"   [!] {len(errores_quimicos)} quimicos sin datos en CSV:")
+        for err in sorted(errores_quimicos):
+            print(f"      - {err}")
+
+        # Guardar en archivo de alertas
+        with open("alertas_quimicos.txt", "a", encoding="utf-8") as f:
+            f.write(f"\n--- Tickbarr: {tickbarr} ---\n")
+            for err in sorted(errores_quimicos):
+                f.write(f"NO ENCONTRADO: {err}\n")
+
+    return clean_json_dict
+
+
 def get_json_from_tickbarr(tickbarr: str):
+    """
+    Obtiene JSON completo de un tickbarr específico
+    Incluye validación de químicos contra ZDHC MRSL
+    """
     dicc_df = get_tickbar(tickbarr, "es", None)
     if dicc_df is None:
         print(f"Error: No se pudo obtener datos para el tickbarr {tickbarr}")
@@ -194,7 +280,12 @@ def get_json_from_tickbarr(tickbarr: str):
         return None
 
     main_json = clean_relevant_json(json.loads(first_json))
-    return main_json
+    clean_json_dict = json.loads(main_json)
+
+    # Validar químicos ZDHC MRSL
+    clean_json_dict = validar_quimicos_mrsl(clean_json_dict, tickbarr)
+
+    return json.dumps(clean_json_dict, ensure_ascii=False, indent=1)
 
 
 def clean_relevant_json(json_data):
@@ -202,22 +293,25 @@ def clean_relevant_json(json_data):
         campos_por_clave = json.load(file)
 
     resultado = {}
-    for clave_principal, campos_a_conservar in campos_por_clave.items():
-        if clave_principal in json_data and json_data[clave_principal]:
-            datos_filtrados = []
-            for i in range(len(json_data[clave_principal])):
-                filtrar = {}
-                for campo in campos_a_conservar:
-                    if campo in json_data[clave_principal][i]:
-                        valor = json_data[clave_principal][i][campo]
-                        if valor is not None and valor != "NaT" and not (isinstance(valor, float) and math.isnan(valor)):
-                            filtrar[campo] = valor
-                
-                # Se agrega el diccionario filtrado a la lista (indentado dentro del for i)
-                datos_filtrados.append(filtrar)
+    # Usar list_temp_dfs para mantener el orden correcto
+    for clave_principal in list_temp_dfs:
+        if clave_principal in campos_por_clave:
+            campos_a_conservar = campos_por_clave[clave_principal]
+            if clave_principal in json_data and json_data[clave_principal]:
+                datos_filtrados = []
+                for i in range(len(json_data[clave_principal])):
+                    filtrar = {}
+                    for campo in campos_a_conservar:
+                        if campo in json_data[clave_principal][i]:
+                            valor = json_data[clave_principal][i][campo]
+                            if valor is not None and valor != "NaT" and not (isinstance(valor, float) and math.isnan(valor)):
+                                filtrar[campo] = valor
 
-            resultado[clave_principal] = datos_filtrados
-    
+                    # Se agrega el diccionario filtrado a la lista (indentado dentro del for i)
+                    datos_filtrados.append(filtrar)
+
+                resultado[clave_principal] = datos_filtrados
+
     resultado = json.dumps(resultado, ensure_ascii=False, indent=1)
     return resultado
 
@@ -231,57 +325,10 @@ def get_clean_json_from_tickbar(tickbarr: str):
     main_json = make_json_from_dfs(dicc_df)
     clean_json_dict = json.loads(clean_relevant_json(json.loads(main_json)))
 
-    # 2. VALIDACIÓN DE QUÍMICOS (ZDHC MRSL)
-    print(f"\n[MRSL] Validando quimicos para {tickbarr}...")
-    maestro_quimicos = cargar_maestro_quimicos()
+    # 2. Validar químicos ZDHC MRSL
+    clean_json_dict = validar_quimicos_mrsl(clean_json_dict, tickbarr)
 
-    # Obtener lista de químicos de la prenda
-    lista_raw_q = clean_json_dict.get("tztotrazwebtintqyc", [])
-    lista_certificada = []
-    errores_quimicos = set()
-
-    for q in lista_raw_q:
-        nombre_real = q.get("TDESCPROD", "").strip().upper()
-
-        # Buscar en el CSV maestro
-        estado_mrsl = maestro_quimicos.get(nombre_real)
-
-        if estado_mrsl:
-            # Solo agregar si cumple exactamente "Cumple"
-            if estado_mrsl == "Cumple":
-                lista_certificada.append({
-                    "nombre": q.get("TDESCPROD", ""),
-                    "proveedor": q.get("TPROVPROD", ""),
-                    "origen": q.get("TORIGPROD", ""),
-                    "certificado": True,
-                    "estado_mrsl": estado_mrsl
-                })
-            else:
-                # Existe en CSV pero NO cumple
-                print(f"   ⚠️ {nombre_real}: {estado_mrsl}")
-        else:
-            # No existe en el CSV
-            if nombre_real:
-                errores_quimicos.add(nombre_real)
-
-    # 3. Agregar lista certificada al JSON
-    clean_json_dict["quimicos_certificados"] = lista_certificada
-
-    # 4. Reportar errores si existen
-    if errores_quimicos:
-        print(f"   ⚠️ {len(errores_quimicos)} químicos NO encontrados en CSV:")
-        for err in sorted(errores_quimicos):
-            print(f"      - {err}")
-
-        # Guardar en archivo de alertas
-        with open("alertas_quimicos.txt", "a", encoding="utf-8") as f:
-            f.write(f"\n--- Tickbarr: {tickbarr} ---\n")
-            for err in sorted(errores_quimicos):
-                f.write(f"NO ENCONTRADO: {err}\n")
-
-    print(f"   ✅ {len(lista_certificada)} químicos certificados ZDHC MRSL")
-
-    # 5. Retornar JSON final con químicos validados
+    # 3. Retornar JSON final con químicos validados y estadísticas
     return json.dumps(clean_json_dict, ensure_ascii=False, indent=1)
 
 
