@@ -1,0 +1,108 @@
+{
+  "tztotrazwebinfo": [
+    {
+      "TCODICLIE": "0266",
+      "TNOMBCLIE": "LACOSTE",
+      "TCODIESTICLIE": "L1212-23",
+      "TNUMEVERSCLIE": "03",
+      "TCODIETIQCLIEXEDI": "3D3",
+      "TCODIETIQCLIE": "GITANE",
+      "TDESCETIQCLIE": "GITANE",
+      "TCODITALL": "5",
+      "TCODIESTINETT": "A2781",
+      "TNUMEVERSESTINETT": "01",
+      "TDESCPREN": "Ss collar & placket - elegant cotton",
+      "TTIPOPREN": "Q1",
+      "TDESCTIPOPREN": "Collar & Placket",
+      "TCODIPROG": "000562",
+      "TDESCPROG": "Otra Composición",
+      "TGRUPMEDI": "RG",
+      "TDESCGRUPMEDI": "Regular",
+      "TINDIEDAD": "A",
+      "TDESCEDAD": "Adulto",
+      "TINDIGENE": "H",
+      "TDESCGENE": "Hombres",
+      "TGENDER": "Hombre",
+      "TCLASIFIC": "A",
+      "TDESCCLASPREN": "Prenda de Primera calidad",
+      "TDESCUBIC": "En APT",
+      "TDIREBUSI": "N"
+    }
+  ],
+  "tztotrazwebalma": [
+    {
+      "TNUMECAJA": "17184960",
+      "TCANTPREN": 1,
+      "TPURCORDE": "7283501",
+      "TCODITEMP": "2026ET",
+      "TNUMEORDEFABR": "E26UJL25R",
+      "TCODIDEST": "URY",
+      "TDESCDEST": "Uruguay",
+      "TDESCTIPOCAJA": "Caja de exportación (obsoletos)",
+      "TFECHRECEALMA": "2026-02-07 07:55:08",
+      "TCODIPERSRECEALMA": "O00J849",
+      "TNOMBPERSRECEALMA": "Waldir Porras"
+    }
+  ],
+  "tztotrazwebacab": [
+    {
+      "TNUMECAJA": "17184960",
+      "TFECHPESA": "2026-02-07 06:22:34",
+      "TCODIPERSPESA": "O00F311",
+      "TNOMBPERSPESA": "Juan Martinez",
+      "TPESOBRUT": 23.7,
+      "TPESONETO": 22.37,
+      "TFECHEMPA": "2026-02-07 02:00:54",
+      "TCODIPERSEMPA": "O00F311",
+      "TNOMBPERSEMPA": "Juan Martinez",
+      "TFECHAUDI": "2025-12-29 05:32:13",
+      "TCODIPERSAUDI": "E000000",
+      "TLOTEAUDIESTA": "8NR137",
+      "TPRENINSPMEDI": "0",
+      "TFECHINGRESTA": "2025-12-16 10:58:02",
+      "TNUMECAJAESTA": "17506188",
+      "TFECHMODU": "2025-08-05 07:28:13",
+      "TCODIMODU": "01",
+      "TTIPOTICK": "S",
+      "TDESCTIPOTICK": "Prenda sustituta"
+    }
+  ],
+  "tztotrazwebacabmodu": [
+    {
+      "TCODIMODU": "01",
+      "TCODIPERS": "O00J093",
+      "TNOMBPERS": "Janina Inuma"
+    },
+    {
+      "TCODIMODU": "01",
+      "TCODIPERS": "O00F188",
+      "TNOMBPERS": "Scarlett Sanchez"
+    },
+    {
+      "TCODIMODU": "01",
+      "TCODIPERS": "O00A604",
+      "TNOMBPERS": "Solia Tanta"
+    },
+    {
+      "TCODIMODU": "01",
+      "TCODIPERS": "O00H088",
+      "TNOMBPERS": "Emilia Lanche"
+    },
+    {
+      "TCODIMODU": "01",
+      "TCODIPERS": "O008396",
+      "TNOMBPERS": "Teddy Del Castillo"
+    },
+    {
+      "TCODIMODU": "01",
+      "TCODIPERS": "O00J686",
+      "TNOMBPERS": "Joaquin Huerta"
+    },
+    {
+      "TCODIMODU": "01",
+      "TCODIPERS": "O008664",
+      "TNOMBPERS": "Laura Rivera"
+    }
+  ],
+  "quimicos_certificados": []
+}

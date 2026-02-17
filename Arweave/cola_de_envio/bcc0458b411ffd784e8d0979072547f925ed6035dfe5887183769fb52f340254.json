@@ -1,0 +1,996 @@
+{
+  "tztotrazwebinfo": [
+    {
+      "TCODICLIE": "0266",
+      "TNOMBCLIE": "LACOSTE",
+      "TCODIESTICLIE": "DF0865-23",
+      "TNUMEVERSCLIE": "01",
+      "TCODIETIQCLIEXEDI": "0PI",
+      "TCODIETIQCLIE": "EXPS/BFFLE",
+      "TDESCETIQCLIE": "EXPRESSO/BUFFLE",
+      "TCODITALL": "40",
+      "TCODIESTINETT": "A1770",
+      "TNUMEVERSESTINETT": "02",
+      "TDESCPREN": "Ss collar & hidden placket striped",
+      "TTIPOPREN": "Q3",
+      "TDESCTIPOPREN": "Rugby Shirt",
+      "TCODIPROG": "000562",
+      "TDESCPROG": "Otra Composición",
+      "TGRUPMEDI": "RG",
+      "TDESCGRUPMEDI": "Regular",
+      "TINDIEDAD": "A",
+      "TDESCEDAD": "Adulto",
+      "TINDIGENE": "M",
+      "TDESCGENE": "Mujeres",
+      "TGENDER": "Adulto",
+      "TCLASIFIC": "D",
+      "TDESCCLASPREN": "Prenda de Segunda calidad",
+      "TDESCUBIC": "En carga (APT)",
+      "TDIREBUSI": "N"
+    }
+  ],
+  "tztotrazwebalma": [
+    {
+      "TNUMECAJA": "17546299",
+      "TCANTPREN": 1,
+      "TPURCORDE": "7283576",
+      "TCODITEMP": "2026ET",
+      "TNUMEORDEFABR": "E26UJL25R",
+      "TCODIDEST": "ARG",
+      "TDESCDEST": "Argentina",
+      "TNUMEEMBA": "F2411",
+      "TDESCTIPOCAJA": "Caja de prendas de segunda",
+      "TFECHRECEALMA": "2026-02-07 05:17:26",
+      "TCODIPERSRECEALMA": "O00A859",
+      "TNOMBPERSRECEALMA": "Luis Sanchez"
+    }
+  ],
+  "tztotrazwebacab": [
+    {
+      "TNUMECAJA": "17546299",
+      "TFECHPESA": "2026-02-07 05:13:21",
+      "TCODIPERSPESA": "O00F311",
+      "TNOMBPERSPESA": "Juan Martinez",
+      "TPESOBRUT": 13.1,
+      "TPESONETO": 11.77,
+      "TFECHEMPA": "2026-02-06 10:43:28",
+      "TCODIPERSEMPA": "O00B958",
+      "TNOMBPERSEMPA": "Dina Muñoz",
+      "TPRENINSPMEDI": "0",
+      "TFECHRECEBANDCOST": "2026-01-27 09:25:52",
+      "TCODIRECEBANDCOST": "O00F311",
+      "TNOMBRECEBANDCOST": "Juan Martinez",
+      "TTIPOTICK": "O",
+      "TDESCTIPOTICK": "Prenda regular"
+    }
+  ],
+  "tztotrazwebcost": [
+    {
+      "TORDECOST": "926286",
+      "TNUMEPEDI": "696304",
+      "TNUMECORR": "211",
+      "TNUMEPAQU": "05",
+      "TFECHCLAS": "2026-01-26 17:27:19",
+      "TCODIPERSCLAS": "O00C988",
+      "TNOMBPERSCLAS": "Mida Quispe",
+      "TCODIBAND": "M9018",
+      "TNUMELINECOST": "20",
+      "TDESCPLANCOST": "Vulcano",
+      "TCODIPERSSUPE": "E004027",
+      "TNOMBPERSSUPE": "Carmen Tineo",
+      "TFECHDESPCORT": "2026-01-14 14:29:58"
+    }
+  ],
+  "tztotrazwebcostoper": [
+    {
+      "TCODIPERS": "O005031",
+      "TNOMBPERS": "Norma Romero",
+      "TNUMEOPERESPE": 11597,
+      "TCODIOPERESPEVARISECU": "00219000001159700001",
+      "TDESCOPERESPE": "Orillar Basta Manga",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "008028256877"
+    },
+    {
+      "TCODIPERS": "O000252",
+      "TNOMBPERS": "Raquel Almeyda",
+      "TNUMEOPERESPE": 41943,
+      "TCODIOPERESPEVARISECU": "00204000004194300003",
+      "TDESCOPERESPE": "Pegar Twill Pechera",
+      "TFECHLECT": "2026-01-22 00:00:00",
+      "TCODITICK": "005737993585"
+    },
+    {
+      "TCODIPERS": "O00K209",
+      "TNOMBPERS": "Samuel Quispe",
+      "TNUMEOPERESPE": 31,
+      "TCODIOPERESPEVARISECU": "00201000000003100001",
+      "TDESCOPERESPE": "Cerrar Cuello Tela",
+      "TFECHLECT": "2026-01-21 00:00:00",
+      "TCODITICK": "008782275632"
+    },
+    {
+      "TCODIPERS": "O00K209",
+      "TNOMBPERS": "Samuel Quispe",
+      "TNUMEOPERESPE": 4257,
+      "TCODIOPERESPEVARISECU": "00201000000425700002",
+      "TDESCOPERESPE": "Pespuntar Cuello",
+      "TFECHLECT": "2026-01-22 00:00:00",
+      "TCODITICK": "009061234887"
+    },
+    {
+      "TCODIPERS": "O007868",
+      "TNOMBPERS": "Jeremias Quincho",
+      "TNUMEOPERESPE": 5054,
+      "TCODIOPERESPEVARISECU": "00208000000505400001",
+      "TDESCOPERESPE": "Bastillar Banda",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "007976230201"
+    },
+    {
+      "TCODIPERS": "O007868",
+      "TNOMBPERS": "Jeremias Quincho",
+      "TNUMEOPERESPE": 17723,
+      "TCODIOPERESPEVARISECU": "00201000001772300006",
+      "TDESCOPERESPE": "Pegar Bandas",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "008873238181"
+    },
+    {
+      "TCODIPERS": "O005916",
+      "TNOMBPERS": "Rogelia Ricse",
+      "TNUMEOPERESPE": 9749,
+      "TCODIOPERESPEVARISECU": "00201000000974901005",
+      "TDESCOPERESPE": "Recortar Banda Cuello..",
+      "TFECHLECT": "2026-01-24 00:00:00",
+      "TCODITICK": "003862243852"
+    },
+    {
+      "TCODIPERS": "O005916",
+      "TNOMBPERS": "Rogelia Ricse",
+      "TNUMEOPERESPE": 20982,
+      "TCODIOPERESPEVARISECU": "00282000002098200011",
+      "TDESCOPERESPE": "Pegar Cuello",
+      "TFECHLECT": "2026-01-24 00:00:00",
+      "TCODITICK": "002967840004"
+    },
+    {
+      "TCODIPERS": "O00D885",
+      "TNOMBPERS": "Neri Espinoza",
+      "TNUMEOPERESPE": 37432,
+      "TCODIOPERESPEVARISECU": "00282000003743200021",
+      "TDESCOPERESPE": "Asentar Cuello",
+      "TFECHLECT": "2026-01-24 00:00:00",
+      "TCODITICK": "005436437864"
+    },
+    {
+      "TCODIPERS": "O007657",
+      "TNOMBPERS": "Alex Ticona",
+      "TNUMEOPERESPE": 42283,
+      "TCODIOPERESPEVARISECU": "00282000004228300026",
+      "TDESCOPERESPE": "Basta Recubierta Manga",
+      "TFECHLECT": "2026-01-24 00:00:00",
+      "TCODITICK": "003999607258"
+    },
+    {
+      "TCODIPERS": "O007228",
+      "TNOMBPERS": "Adela Porras",
+      "TNUMEOPERESPE": 12355,
+      "TCODIOPERESPEVARISECU": "00259000001235501012",
+      "TDESCOPERESPE": "Orillar Pechera",
+      "TFECHLECT": "2026-01-24 00:00:00",
+      "TCODITICK": "002418282804"
+    },
+    {
+      "TCODIPERS": "O000252",
+      "TNOMBPERS": "Raquel Almeyda",
+      "TNUMEOPERESPE": 14487,
+      "TCODIOPERESPEVARISECU": "00999000001448700002",
+      "TDESCOPERESPE": "Pespuntar Pechera",
+      "TFECHLECT": "2026-01-22 00:00:00",
+      "TCODITICK": "008171772320"
+    },
+    {
+      "TCODIPERS": "O00K440",
+      "TNOMBPERS": "Gloria Guevara",
+      "TNUMEOPERESPE": 35932,
+      "TCODIOPERESPEVARISECU": "00294000003593200001",
+      "TDESCOPERESPE": "Preparar Etiquetas",
+      "TFECHLECT": "2026-01-22 00:00:00",
+      "TCODITICK": "001058092047"
+    },
+    {
+      "TCODIPERS": "O00B070",
+      "TNOMBPERS": "Marisol Leguia",
+      "TNUMEOPERESPE": 31963,
+      "TCODIOPERESPEVARISECU": "00142000003196300001",
+      "TDESCOPERESPE": "Pegar Etiquetas",
+      "TFECHLECT": "2026-01-20 00:00:00",
+      "TCODITICK": "002195466205"
+    },
+    {
+      "TCODIPERS": "O007228",
+      "TNOMBPERS": "Adela Porras",
+      "TNUMEOPERESPE": 41941,
+      "TCODIOPERESPEVARISECU": "00282000004194103001",
+      "TDESCOPERESPE": "Unir Hombros",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "001150573152"
+    },
+    {
+      "TCODIPERS": "O007228",
+      "TNOMBPERS": "Adela Porras",
+      "TNUMEOPERESPE": 41945,
+      "TCODIOPERESPEVARISECU": "00282000004194500025",
+      "TDESCOPERESPE": "Pespuntar Hombros",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "000751478804"
+    },
+    {
+      "TCODIPERS": "O001615",
+      "TNOMBPERS": "Cirilo Caccha",
+      "TNUMEOPERESPE": 42850,
+      "TCODIOPERESPEVARISECU": "00282000004285000006",
+      "TDESCOPERESPE": "Peg.Mga Y/O Cerr Cos",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "003914507678"
+    },
+    {
+      "TCODIPERS": "O001615",
+      "TNOMBPERS": "Cirilo Caccha",
+      "TNUMEOPERESPE": 31849,
+      "TCODIOPERESPEVARISECU": "00282000003184900005",
+      "TDESCOPERESPE": "Peg.Mga Y/O Cerr Cos",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "009313383228"
+    },
+    {
+      "TCODIPERS": "O007868",
+      "TNOMBPERS": "Jeremias Quincho",
+      "TNUMEOPERESPE": 5741,
+      "TCODIOPERESPEVARISECU": "00999000000574100001",
+      "TDESCOPERESPE": "Adicional Con Categoria \"A\"",
+      "TFECHLECT": "2026-01-20 00:00:00",
+      "TCODITICK": "002425269589"
+    },
+    {
+      "TCODIPERS": "O00B636",
+      "TNOMBPERS": "Sahagun Catacora",
+      "TNUMEOPERESPE": 42851,
+      "TCODIOPERESPEVARISECU": "00282000004285100004",
+      "TDESCOPERESPE": "Basta Faldon",
+      "TFECHLECT": "2026-01-24 00:00:00",
+      "TCODITICK": "003366530202"
+    },
+    {
+      "TCODIPERS": "O001615",
+      "TNOMBPERS": "Cirilo Caccha",
+      "TNUMEOPERESPE": 2144,
+      "TCODIOPERESPEVARISECU": "00282000000214400024",
+      "TDESCOPERESPE": "Recorte Faldon",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "006713914194"
+    },
+    {
+      "TCODIPERS": "O00D053",
+      "TNOMBPERS": "Cesar Gutierrez",
+      "TNUMEOPERESPE": 11091,
+      "TCODIOPERESPEVARISECU": "00282000001109100014",
+      "TDESCOPERESPE": "Ojalar",
+      "TFECHLECT": "2026-01-24 00:00:00",
+      "TCODITICK": "008362769771"
+    },
+    {
+      "TCODIPERS": "O00D053",
+      "TNOMBPERS": "Cesar Gutierrez",
+      "TNUMEOPERESPE": 37433,
+      "TCODIOPERESPEVARISECU": "00204000003743300002",
+      "TDESCOPERESPE": "Ojalar",
+      "TFECHLECT": "2026-01-22 00:00:00",
+      "TCODITICK": "006658437275"
+    },
+    {
+      "TCODIPERS": "O00D053",
+      "TNOMBPERS": "Cesar Gutierrez",
+      "TNUMEOPERESPE": 42849,
+      "TCODIOPERESPEVARISECU": "00282000004284900015",
+      "TDESCOPERESPE": "Botonar",
+      "TFECHLECT": "2026-01-24 00:00:00",
+      "TCODITICK": "003816670648"
+    },
+    {
+      "TCODIPERS": "O000252",
+      "TNOMBPERS": "Raquel Almeyda",
+      "TNUMEOPERESPE": 41890,
+      "TCODIOPERESPEVARISECU": "00259000004189000002",
+      "TDESCOPERESPE": "Prep/Pegar Pech Twil Ocul",
+      "TFECHLECT": "2026-01-22 00:00:00",
+      "TCODITICK": "004489272120"
+    },
+    {
+      "TCODIPERS": "O000252",
+      "TNOMBPERS": "Raquel Almeyda",
+      "TNUMEOPERESPE": 41942,
+      "TCODIOPERESPEVARISECU": "00204000004194200004",
+      "TDESCOPERESPE": "Fijar Pechera Oculta",
+      "TFECHLECT": "2026-01-22 00:00:00",
+      "TCODITICK": "001541903904"
+    },
+    {
+      "TCODIPERS": "O003086",
+      "TNOMBPERS": "Natalia Carranza",
+      "TNUMEOPERESPE": 41944,
+      "TCODIOPERESPEVARISECU": "00259000004194401014",
+      "TDESCOPERESPE": "Pesp/Asent Pechera",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "009295108776"
+    },
+    {
+      "TCODIPERS": "O003086",
+      "TNOMBPERS": "Natalia Carranza",
+      "TNUMEOPERESPE": 41885,
+      "TCODIOPERESPEVARISECU": "00259000004188500017",
+      "TDESCOPERESPE": "Fijar+Atraque Pechera",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "007549366610"
+    },
+    {
+      "TCODIPERS": "O00D112",
+      "TNOMBPERS": "Lino Chavez",
+      "TNUMEOPERESPE": 41948,
+      "TCODIOPERESPEVARISECU": "00259000004194800011",
+      "TDESCOPERESPE": "Atraque Pechera Rugby",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "001170073847"
+    },
+    {
+      "TCODIPERS": "O00D112",
+      "TNOMBPERS": "Lino Chavez",
+      "TNUMEOPERESPE": 11743,
+      "TCODIOPERESPEVARISECU": "00259000001174300006",
+      "TDESCOPERESPE": "Atraque Recubierto Cuello",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "006681190497"
+    },
+    {
+      "TCODIPERS": "O007868",
+      "TNOMBPERS": "Jeremias Quincho",
+      "TNUMEOPERESPE": 27088,
+      "TCODIOPERESPEVARISECU": "00201000002708800008",
+      "TDESCOPERESPE": "Pespuntar Bandas",
+      "TFECHLECT": "2026-01-26 00:00:00",
+      "TCODITICK": "002814812384"
+    },
+    {
+      "TCODIPERS": "O00D053",
+      "TNOMBPERS": "Cesar Gutierrez",
+      "TNUMEOPERESPE": 2208,
+      "TCODIOPERESPEVARISECU": "00259000000220800018",
+      "TDESCOPERESPE": "Atraque Automatico",
+      "TFECHLECT": "2026-01-23 00:00:00",
+      "TCODITICK": "009605365973"
+    }
+  ],
+  "tztotrazwebcort": [
+    {
+      "TNUMEORDECORT": "313789",
+      "TNUMETEND": "00897263",
+      "TFECHDESPCORT": "2026-01-14 14:29:58"
+    }
+  ],
+  "tztotrazwebcortoper": [
+    {
+      "TCODIOPER": "01",
+      "TDESCOPER": "Tendido",
+      "TFECHLECT": "2026-01-12 15:15:44",
+      "TCODIPERS": "O002389",
+      "TNOMBPERS": "Juan Peralta",
+      "TNUMETICK": "023394"
+    },
+    {
+      "TCODIOPER": "01",
+      "TDESCOPER": "Tendido",
+      "TFECHLECT": "2026-01-12 15:15:44",
+      "TCODIPERS": "O00D575",
+      "TNOMBPERS": "Luis More",
+      "TNUMETICK": "023395"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023396"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023398"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023399"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023400"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023401"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023403"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023405"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023406"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023408"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023409"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023411"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023412"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023413"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023414"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023415"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023397"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023402"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023404"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O00B481",
+      "TNOMBPERS": "Ricardo Giron",
+      "TNUMETICK": "023407"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-13 10:22:57",
+      "TCODIPERS": "O001425",
+      "TNOMBPERS": "Wenceslao Atachao",
+      "TNUMETICK": "023410"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-13 10:55:54",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "023416"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-13 10:55:54",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "023417"
+    },
+    {
+      "TCODIOPER": "06",
+      "TDESCOPER": "Pesado De Prendas",
+      "TFECHLECT": "2026-01-13 10:55:12",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "024170"
+    },
+    {
+      "TCODIOPER": "06",
+      "TDESCOPER": "Pesado De Prendas",
+      "TFECHLECT": "2026-01-13 10:55:12",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "024171"
+    },
+    {
+      "TCODIOPER": "06",
+      "TDESCOPER": "Pesado De Prendas",
+      "TFECHLECT": "2026-01-13 10:55:12",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "024172"
+    },
+    {
+      "TCODIOPER": "06",
+      "TDESCOPER": "Pesado De Prendas",
+      "TFECHLECT": "2026-01-13 10:55:12",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "024173"
+    },
+    {
+      "TCODIOPER": "06",
+      "TDESCOPER": "Pesado De Prendas",
+      "TFECHLECT": "2026-01-13 10:55:12",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "024174"
+    },
+    {
+      "TCODIOPER": "06",
+      "TDESCOPER": "Pesado De Prendas",
+      "TFECHLECT": "2026-01-13 10:55:12",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "024175"
+    },
+    {
+      "TCODIOPER": "06",
+      "TDESCOPER": "Pesado De Prendas",
+      "TFECHLECT": "2026-01-13 10:55:12",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "024176"
+    },
+    {
+      "TCODIOPER": "06",
+      "TDESCOPER": "Pesado De Prendas",
+      "TFECHLECT": "2026-01-13 10:55:12",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "024177"
+    }
+  ],
+  "tztotrazwebtint": [
+    {
+      "TNUMEOB": 4361611,
+      "TTELAPRIN": "1",
+      "TTIPOARTI": "TELA",
+      "TPEDISGT": 5012261,
+      "TNUMEUD": 912363,
+      "TKILOACAB": 71.9,
+      "TKILOPROG": 74.2,
+      "TREDUACAB": 1222928,
+      "TCODITELA": "80147",
+      "TDESCTELA": "Jersey 20/1x2 upl rayado inge c/ant m.suave",
+      "TTIPOCOLN": "R",
+      "TDESCTIPOCOLN": "Rayado",
+      "TNUMECOLN": "11964008",
+      "TDESCCOLN": "Expresso/buffle 0pi",
+      "TTIPOTELA": "R",
+      "TDESCTIPOTELA": "Rayada",
+      "TTIPOACABTELA": "V",
+      "THILOCOLO": "1",
+      "TINDIANTIPILI": "1",
+      "TNUMECOMP": "01",
+      "TDESCCOMP": "Fte(1),Splda(1),Mng(2)",
+      "TTIPOCOMP": "01",
+      "TDESCTIPOCOMP": "Body",
+      "TDESCTIPOARTI": "Tela",
+      "TMAQUTENI": "0ST41",
+      "TNOMBMAQUTENI": "Saturno 41.150",
+      "TMODEMAQUTENI": "Saturno.150kg",
+      "TFABRMAQUTENI": "Brazzoli",
+      "TPARTTINT": "194179",
+      "TCODIRECE": "SP00170822",
+      "TFECHTENIINIC": "2025-12-05 19:52:00",
+      "TFECHTENIFINA": "2025-12-05 22:50:00",
+      "TMAQUCORT": "0CO02",
+      "TNOMBMAQUCORT": "Cortadora Abridora Bianco",
+      "TMODEMAQUCORT": "Sdm 3512-97",
+      "TFABRMAQUCORT": "Bianco",
+      "TFECHCORTINIC": "2025-12-05 23:03:00",
+      "TFECHCORTFINA": "2025-12-05 23:11:00",
+      "TOPERCORTINIC": "E004436",
+      "TNOMBOPERCORTINIC": "Cristian Pizango",
+      "TMAQUSECA": "0SE01",
+      "TNOMBMAQUSECA": "Secadora Relaxa 1",
+      "TMODEMAQUSECA": "Relaxa",
+      "TFABRMAQUSECA": "Sperotto",
+      "TFECHSECAINIC": "2025-12-06 01:12:00",
+      "TFECHSECAFINA": "2025-12-06 01:30:00",
+      "TOPERSECAINIC": "E000789",
+      "TNOMBOPERSECAINIC": "Timoteo Huerta",
+      "TMAQUACAB": "0RM03",
+      "TNOMBMAQUACAB": "Rama 3",
+      "TMODEMAQUACAB": "Red Evo 5",
+      "TFABRMAQUACAB": "Unitech",
+      "TFECHACABINIC": "2025-12-06 05:12:00",
+      "TFECHACABFINA": "2025-12-06 05:24:00",
+      "TOPERACABINIC": "E003501",
+      "TNOMBOPERACABINIC": "Pedro Pinchi",
+      "TFECHCALITINT": "2025-12-06 04:30:00",
+      "TFECHDESPTINT": "2025-12-06 00:00:00"
+    },
+    {
+      "TNUMEOB": 4361612,
+      "TTELAPRIN": "0",
+      "TTIPOARTI": "TELA",
+      "TPEDISGT": 5012261,
+      "TNUMEUD": 912363,
+      "TKILOACAB": 1.7,
+      "TKILOPROG": 1.7099570038470242,
+      "TREDUACAB": 1222642,
+      "TCODITELA": "99897",
+      "TDESCTELA": "Rib 1x1 20/1 upl hcolor c/lyc c/ant complemento msuave",
+      "TTIPOCOLN": "C",
+      "TDESCTIPOCOLN": "Color entero",
+      "TNUMECOLN": "63111",
+      "TDESCCOLN": "Buffle 3la ss26 alta solid.c.63108",
+      "TTIPOTELA": "E",
+      "TDESCTIPOTELA": "Color Entero",
+      "TTIPOACABTELA": "V",
+      "THILOCOLO": "1",
+      "TINDIANTIPILI": "1",
+      "TDESCTIPOARTI": "Tela",
+      "TMAQUTENI": "0ST41",
+      "TNOMBMAQUTENI": "Saturno 41.150",
+      "TMODEMAQUTENI": "Saturno.150kg",
+      "TFABRMAQUTENI": "Brazzoli",
+      "TPARTTINT": "194179",
+      "TCODIRECE": "SP00170822",
+      "TFECHTENIINIC": "2025-12-05 19:52:00",
+      "TFECHTENIFINA": "2025-12-05 22:50:00",
+      "TMAQUCORT": "0CO02",
+      "TNOMBMAQUCORT": "Cortadora Abridora Bianco",
+      "TMODEMAQUCORT": "Sdm 3512-97",
+      "TFABRMAQUCORT": "Bianco",
+      "TFECHCORTINIC": "2025-12-05 23:03:00",
+      "TFECHCORTFINA": "2025-12-05 23:03:00",
+      "TOPERCORTINIC": "E004436",
+      "TNOMBOPERCORTINIC": "Cristian Pizango",
+      "TMAQUSECA": "0SE01",
+      "TNOMBMAQUSECA": "Secadora Relaxa 1",
+      "TMODEMAQUSECA": "Relaxa",
+      "TFABRMAQUSECA": "Sperotto",
+      "TFECHSECAINIC": "2025-12-06 01:31:00",
+      "TFECHSECAFINA": "2025-12-06 01:32:00",
+      "TOPERSECAINIC": "E000789",
+      "TNOMBOPERSECAINIC": "Timoteo Huerta",
+      "TMAQUACAB": "0RM03",
+      "TNOMBMAQUACAB": "Rama 3",
+      "TMODEMAQUACAB": "Red Evo 5",
+      "TFABRMAQUACAB": "Unitech",
+      "TFECHACABINIC": "2025-12-06 05:06:00",
+      "TFECHACABFINA": "2025-12-06 05:08:00",
+      "TOPERACABINIC": "E003501",
+      "TNOMBOPERACABINIC": "Pedro Pinchi",
+      "TFECHCALITINT": "2025-12-06 04:30:00",
+      "TFECHDESPTINT": "2025-12-06 00:00:00"
+    }
+  ],
+  "tztotrazwebteje": [
+    {
+      "TORDETEJE": 1091014,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 74.2,
+      "TNUMEOB": 4361611,
+      "TREDUCRUD": 1222840,
+      "TCODITELA": "80147",
+      "TDESCTELA": "Jersey 20/1x2 upl rayado inge c/ant m.suave",
+      "TNUMEGALG": 18,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "1",
+      "TTIPOTEJI": "J",
+      "TDESCTIPOTEJI": "Jersey",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "C",
+      "TDESCCODIMATEPRIM": "Algodon Americano",
+      "TMATEPRIM": "B",
+      "TDESCMATEPRIM": "Algodon Tanguis",
+      "TNUMEPIEZ": 4262120,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2025-12-02 14:32:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 33.4,
+      "TMETRPIEZ": 65.041,
+      "TCODIMAQU": "0C049",
+      "TNOMBMAQU": "Jersera Listadora 49 D30",
+      "TMODEMAQU": "S4f-196",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 15,
+      "TCODIPERS": "E004382",
+      "TNOMBPERS": "Hebert Cobeñas"
+    },
+    {
+      "TORDETEJE": 1091014,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 74.2,
+      "TNUMEOB": 4361611,
+      "TREDUCRUD": 1222840,
+      "TCODITELA": "80147",
+      "TDESCTELA": "Jersey 20/1x2 upl rayado inge c/ant m.suave",
+      "TNUMEGALG": 18,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "1",
+      "TTIPOTEJI": "J",
+      "TDESCTIPOTEJI": "Jersey",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "C",
+      "TDESCCODIMATEPRIM": "Algodon Americano",
+      "TMATEPRIM": "B",
+      "TDESCMATEPRIM": "Algodon Tanguis",
+      "TNUMEPIEZ": 4262121,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2025-12-02 20:49:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 13.4,
+      "TMETRPIEZ": 26.094,
+      "TCODIMAQU": "0C049",
+      "TNOMBMAQU": "Jersera Listadora 49 D30",
+      "TMODEMAQU": "S4f-196",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 15,
+      "TCODIPERS": "E003963",
+      "TNOMBPERS": "Rusell Yalo"
+    },
+    {
+      "TORDETEJE": 1091014,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 74.2,
+      "TNUMEOB": 4361611,
+      "TREDUCRUD": 1222840,
+      "TCODITELA": "80147",
+      "TDESCTELA": "Jersey 20/1x2 upl rayado inge c/ant m.suave",
+      "TNUMEGALG": 18,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "1",
+      "TTIPOTEJI": "J",
+      "TDESCTIPOTEJI": "Jersey",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "C",
+      "TDESCCODIMATEPRIM": "Algodon Americano",
+      "TMATEPRIM": "B",
+      "TDESCMATEPRIM": "Algodon Tanguis",
+      "TNUMEPIEZ": 4262123,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2025-12-03 00:34:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 27.4,
+      "TMETRPIEZ": 53.357,
+      "TCODIMAQU": "0C049",
+      "TNOMBMAQU": "Jersera Listadora 49 D30",
+      "TMODEMAQU": "S4f-196",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 15,
+      "TCODIPERS": "E003351",
+      "TNOMBPERS": "Segundo Llanos"
+    },
+    {
+      "TORDETEJE": 1083766,
+      "TTELAPRIN": "0",
+      "TKILOCRUD": 1.74,
+      "TNUMEOB": 4361612,
+      "TREDUCRUD": 1222525,
+      "TCODITELA": "99897",
+      "TDESCTELA": "Rib 1x1 20/1 upl hcolor c/lyc c/ant complemento msuave",
+      "TNUMEGALG": 16,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "1",
+      "TTIPOTEJI": "R",
+      "TDESCTIPOTEJI": "Rib",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "L",
+      "TDESCCODIMATEPRIM": "Lycra",
+      "TMATEPRIM": "B",
+      "TDESCMATEPRIM": "Algodon Tanguis",
+      "TNUMEPIEZ": 4261444,
+      "TSECUPIEZ": 1,
+      "TFECHTEJE": "2025-11-29 10:21:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 1.74,
+      "TMETRPIEZ": 3.407,
+      "TCODIMAQU": "0C029",
+      "TNOMBMAQU": "Rib  29 D30",
+      "TMODEMAQU": "Rh-116",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 21,
+      "TCODIPERS": "E000312",
+      "TNOMBPERS": "Fredy Bobbio"
+    }
+  ],
+  "tztotrazwebhilo": [
+    {
+      "TREDUCRUD": 1222525,
+      "TTELAPRIN": "0",
+      "TCODITELA": "99897",
+      "TDESCTELA": "Rib 1x1 20/1 upl hcolor c/lyc c/ant complemento msuave",
+      "TDESCTIPOARTI": "Tela",
+      "TREDUHILOPRIN": 427,
+      "THILOPRIN": "C201P",
+      "TDESCHILOPRIN": "Alg. Upland 201 Peinado Sin Parafina",
+      "TLOTEHILA": "4315357",
+      "TLOTENETT": "5630116-29",
+      "TPROVPRIN": "110014",
+      "TNOMBPROVPRIN": "Creditex S. A. A."
+    },
+    {
+      "TREDUCRUD": 1222840,
+      "TTELAPRIN": "1",
+      "TCODITELA": "80147",
+      "TDESCTELA": "Jersey 20/1x2 upl rayado inge c/ant m.suave",
+      "TDESCTIPOARTI": "Tela",
+      "TREDUHILOPRIN": 427,
+      "THILOPRIN": "C201P",
+      "TDESCHILOPRIN": "Alg. Upland 201 Peinado Sin Parafina",
+      "TLOTEHILA": "4315357",
+      "TLOTENETT": "5630116-29",
+      "TPROVPRIN": "110014",
+      "TNOMBPROVPRIN": "Creditex S. A. A."
+    }
+  ],
+  "tztotrazwebhiloloteprin": [
+    {
+      "TLOTENETT": "1F346-2502",
+      "TGUIAHILO": "2876",
+      "TFECHGUIAHILO": "NaT",
+      "TFECHORDECOMP": "NaT"
+    },
+    {
+      "TLOTENETT": "5630116-28",
+      "TGUIAHILO": "602-8472",
+      "TFECHGUIAHILO": "2025-07-18 00:00:00",
+      "TPESOGUIAHILO": 132.3,
+      "TZONAORIGHILO": "La Libertad (Perú)",
+      "TNUMEORDECOMP": 2025006347.0,
+      "TFECHORDECOMP": "2025-06-13 00:00:00",
+      "TNUMEFACTHILO": "FAC:F601-19809 SOCAP"
+    },
+    {
+      "TFECHGUIAHILO": "NaT",
+      "TFECHORDECOMP": "NaT"
+    }
+  ],
+  "tztotrazwebtintqyc": [
+    {
+      "TTICKBARR": "092628605026",
+      "TNUMEOB": 4361611,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6411",
+      "TDESCPROD": "BEIZYM BPM 300",
+      "TNOMBPROV": "CHT PERUANA S.A.",
+      "TORIGPROD": "PERÚ"
+    },
+    {
+      "TTICKBARR": "092628605026",
+      "TNUMEOB": 4361611,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S1002",
+      "TDESCPROD": "ACIDO ACETICO GLACIAL",
+      "TNOMBPROV": "COMINSA SAC",
+      "TORIGPROD": "CHINA"
+    },
+    {
+      "TTICKBARR": "092628605026",
+      "TNUMEOB": 4361611,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6399",
+      "TDESCPROD": "BIAVIN BPA",
+      "TNOMBPROV": "CHT PERUANA S.A.",
+      "TORIGPROD": "PERÚ"
+    }
+  ],
+  "quimicos_certificados": [
+    {
+      "nombre": "BEIZYM BPM 300",
+      "proveedor": "CHT PERUANA S.A.",
+      "origen": "PERÚ",
+      "certificado": true
+    },
+    {
+      "nombre": "ACIDO ACETICO GLACIAL",
+      "proveedor": "COMINSA SAC",
+      "origen": "CHINA",
+      "certificado": true
+    },
+    {
+      "nombre": "BIAVIN BPA",
+      "proveedor": "CHT PERUANA S.A.",
+      "origen": "PERÚ",
+      "certificado": true
+    }
+  ]
+}

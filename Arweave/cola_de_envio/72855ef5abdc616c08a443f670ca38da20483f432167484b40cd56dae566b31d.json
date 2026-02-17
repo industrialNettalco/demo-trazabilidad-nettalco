@@ -1,0 +1,786 @@
+{
+  "tztotrazwebinfo": [
+    {
+      "TCODICLIE": "0002",
+      "TNOMBCLIE": "L.L. BEAN",
+      "TCODIESTICLIE": "524700",
+      "TNUMEVERSCLIE": "04",
+      "TCODIETIQCLIEXEDI": "482",
+      "TCODIETIQCLIE": "LIGHT YELL",
+      "TDESCETIQCLIE": "Light Yellow",
+      "TCODITALL": "XL",
+      "TCODIESTINETT": "A1710",
+      "TNUMEVERSESTINETT": "01",
+      "TDESCPREN": "Pima elb slv boatneck wsreg",
+      "TTIPOPREN": "P2",
+      "TDESCTIPOPREN": "T-Shirt",
+      "TCODIPROG": "000033",
+      "TDESCPROG": "Pima Tee",
+      "TGRUPMEDI": "RG",
+      "TDESCGRUPMEDI": "Regular",
+      "TINDIEDAD": "A",
+      "TDESCEDAD": "Adulto",
+      "TINDIGENE": "M",
+      "TDESCGENE": "Mujeres",
+      "TGENDER": "Misses'",
+      "TCLASIFIC": "A",
+      "TDESCCLASPREN": "Prenda de Primera calidad",
+      "TDESCUBIC": "En APT",
+      "TCODICANA": "002",
+      "TDIREBUSI": "S"
+    }
+  ],
+  "tztotrazwebalma": [
+    {
+      "TNUMECAJACLIE": "00004031990019733953",
+      "TNUMECAJA": "17555434",
+      "TCANTPREN": 1,
+      "TPURCORDE": "45589560",
+      "TCODITEMP": "2026SS",
+      "TCODIDEST": "USA",
+      "TDESCDEST": "Estados Unidos",
+      "TDESCTIPOCAJA": "Caja de exportación (cliente)",
+      "TFECHRECEALMA": "2026-02-07 02:51:16",
+      "TCODIPERSRECEALMA": "O00A859",
+      "TNOMBPERSRECEALMA": "Luis Sanchez"
+    }
+  ],
+  "tztotrazwebacab": [
+    {
+      "TNUMECAJA": "17555434",
+      "TFECHPESA": "2026-02-07 01:57:06",
+      "TCODIPERSPESA": "O00J753",
+      "TNOMBPERSPESA": "Victor Morales",
+      "TPESOBRUT": 5.88,
+      "TPESONETO": 5.16,
+      "TFECHEMPA": "2026-02-07 01:54:03",
+      "TCODIPERSEMPA": "O00J753",
+      "TNOMBPERSEMPA": "Victor Morales",
+      "TFECHAUDI": "2026-02-06 18:26:42",
+      "TCODIPERSAUDI": "E000000",
+      "TLOTEAUDIESTA": "8NV054",
+      "TPRENINSPMEDI": "0",
+      "TFECHINGRESTA": "2026-02-06 12:32:49",
+      "TNUMECAJAESTA": "17565456",
+      "TFECHMODU": "2026-02-06 12:32:49",
+      "TCODIMODU": "03",
+      "TFECHRECEBANDCOST": "2026-02-04 18:00:03",
+      "TCODIRECEBANDCOST": "O00F311",
+      "TNOMBRECEBANDCOST": "Juan Martinez",
+      "TTIPOTICK": "O",
+      "TDESCTIPOTICK": "Prenda regular"
+    }
+  ],
+  "tztotrazwebcost": [
+    {
+      "TORDECOST": "926914",
+      "TNUMEPEDI": "699735",
+      "TNUMECORR": "882",
+      "TNUMEPAQU": "01",
+      "TFECHCLAS": "2026-02-02 18:48:14",
+      "TCODIPERSCLAS": "O00K554",
+      "TNOMBPERSCLAS": "Maria Abreu",
+      "TCODIBAND": "R9027",
+      "TNUMELINECOST": "36",
+      "TDESCPLANCOST": "Vulcano",
+      "TCODIPERSSUPE": "E00D648",
+      "TNOMBPERSSUPE": "Elizabeth Rojas",
+      "TFECHDESPCORT": "2026-01-22 14:32:32"
+    }
+  ],
+  "tztotrazwebcostoper": [
+    {
+      "TCODIPERS": "O00D473",
+      "TNOMBPERS": "Anita Sanchez",
+      "TNUMEOPERESPE": 26307,
+      "TCODIOPERESPEVARISECU": "00282000002630700017",
+      "TDESCOPERESPE": "Fijar Solap/Esco+Homb",
+      "TFECHLECT": "2026-01-29 00:00:00",
+      "TCODITICK": "009273819529"
+    },
+    {
+      "TCODIPERS": "O00K644",
+      "TNOMBPERS": "Jose Tanta",
+      "TNUMEOPERESPE": 26986,
+      "TCODIOPERESPEVARISECU": "00282000002698600008",
+      "TDESCOPERESPE": "Basta Recubierta Manga",
+      "TFECHLECT": "2026-01-30 00:00:00",
+      "TCODITICK": "005477856838"
+    },
+    {
+      "TCODIPERS": "O00C680",
+      "TNOMBPERS": "Huber Huangal",
+      "TNUMEOPERESPE": 34419,
+      "TCODIOPERESPEVARISECU": "00282000003441902024",
+      "TDESCOPERESPE": "Peg.Mga Y/O Cerr Cos",
+      "TFECHLECT": "2026-01-29 00:00:00",
+      "TCODITICK": "003863169117"
+    },
+    {
+      "TCODIPERS": "O00K644",
+      "TNOMBPERS": "Jose Tanta",
+      "TNUMEOPERESPE": 10681,
+      "TCODIOPERESPEVARISECU": "00282000001068100007",
+      "TDESCOPERESPE": "Basta Faldon",
+      "TFECHLECT": "2026-01-30 00:00:00",
+      "TCODITICK": "004495895688"
+    },
+    {
+      "TCODIPERS": "O00F727",
+      "TNOMBPERS": "Ana Huarancca",
+      "TNUMEOPERESPE": 29747,
+      "TCODIOPERESPEVARISECU": "00282000002974700022",
+      "TDESCOPERESPE": "Atracar Abertura",
+      "TFECHLECT": "2026-01-31 00:00:00",
+      "TCODITICK": "001421452936"
+    },
+    {
+      "TCODIPERS": "O00H690",
+      "TNOMBPERS": "Cromwell Saldaña",
+      "TNUMEOPERESPE": 20944,
+      "TCODIOPERESPEVARISECU": "00259000002094400002",
+      "TDESCOPERESPE": "Pegar Collareta",
+      "TFECHLECT": "2026-01-29 00:00:00",
+      "TCODITICK": "003250605883"
+    },
+    {
+      "TCODIPERS": "O00H690",
+      "TNOMBPERS": "Cromwell Saldaña",
+      "TNUMEOPERESPE": 9923,
+      "TCODIOPERESPEVARISECU": "00259000000992300001",
+      "TDESCOPERESPE": "Pegar Collareta",
+      "TFECHLECT": "2026-01-29 00:00:00",
+      "TCODITICK": "001691505307"
+    }
+  ],
+  "tztotrazwebacabmodu": [
+    {
+      "TCODIMODU": "03",
+      "TCODIPERS": "O00J495",
+      "TNOMBPERS": "Ruth Pasache"
+    },
+    {
+      "TCODIMODU": "03",
+      "TCODIPERS": "O00J837",
+      "TNOMBPERS": "Henry Flores"
+    },
+    {
+      "TCODIMODU": "03",
+      "TCODIPERS": "O00F614",
+      "TNOMBPERS": "Veronica Gallardo"
+    },
+    {
+      "TCODIMODU": "03",
+      "TCODIPERS": "O00J951",
+      "TNOMBPERS": "Nancy Castro"
+    },
+    {
+      "TCODIMODU": "03",
+      "TCODIPERS": "O00F424",
+      "TNOMBPERS": "Jedith Shuña"
+    },
+    {
+      "TCODIMODU": "03",
+      "TCODIPERS": "O00A665",
+      "TNOMBPERS": "Oswaldo Pallaroso"
+    },
+    {
+      "TCODIMODU": "03",
+      "TCODIPERS": "O00J189",
+      "TNOMBPERS": "Oreana Urquia"
+    },
+    {
+      "TCODIMODU": "03",
+      "TCODIPERS": "O00H153",
+      "TNOMBPERS": "Maria Reynoso"
+    }
+  ],
+  "tztotrazwebcort": [
+    {
+      "TNUMEORDECORT": "314044",
+      "TNUMETEND": "00897526",
+      "TFECHDESPCORT": "2026-01-22 14:32:32"
+    }
+  ],
+  "tztotrazwebcortoper": [
+    {
+      "TCODIOPER": "01",
+      "TDESCOPER": "Tendido",
+      "TFECHLECT": "2026-01-21 10:35:53",
+      "TCODIPERS": "O00D287",
+      "TNOMBPERS": "Walter Vilca",
+      "TNUMETICK": "029910"
+    },
+    {
+      "TCODIOPER": "01",
+      "TDESCOPER": "Tendido",
+      "TFECHLECT": "2026-01-21 10:35:53",
+      "TCODIPERS": "O00K001",
+      "TNOMBPERS": "Jorge Salazar",
+      "TNUMETICK": "029911"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-21 12:25:35",
+      "TCODIPERS": "O002183",
+      "TNOMBPERS": "Javier Erazo",
+      "TNUMETICK": "029914"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-21 12:25:35",
+      "TCODIPERS": "O002183",
+      "TNOMBPERS": "Javier Erazo",
+      "TNUMETICK": "029916"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-21 12:25:35",
+      "TCODIPERS": "O002183",
+      "TNOMBPERS": "Javier Erazo",
+      "TNUMETICK": "029917"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-21 12:25:35",
+      "TCODIPERS": "O002183",
+      "TNOMBPERS": "Javier Erazo",
+      "TNUMETICK": "029918"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-21 12:25:35",
+      "TCODIPERS": "O002183",
+      "TNOMBPERS": "Javier Erazo",
+      "TNUMETICK": "029923"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2026-01-21 12:25:35",
+      "TCODIPERS": "O002183",
+      "TNOMBPERS": "Javier Erazo",
+      "TNUMETICK": "029920"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-21 14:39:49",
+      "TCODIPERS": "O00D617",
+      "TNOMBPERS": "Jose Aguilar",
+      "TNUMETICK": "029951"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-21 14:39:49",
+      "TCODIPERS": "O00D617",
+      "TNOMBPERS": "Jose Aguilar",
+      "TNUMETICK": "029952"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-21 14:39:49",
+      "TCODIPERS": "O00D617",
+      "TNOMBPERS": "Jose Aguilar",
+      "TNUMETICK": "029953"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-21 14:39:49",
+      "TCODIPERS": "O00D617",
+      "TNOMBPERS": "Jose Aguilar",
+      "TNUMETICK": "029954"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-21 14:39:49",
+      "TCODIPERS": "O00D617",
+      "TNOMBPERS": "Jose Aguilar",
+      "TNUMETICK": "029955"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-21 14:39:49",
+      "TCODIPERS": "O00D617",
+      "TNOMBPERS": "Jose Aguilar",
+      "TNUMETICK": "029956"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-21 14:39:49",
+      "TCODIPERS": "O00D617",
+      "TNOMBPERS": "Jose Aguilar",
+      "TNUMETICK": "029957"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2026-01-21 14:39:49",
+      "TCODIPERS": "O00D617",
+      "TNOMBPERS": "Jose Aguilar",
+      "TNUMETICK": "029958"
+    },
+    {
+      "TCODIOPER": "05",
+      "TDESCOPER": "Inspection",
+      "TFECHLECT": "2026-01-22 12:56:19",
+      "TCODIPERS": "O00K524",
+      "TNOMBPERS": "Leyni Tarrillo"
+    }
+  ],
+  "tztotrazwebtint": [
+    {
+      "TNUMEOB": 4378755,
+      "TTELAPRIN": "1",
+      "TTIPOARTI": "TELA",
+      "TPEDISGT": 5017318,
+      "TNUMEUD": 916807,
+      "TKILOACAB": 138.6,
+      "TKILOPROG": 146.9847350601791,
+      "TREDUACAB": 1208601,
+      "TCODITELA": "90677",
+      "TDESCTELA": "Interlock 44/1 c/antip gg32 color claro",
+      "TTIPOCOLN": "C",
+      "TDESCTIPOCOLN": "Color entero",
+      "TNUMECOLN": "51949",
+      "TDESCCOLN": "Light yellow 12-0715 tcx",
+      "TTIPOTELA": "E",
+      "TDESCTIPOTELA": "Color Entero",
+      "TTIPOACABTELA": "N",
+      "THILOCOLO": "0",
+      "TINDIANTIPILI": "1",
+      "TNUMECOMP": "01",
+      "TDESCCOMP": "Splda(1),Fte(1),Mng(2)",
+      "TTIPOCOMP": "01",
+      "TDESCTIPOCOMP": "Body",
+      "TDESCTIPOARTI": "Tela",
+      "TMAQUTENI": "0ST41",
+      "TNOMBMAQUTENI": "Saturno 41.150",
+      "TMODEMAQUTENI": "Saturno.150kg",
+      "TFABRMAQUTENI": "Brazzoli",
+      "TPARTTINT": "197844",
+      "TCODIRECE": "SL00169460",
+      "TFECHTENIINIC": "2026-01-18 12:30:00",
+      "TFECHTENIFINA": "2026-01-18 19:40:00",
+      "TMAQUCORT": "0CO02",
+      "TNOMBMAQUCORT": "Cortadora Abridora Bianco",
+      "TMODEMAQUCORT": "Sdm 3512-97",
+      "TFABRMAQUCORT": "Bianco",
+      "TFECHCORTINIC": "2026-01-18 20:20:00",
+      "TFECHCORTFINA": "2026-01-18 20:46:00",
+      "TOPERCORTINIC": "E004273",
+      "TNOMBOPERCORTINIC": "Jose Ayala",
+      "TMAQUSECA": "0RM01",
+      "TNOMBMAQUSECA": "Rama 1",
+      "TMODEMAQUSECA": "71318",
+      "TFABRMAQUSECA": "Artos",
+      "TFECHSECAINIC": "2026-01-18 22:25:00",
+      "TFECHSECAFINA": "2026-01-18 22:52:00",
+      "TOPERSECAINIC": "E004598",
+      "TNOMBOPERSECAINIC": "Noe Ayala",
+      "TMAQUACAB": "0RM01",
+      "TNOMBMAQUACAB": "Rama 1",
+      "TMODEMAQUACAB": "71318",
+      "TFABRMAQUACAB": "Artos",
+      "TFECHACABINIC": "2026-01-19 10:45:00",
+      "TFECHACABFINA": "2026-01-19 11:37:00",
+      "TOPERACABINIC": "E002286",
+      "TNOMBOPERACABINIC": "Pedro Campos",
+      "TFECHCALITINT": "2026-01-18 22:30:00",
+      "TFECHDESPTINT": "2026-01-20 00:00:00"
+    }
+  ],
+  "tztotrazwebteje": [
+    {
+      "TORDETEJE": 1094617,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 146.785,
+      "TNUMEOB": 4378755,
+      "TREDUCRUD": 803421,
+      "TCODITELA": "96045",
+      "TDESCTELA": "Llb interlock 44/1 c/antip gg32 color claro + ajustado",
+      "TNUMEGALG": 32,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "0",
+      "TTIPOTEJI": "I",
+      "TDESCTIPOTEJI": "Interlock",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "E",
+      "TDESCCODIMATEPRIM": "Mezcla Pima Peruano - Pima Americano",
+      "TMATEPRIM": "X",
+      "TDESCMATEPRIM": "Mix",
+      "TNUMEPIEZ": 4271648,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2026-01-15 06:35:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 10.016,
+      "TMETRPIEZ": 29.986,
+      "TCODIMAQU": "0C107",
+      "TNOMBMAQU": "Interlock 107 D30",
+      "TMODEMAQU": "I2-108",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 30,
+      "TCODIPERS": "E003877",
+      "TNOMBPERS": "Emer Vega"
+    },
+    {
+      "TORDETEJE": 1094617,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 146.785,
+      "TNUMEOB": 4378755,
+      "TREDUCRUD": 803421,
+      "TCODITELA": "96045",
+      "TDESCTELA": "Llb interlock 44/1 c/antip gg32 color claro + ajustado",
+      "TNUMEGALG": 32,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "0",
+      "TTIPOTEJI": "I",
+      "TDESCTIPOTEJI": "Interlock",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "E",
+      "TDESCCODIMATEPRIM": "Mezcla Pima Peruano - Pima Americano",
+      "TMATEPRIM": "X",
+      "TDESCMATEPRIM": "Mix",
+      "TNUMEPIEZ": 4272776,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2026-01-15 20:31:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 14.569,
+      "TMETRPIEZ": 44.439,
+      "TCODIMAQU": "0C107",
+      "TNOMBMAQU": "Interlock 107 D30",
+      "TMODEMAQU": "I2-108",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 30,
+      "TCODIPERS": "E004208",
+      "TNOMBPERS": "Isaac Leon"
+    },
+    {
+      "TORDETEJE": 1094617,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 146.785,
+      "TNUMEOB": 4378755,
+      "TREDUCRUD": 803421,
+      "TCODITELA": "96045",
+      "TDESCTELA": "Llb interlock 44/1 c/antip gg32 color claro + ajustado",
+      "TNUMEGALG": 32,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "0",
+      "TTIPOTEJI": "I",
+      "TDESCTIPOTEJI": "Interlock",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "E",
+      "TDESCCODIMATEPRIM": "Mezcla Pima Peruano - Pima Americano",
+      "TMATEPRIM": "X",
+      "TDESCMATEPRIM": "Mix",
+      "TNUMEPIEZ": 4272698,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2026-01-15 14:05:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 29.4,
+      "TMETRPIEZ": 88.464,
+      "TCODIMAQU": "0C107",
+      "TNOMBMAQU": "Interlock 107 D30",
+      "TMODEMAQU": "I2-108",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 30,
+      "TCODIPERS": "E002292",
+      "TNOMBPERS": "Nilo De La Cruz"
+    },
+    {
+      "TORDETEJE": 1094617,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 146.785,
+      "TNUMEOB": 4378755,
+      "TREDUCRUD": 803421,
+      "TCODITELA": "96045",
+      "TDESCTELA": "Llb interlock 44/1 c/antip gg32 color claro + ajustado",
+      "TNUMEGALG": 32,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "0",
+      "TTIPOTEJI": "I",
+      "TDESCTIPOTEJI": "Interlock",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "E",
+      "TDESCCODIMATEPRIM": "Mezcla Pima Peruano - Pima Americano",
+      "TMATEPRIM": "X",
+      "TDESCMATEPRIM": "Mix",
+      "TNUMEPIEZ": 4271649,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2026-01-15 10:16:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 31.5,
+      "TMETRPIEZ": 94.782,
+      "TCODIMAQU": "0C107",
+      "TNOMBMAQU": "Interlock 107 D30",
+      "TMODEMAQU": "I2-108",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 30,
+      "TCODIPERS": "E002292",
+      "TNOMBPERS": "Nilo De La Cruz"
+    },
+    {
+      "TORDETEJE": 1094617,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 146.785,
+      "TNUMEOB": 4378755,
+      "TREDUCRUD": 803421,
+      "TCODITELA": "96045",
+      "TDESCTELA": "Llb interlock 44/1 c/antip gg32 color claro + ajustado",
+      "TNUMEGALG": 32,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "0",
+      "TTIPOTEJI": "I",
+      "TDESCTIPOTEJI": "Interlock",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "E",
+      "TDESCCODIMATEPRIM": "Mezcla Pima Peruano - Pima Americano",
+      "TMATEPRIM": "X",
+      "TDESCMATEPRIM": "Mix",
+      "TNUMEPIEZ": 4271650,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2026-01-15 10:41:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 30.7,
+      "TMETRPIEZ": 92.375,
+      "TCODIMAQU": "0C107",
+      "TNOMBMAQU": "Interlock 107 D30",
+      "TMODEMAQU": "I2-108",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 30,
+      "TCODIPERS": "E002292",
+      "TNOMBPERS": "Nilo De La Cruz"
+    },
+    {
+      "TORDETEJE": 1094617,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 146.785,
+      "TNUMEOB": 4378755,
+      "TREDUCRUD": 803421,
+      "TCODITELA": "96045",
+      "TDESCTELA": "Llb interlock 44/1 c/antip gg32 color claro + ajustado",
+      "TNUMEGALG": 32,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "0",
+      "TTIPOTEJI": "I",
+      "TDESCTIPOTEJI": "Interlock",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "E",
+      "TDESCCODIMATEPRIM": "Mezcla Pima Peruano - Pima Americano",
+      "TMATEPRIM": "X",
+      "TDESCMATEPRIM": "Mix",
+      "TNUMEPIEZ": 4272755,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2026-01-15 17:30:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 30.6,
+      "TMETRPIEZ": 92.074,
+      "TCODIMAQU": "0C107",
+      "TNOMBMAQU": "Interlock 107 D30",
+      "TMODEMAQU": "I2-108",
+      "TFABRMAQU": "Terrot",
+      "TRPMSTND": 30,
+      "TCODIPERS": "E004208",
+      "TNOMBPERS": "Isaac Leon"
+    }
+  ],
+  "tztotrazwebhilo": [
+    {
+      "TREDUCRUD": 803421,
+      "TTELAPRIN": "1",
+      "TCODITELA": "96045",
+      "TDESCTELA": "Llb interlock 44/1 c/antip gg32 color claro + ajustado",
+      "TDESCTIPOARTI": "Tela",
+      "TREDUHILOPRIN": 51,
+      "THILOPRIN": "F441P",
+      "TDESCHILOPRIN": "Alg. Supima 441 Peinado Parafinado",
+      "TLOTEHILA": "5530205",
+      "TLOTENETT": "5530205-52",
+      "TPROVPRIN": "110014",
+      "TNOMBPROVPRIN": "Creditex S. A. A."
+    }
+  ],
+  "tztotrazwebhiloloteprin": [
+    {
+      "TLOTENETT": "5530205-52",
+      "TGUIAHILO": "501-2973",
+      "TFECHGUIAHILO": "2025-12-29 00:00:00",
+      "TPESOGUIAHILO": 5496.99,
+      "TZONAORIGHILO": "USA",
+      "TNUMEORDECOMP": 2025006804,
+      "TFECHORDECOMP": "2025-06-26 00:00:00",
+      "TNUMEFACTHILO": "FAC:F501-6175 SOCAP"
+    }
+  ],
+  "tztotrazwebtintqyc": [
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6540",
+      "TDESCPROD": "SODA CAUSTICA PERLAS(LABOR)",
+      "TNOMBPROV": "COMINSA SAC",
+      "TORIGPROD": "TAIWAN"
+    },
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6583",
+      "TDESCPROD": "ANTIMUSSOL UDF.BR LIQ.",
+      "TNOMBPROV": "ARCHROMA PERÚ S.A.",
+      "TORIGPROD": "BRASIL"
+    },
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6414",
+      "TDESCPROD": "COTOBLANC PCA",
+      "TNOMBPROV": "CHT PERUANA S.A.",
+      "TORIGPROD": "PERÚ"
+    },
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6074",
+      "TDESCPROD": "SAL MOLIDA EXTRA (NACL)/CLORUR",
+      "TNOMBPROV": "QUIMPAC",
+      "TORIGPROD": "PERÚ"
+    },
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6399",
+      "TDESCPROD": "BIAVIN BPA",
+      "TNOMBPROV": "CHT PERUANA S.A.",
+      "TORIGPROD": "PERÚ"
+    },
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S1009",
+      "TDESCPROD": "AGUA OXIGENADA AL 50%",
+      "TNOMBPROV": "QUIMEX S.A.",
+      "TORIGPROD": "KOREA"
+    },
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6646",
+      "TDESCPROD": "VARIOBLEACH 3E",
+      "TNOMBPROV": "CHT PERUANA S.A.",
+      "TORIGPROD": "PERÚ"
+    },
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S1002",
+      "TDESCPROD": "ACIDO ACETICO GLACIAL",
+      "TNOMBPROV": "COMINSA SAC",
+      "TORIGPROD": "CHINA"
+    },
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6465",
+      "TDESCPROD": "SARABID LDR",
+      "TNOMBPROV": "CHT PERUANA S.A.",
+      "TORIGPROD": "PERÚ"
+    },
+    {
+      "TTICKBARR": "092691401044",
+      "TNUMEOB": 4378755,
+      "TTIPOPROD": "Q",
+      "TCODIPROD": "S6442",
+      "TDESCPROD": "NEUTRACID NCS",
+      "TNOMBPROV": "CHT PERUANA S.A.",
+      "TORIGPROD": "PERÚ"
+    }
+  ],
+  "quimicos_certificados": [
+    {
+      "nombre": "SODA CAUSTICA PERLAS(LABOR)",
+      "proveedor": "COMINSA SAC",
+      "origen": "TAIWAN",
+      "certificado": true
+    },
+    {
+      "nombre": "ANTIMUSSOL UDF.BR LIQ.",
+      "proveedor": "ARCHROMA PERÚ S.A.",
+      "origen": "BRASIL",
+      "certificado": true
+    },
+    {
+      "nombre": "COTOBLANC PCA",
+      "proveedor": "CHT PERUANA S.A.",
+      "origen": "PERÚ",
+      "certificado": true
+    },
+    {
+      "nombre": "SAL MOLIDA EXTRA (NACL)/CLORUR",
+      "proveedor": "QUIMPAC",
+      "origen": "PERÚ",
+      "certificado": true
+    },
+    {
+      "nombre": "BIAVIN BPA",
+      "proveedor": "CHT PERUANA S.A.",
+      "origen": "PERÚ",
+      "certificado": true
+    },
+    {
+      "nombre": "AGUA OXIGENADA AL 50%",
+      "proveedor": "QUIMEX S.A.",
+      "origen": "KOREA",
+      "certificado": true
+    },
+    {
+      "nombre": "VARIOBLEACH 3E",
+      "proveedor": "CHT PERUANA S.A.",
+      "origen": "PERÚ",
+      "certificado": true
+    },
+    {
+      "nombre": "ACIDO ACETICO GLACIAL",
+      "proveedor": "COMINSA SAC",
+      "origen": "CHINA",
+      "certificado": true
+    },
+    {
+      "nombre": "NEUTRACID NCS",
+      "proveedor": "CHT PERUANA S.A.",
+      "origen": "PERÚ",
+      "certificado": true
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "tztotrazwebinfo": [
+    {
+      "TCODICLIE": "0266",
+      "TNOMBCLIE": "LACOSTE",
+      "TCODIESTICLIE": "DH8278-52",
+      "TNUMEVERSCLIE": "02",
+      "TCODIETIQCLIEXEDI": "031",
+      "TCODIETIQCLIE": "NOIR",
+      "TDESCETIQCLIE": "NOIR",
+      "TCODITALL": "7",
+      "TCODIESTINETT": "A3315",
+      "TNUMEVERSESTINETT": "01",
+      "TDESCPREN": "Ss collar & placket - proyecto outlet",
+      "TTIPOPREN": "Q1",
+      "TDESCTIPOPREN": "Collar & Placket",
+      "TCODIPROG": "000562",
+      "TDESCPROG": "Otra Composición",
+      "TGRUPMEDI": "RG",
+      "TDESCGRUPMEDI": "Regular",
+      "TINDIEDAD": "A",
+      "TDESCEDAD": "Adulto",
+      "TINDIGENE": "H",
+      "TDESCGENE": "Hombres",
+      "TGENDER": "Hombre",
+      "TCLASIFIC": "A",
+      "TDESCCLASPREN": "Prenda de Primera calidad",
+      "TDESCUBIC": "En APT",
+      "TDIREBUSI": "N"
+    }
+  ],
+  "tztotrazwebalma": [
+    {
+      "TNUMECAJA": "17184968",
+      "TCANTPREN": 1,
+      "TPURCORDE": "7286198",
+      "TCODITEMP": "2026ET",
+      "TNUMEORDEFABR": "26EUJL25R",
+      "TCODIDEST": "CAN",
+      "TDESCDEST": "Canada",
+      "TDESCTIPOCAJA": "Caja de exportación (obsoletos)",
+      "TFECHRECEALMA": "2026-02-07 07:55:08",
+      "TCODIPERSRECEALMA": "O00J849",
+      "TNOMBPERSRECEALMA": "Waldir Porras"
+    }
+  ],
+  "tztotrazwebacab": [
+    {
+      "TNUMECAJA": "17184968",
+      "TFECHPESA": "2026-02-07 06:22:27",
+      "TCODIPERSPESA": "O00F311",
+      "TNOMBPERSPESA": "Juan Martinez",
+      "TPESOBRUT": 23.7,
+      "TPESONETO": 22.37,
+      "TFECHEMPA": "2026-02-06 03:52:30",
+      "TCODIPERSEMPA": "O00F311",
+      "TNOMBPERSEMPA": "Juan Martinez",
+      "TPRENINSPMEDI": "0",
+      "TFECHINGRESTA": "2026-01-05 14:06:29",
+      "TNUMECAJAESTA": "17527671",
+      "TFECHMODU": "2026-01-05 14:06:29",
+      "TTIPOTICK": "S",
+      "TDESCTIPOTICK": "Prenda sustituta"
+    }
+  ],
+  "quimicos_certificados": []
+}

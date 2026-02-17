@@ -1,0 +1,67 @@
+{
+  "tztotrazwebinfo": [
+    {
+      "TCODICLIE": "0266",
+      "TNOMBCLIE": "LACOSTE",
+      "TCODIESTICLIE": "CH7895-23",
+      "TNUMEVERSCLIE": "01",
+      "TCODIETIQCLIEXEDI": "001",
+      "TCODIETIQCLIE": "BLANC",
+      "TDESCETIQCLIE": "BLANC",
+      "TCODITALL": "42",
+      "TCODIESTINETT": "98555",
+      "TNUMEVERSESTINETT": "06",
+      "TDESCPREN": "Ls shirt",
+      "TTIPOPREN": "Q1",
+      "TDESCTIPOPREN": "Collar & Placket",
+      "TCODIPROG": "000561",
+      "TDESCPROG": "Pima Light 40/1",
+      "TGRUPMEDI": "RG",
+      "TDESCGRUPMEDI": "Regular",
+      "TINDIEDAD": "A",
+      "TDESCEDAD": "Adulto",
+      "TINDIGENE": "H",
+      "TDESCGENE": "Hombres",
+      "TGENDER": "Hombre",
+      "TCLASIFIC": "A",
+      "TDESCCLASPREN": "Prenda de Primera calidad",
+      "TDESCUBIC": "En APT",
+      "TDIREBUSI": "N"
+    }
+  ],
+  "tztotrazwebalma": [
+    {
+      "TNUMECAJA": "17184968",
+      "TCANTPREN": 1,
+      "TPURCORDE": "7272017",
+      "TCODITEMP": "2025HI",
+      "TNUMEORDEFABR": "H25UDIR",
+      "TCODIDEST": "URY",
+      "TDESCDEST": "Uruguay",
+      "TDESCTIPOCAJA": "Caja de exportación (obsoletos)",
+      "TFECHRECEALMA": "2026-02-07 07:55:08",
+      "TCODIPERSRECEALMA": "O00J849",
+      "TNOMBPERSRECEALMA": "Waldir Porras"
+    }
+  ],
+  "tztotrazwebacab": [
+    {
+      "TNUMECAJA": "17184968",
+      "TFECHPESA": "2026-02-07 06:22:27",
+      "TCODIPERSPESA": "O00F311",
+      "TNOMBPERSPESA": "Juan Martinez",
+      "TPESOBRUT": 23.7,
+      "TPESONETO": 22.37,
+      "TFECHEMPA": "2026-02-06 03:52:30",
+      "TCODIPERSEMPA": "O00F311",
+      "TNOMBPERSEMPA": "Juan Martinez",
+      "TPRENINSPMEDI": "0",
+      "TFECHINGRESTA": "2026-01-13 09:19:21",
+      "TNUMECAJAESTA": "17497888",
+      "TFECHMODU": "2026-01-13 09:19:21",
+      "TTIPOTICK": "S",
+      "TDESCTIPOTICK": "Prenda sustituta"
+    }
+  ],
+  "quimicos_certificados": []
+}

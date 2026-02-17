@@ -1,0 +1,899 @@
+{
+  "tztotrazwebinfo": [
+    {
+      "TCODICLIE": "0266",
+      "TNOMBCLIE": "LACOSTE",
+      "TCODIESTICLIE": "DH3187-10",
+      "TNUMEVERSCLIE": "03",
+      "TCODIETIQCLIEXEDI": "2QB",
+      "TCODIETIQCLIE": "TURQUIN/BL",
+      "TDESCETIQCLIE": "TURQUIN/BL",
+      "TCODITALL": "2",
+      "TCODIESTINETT": "A3403",
+      "TNUMEVERSESTINETT": "01",
+      "TDESCPREN": "Ss collar & placket stripe",
+      "TTIPOPREN": "Q1",
+      "TDESCTIPOPREN": "Collar & Placket",
+      "TCODIPROG": "000562",
+      "TDESCPROG": "Otra Composición",
+      "TGRUPMEDI": "RG",
+      "TDESCGRUPMEDI": "Regular",
+      "TINDIEDAD": "A",
+      "TDESCEDAD": "Adulto",
+      "TINDIGENE": "H",
+      "TDESCGENE": "Hombres",
+      "TGENDER": "Hombre",
+      "TCLASIFIC": "A",
+      "TDESCCLASPREN": "Prenda de Primera calidad",
+      "TDESCUBIC": "En APT",
+      "TDIREBUSI": "N"
+    }
+  ],
+  "tztotrazwebalma": [
+    {
+      "TNUMECAJA": "17184965",
+      "TCANTPREN": 1,
+      "TPURCORDE": "7283125",
+      "TCODITEMP": "2026ET",
+      "TNUMEORDEFABR": "E26UJL25R",
+      "TCODIDEST": "IDN",
+      "TDESCDEST": "Indonesia",
+      "TDESCTIPOCAJA": "Caja de exportación (obsoletos)",
+      "TFECHRECEALMA": "2026-02-07 07:55:08",
+      "TCODIPERSRECEALMA": "O00J849",
+      "TNOMBPERSRECEALMA": "Waldir Porras"
+    }
+  ],
+  "tztotrazwebacab": [
+    {
+      "TNUMECAJA": "17184965",
+      "TFECHPESA": "2026-02-07 06:22:30",
+      "TCODIPERSPESA": "O00F311",
+      "TNOMBPERSPESA": "Juan Martinez",
+      "TPESOBRUT": 23.7,
+      "TPESONETO": 22.37,
+      "TFECHEMPA": "2026-02-06 04:49:36",
+      "TCODIPERSEMPA": "O00F311",
+      "TNOMBPERSEMPA": "Juan Martinez",
+      "TFECHAUDI": "2025-12-16 13:17:22",
+      "TCODIPERSAUDI": "E00J079",
+      "TNOMBPERSAUDI": "Magali Huaman",
+      "TLOTEAUDIESTA": "8NP590",
+      "TPRENINSPMEDI": "0",
+      "TFECHINGRESTA": "2025-12-04 19:12:39",
+      "TNUMECAJAESTA": "17494483",
+      "TFECHMODU": "2025-12-04 19:12:39",
+      "TCODIMODU": "04",
+      "TFECHRECEBANDCOST": "2025-12-04 15:21:42",
+      "TCODIRECEBANDCOST": "O00J176",
+      "TNOMBRECEBANDCOST": "Luciano Cahuaza",
+      "TTIPOTICK": "O",
+      "TDESCTIPOTICK": "Prenda regular"
+    }
+  ],
+  "tztotrazwebacabmedi": [
+    {
+      "TTICKBARRLOTE": "092033504020",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "ACG",
+      "TDESCDIME": "Alto de cuello centro espalda",
+      "TMEDIDIME": "5.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.3     ",
+      "TMEDIDIMEAPT": "5.5",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AFJ",
+      "TDESCDIME": "Largo de manga desde hombro",
+      "TMEDIDIME": "23.3",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "24",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AFH",
+      "TDESCDIME": "Ancho de hombro",
+      "TMEDIDIME": "13.8",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "14",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AAN",
+      "TDESCDIME": "Ancho pecho 1cm bajo sisa",
+      "TMEDIDIME": "48.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "48.5",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AAA",
+      "TDESCDIME": "Abertura de faldon",
+      "TMEDIDIME": "48.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "49",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AFN",
+      "TDESCDIME": " longitud de pechera",
+      "TMEDIDIME": "14.0",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "14.3",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AEE",
+      "TDESCDIME": "Abertura de escote",
+      "TMEDIDIME": "15.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "15.5",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AGW",
+      "TDESCDIME": "Biceps",
+      "TMEDIDIME": "18.1",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.7     ",
+      "TMEDIDIMEAPT": "18",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AHL",
+      "TDESCDIME": "Largo de prenda frente d/hps a borde faldon",
+      "TMEDIDIME": "72.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.5     ",
+      "TMEDIDIMEAPT": "73",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "ADQ",
+      "TDESCDIME": "Abertura de manga",
+      "TMEDIDIME": "16.8",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "16.5",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AGG_NEW",
+      "TDESCDIME": "Logo cocodrilo desde hps a mitad de logo (vertical)",
+      "TMEDIDIME": "19.6",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "19.5",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401056",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "ABF",
+      "TDESCDIME": "Logo cocodrilo d/ctro pech. a inicio croco",
+      "TMEDIDIME": "8.8",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "8.7",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AFJ",
+      "TDESCDIME": "Largo de manga desde hombro",
+      "TMEDIDIME": "25.4",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "26",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AFH",
+      "TDESCDIME": "Ancho de hombro",
+      "TMEDIDIME": "15.9",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "16.3",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AAN",
+      "TDESCDIME": "Ancho pecho 1cm bajo sisa",
+      "TMEDIDIME": "59.0",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "60.5",
+      "TMEDIDIMEFALL": "Medida fuera de estándar"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AAA",
+      "TDESCDIME": "Abertura de faldon",
+      "TMEDIDIME": "59.0",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "60.5",
+      "TMEDIDIMEFALL": "Medida fuera de estándar"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AFN",
+      "TDESCDIME": " longitud de pechera",
+      "TMEDIDIME": "14.0",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "13.8",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AEE",
+      "TDESCDIME": "Abertura de escote",
+      "TMEDIDIME": "17.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "18",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AGW",
+      "TDESCDIME": "Biceps",
+      "TMEDIDIME": "20.8",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.7     ",
+      "TMEDIDIMEAPT": "21.4",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AHL",
+      "TDESCDIME": "Largo de prenda frente d/hps a borde faldon",
+      "TMEDIDIME": "77.0",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.5     ",
+      "TMEDIDIMEAPT": "75",
+      "TMEDIDIMEFALL": "Medida fuera de estándar"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "ADQ",
+      "TDESCDIME": "Abertura de manga",
+      "TMEDIDIME": "19.1",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "19.7",
+      "TMEDIDIMEFALL": "Medida fuera de estándar"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AGG_NEW",
+      "TDESCDIME": "Logo cocodrilo desde hps a mitad de logo (vertical)",
+      "TMEDIDIME": "20.8",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "20.3",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092033504037",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "ABF",
+      "TDESCDIME": "Logo cocodrilo d/ctro pech. a inicio croco",
+      "TMEDIDIME": "9.4",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "9.7",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AFJ",
+      "TDESCDIME": "Largo de manga desde hombro",
+      "TMEDIDIME": "23.3",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "24.5",
+      "TMEDIDIMEFALL": "Medida fuera de estándar"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AFH",
+      "TDESCDIME": "Ancho de hombro",
+      "TMEDIDIME": "13.8",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "14",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AAN",
+      "TDESCDIME": "Ancho pecho 1cm bajo sisa",
+      "TMEDIDIME": "48.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "49",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AAA",
+      "TDESCDIME": "Abertura de faldon",
+      "TMEDIDIME": "48.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "49",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AFN",
+      "TDESCDIME": " longitud de pechera",
+      "TMEDIDIME": "14.0",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "13.8",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AEE",
+      "TDESCDIME": "Abertura de escote",
+      "TMEDIDIME": "15.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "16.5",
+      "TMEDIDIMEFALL": "Medida fuera de estándar"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AGW",
+      "TDESCDIME": "Biceps",
+      "TMEDIDIME": "18.1",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.7     ",
+      "TMEDIDIMEAPT": "18",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AHL",
+      "TDESCDIME": "Largo de prenda frente d/hps a borde faldon",
+      "TMEDIDIME": "72.5",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.5     ",
+      "TMEDIDIMEAPT": "72.5",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "ADQ",
+      "TDESCDIME": "Abertura de manga",
+      "TMEDIDIME": "16.8",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "16.5",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "AGG_NEW",
+      "TDESCDIME": "Logo cocodrilo desde hps a mitad de logo (vertical)",
+      "TMEDIDIME": "19.6",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 1.0     ",
+      "TMEDIDIMEAPT": "19.5",
+      "TMEDIDIMEFALL": "OK"
+    },
+    {
+      "TTICKBARRLOTE": "092054401100",
+      "TCODIESTICLIE": "DH3187-10",
+      "TIDENCLIE": "ABF",
+      "TDESCDIME": "Logo cocodrilo d/ctro pech. a inicio croco",
+      "TMEDIDIME": "8.8",
+      "TUNIDMEDI": "cms",
+      "TTOLEDIME": "+/- 0.5     ",
+      "TMEDIDIMEAPT": "8.5",
+      "TMEDIDIMEFALL": "OK"
+    }
+  ],
+  "tztotrazwebcost": [
+    {
+      "TORDECOST": "922564",
+      "TNUMEPEDI": "694722",
+      "TNUMECORR": "571",
+      "TNUMEPAQU": "01",
+      "TFECHCLAS": "2025-12-04 15:12:19",
+      "TCODIPERSCLAS": "O00F886",
+      "TNOMBPERSCLAS": "Ketty Condori",
+      "TCODIBAND": "T9025",
+      "TNUMELINECOST": "48",
+      "TDESCPLANCOST": "Cercado",
+      "TCODIPERSSUPE": "E002223",
+      "TNOMBPERSSUPE": "Carmen Velasquez",
+      "TFECHDESPCORT": "2025-11-26 15:47:48"
+    }
+  ],
+  "tztotrazwebcostoper": [
+    {
+      "TCODIPERS": "O00J883",
+      "TNOMBPERS": "Llanet Rosas",
+      "TNUMEOPERESPE": 11597,
+      "TCODIOPERESPEVARISECU": "00219000001159700003",
+      "TDESCOPERESPE": "Orillar Basta Manga",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "006515641184"
+    },
+    {
+      "TCODIPERS": "O00C281",
+      "TNOMBPERS": "Gilbert Huamani",
+      "TNUMEOPERESPE": 21831,
+      "TCODIOPERESPEVARISECU": "00999000002183100004",
+      "TDESCOPERESPE": "Recortar Piezas",
+      "TFECHLECT": "2025-12-01 00:00:00",
+      "TCODITICK": "006134804371"
+    },
+    {
+      "TCODIPERS": "O008765",
+      "TNOMBPERS": "Vilma Medina",
+      "TNUMEOPERESPE": 42399,
+      "TCODIOPERESPEVARISECU": "00201000004239900001",
+      "TDESCOPERESPE": "Cerrar Cuello Tela",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "006776812803"
+    },
+    {
+      "TCODIPERS": "O008765",
+      "TNOMBPERS": "Vilma Medina",
+      "TNUMEOPERESPE": 42404,
+      "TCODIOPERESPEVARISECU": "00201000004240400002",
+      "TDESCOPERESPE": "Cerrar Cuello Tela",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "001029921775"
+    },
+    {
+      "TCODIPERS": "O008765",
+      "TNOMBPERS": "Vilma Medina",
+      "TNUMEOPERESPE": 42403,
+      "TCODIOPERESPEVARISECU": "00201000004240300006",
+      "TDESCOPERESPE": "Pespuntar Cuello",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "005518200813"
+    },
+    {
+      "TCODIPERS": "O00C281",
+      "TNOMBPERS": "Gilbert Huamani",
+      "TNUMEOPERESPE": 4675,
+      "TCODIOPERESPEVARISECU": "00999000000467500003",
+      "TDESCOPERESPE": "Mediciones",
+      "TFECHLECT": "2025-12-01 00:00:00",
+      "TCODITICK": "007163130635"
+    },
+    {
+      "TCODIPERS": "O00J883",
+      "TNOMBPERS": "Llanet Rosas",
+      "TNUMEOPERESPE": 1085,
+      "TCODIOPERESPEVARISECU": "00999000000108500001",
+      "TDESCOPERESPE": "Mediciones",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "007478269594"
+    },
+    {
+      "TCODIPERS": "O003051",
+      "TNOMBPERS": "Griselda Vera",
+      "TNUMEOPERESPE": 25051,
+      "TCODIOPERESPEVARISECU": "00207000002505100001",
+      "TDESCOPERESPE": "Bastillar Banda",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "003263358415"
+    },
+    {
+      "TCODIPERS": "O008765",
+      "TNOMBPERS": "Vilma Medina",
+      "TNUMEOPERESPE": 42405,
+      "TCODIOPERESPEVARISECU": "00201000004240500003",
+      "TDESCOPERESPE": "Pegar Bandas",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "007512340313"
+    },
+    {
+      "TCODIPERS": "O00F981",
+      "TNOMBPERS": "Irma Ninaquispe",
+      "TNUMEOPERESPE": 10297,
+      "TCODIOPERESPEVARISECU": "00201000001029701005",
+      "TDESCOPERESPE": "Recortar Banda Cuello..",
+      "TFECHLECT": "2025-12-01 00:00:00",
+      "TCODITICK": "005992051047"
+    },
+    {
+      "TCODIPERS": "O008765",
+      "TNOMBPERS": "Vilma Medina",
+      "TNUMEOPERESPE": 8170,
+      "TCODIOPERESPEVARISECU": "00999000000817000002",
+      "TDESCOPERESPE": "Recortar Banda Cuello..",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "003290098556"
+    },
+    {
+      "TCODIPERS": "O00F981",
+      "TNOMBPERS": "Irma Ninaquispe",
+      "TNUMEOPERESPE": 42410,
+      "TCODIOPERESPEVARISECU": "00282000004241000003",
+      "TDESCOPERESPE": "Pegar Cuello",
+      "TFECHLECT": "2025-12-01 00:00:00",
+      "TCODITICK": "007631492054"
+    },
+    {
+      "TCODIPERS": "O00A451",
+      "TNOMBPERS": "Alfonso Ramos",
+      "TNUMEOPERESPE": 42411,
+      "TCODIOPERESPEVARISECU": "00282000004241100004",
+      "TDESCOPERESPE": "Asentar Cuello",
+      "TFECHLECT": "2025-12-01 00:00:00",
+      "TCODITICK": "005297637659"
+    },
+    {
+      "TCODIPERS": "O00C281",
+      "TNOMBPERS": "Gilbert Huamani",
+      "TNUMEOPERESPE": 42254,
+      "TCODIOPERESPEVARISECU": "00282000004225400015",
+      "TDESCOPERESPE": "Basta Recubierta Manga",
+      "TFECHLECT": "2025-12-02 00:00:00",
+      "TCODITICK": "003259016672"
+    },
+    {
+      "TCODIPERS": "O000443",
+      "TNOMBPERS": "Ceferina Tapia",
+      "TNUMEOPERESPE": 41222,
+      "TCODIOPERESPEVARISECU": "00204000004122200001",
+      "TDESCOPERESPE": "Pespuntar Pechera",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "006837647381"
+    },
+    {
+      "TCODIPERS": "O00F595",
+      "TNOMBPERS": "Roman Sanchez",
+      "TNUMEOPERESPE": 42406,
+      "TCODIOPERESPEVARISECU": "00142000004240600001",
+      "TDESCOPERESPE": "Pegar Etiquetas",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "001515463296"
+    },
+    {
+      "TCODIPERS": "O00F312",
+      "TNOMBPERS": "Adela Castro",
+      "TNUMEOPERESPE": 42412,
+      "TCODIOPERESPEVARISECU": "00282000004241203001",
+      "TDESCOPERESPE": "Unir Hombros",
+      "TFECHLECT": "2025-11-29 00:00:00",
+      "TCODITICK": "005801858791"
+    },
+    {
+      "TCODIPERS": "O00F949",
+      "TNOMBPERS": "Deiver Valiente",
+      "TNUMEOPERESPE": 42422,
+      "TCODIOPERESPEVARISECU": "00282000004242200007",
+      "TDESCOPERESPE": "Peg.Mga Y/O Cerr Cos",
+      "TFECHLECT": "2025-12-01 00:00:00",
+      "TCODITICK": "000969829766"
+    },
+    {
+      "TCODIPERS": "O00F949",
+      "TNOMBPERS": "Deiver Valiente",
+      "TNUMEOPERESPE": 42423,
+      "TCODIOPERESPEVARISECU": "00282000004242300017",
+      "TDESCOPERESPE": "Peg.Mga Y/O Cerr Cos",
+      "TFECHLECT": "2025-12-01 00:00:00",
+      "TCODITICK": "000583352368"
+    },
+    {
+      "TCODIPERS": "O00C281",
+      "TNOMBPERS": "Gilbert Huamani",
+      "TNUMEOPERESPE": 41227,
+      "TCODIOPERESPEVARISECU": "00282000004122700008",
+      "TDESCOPERESPE": "Basta Faldon",
+      "TFECHLECT": "2025-12-02 00:00:00",
+      "TCODITICK": "007864542387"
+    },
+    {
+      "TCODIPERS": "O00C281",
+      "TNOMBPERS": "Gilbert Huamani",
+      "TNUMEOPERESPE": 2144,
+      "TCODIOPERESPEVARISECU": "00282000000214400012",
+      "TDESCOPERESPE": "Recorte Faldon",
+      "TFECHLECT": "2025-12-01 00:00:00",
+      "TCODITICK": "004153811589"
+    },
+    {
+      "TCODIPERS": "O000518",
+      "TNOMBPERS": "Evelyn Condori",
+      "TNUMEOPERESPE": 23310,
+      "TCODIOPERESPEVARISECU": "00282000002331000009",
+      "TDESCOPERESPE": "Ojalar",
+      "TFECHLECT": "2025-12-03 00:00:00",
+      "TCODITICK": "006321071651"
+    },
+    {
+      "TCODIPERS": "O000518",
+      "TNOMBPERS": "Evelyn Condori",
+      "TNUMEOPERESPE": 42408,
+      "TCODIOPERESPEVARISECU": "00282000004240800010",
+      "TDESCOPERESPE": "Botonar",
+      "TFECHLECT": "2025-12-03 00:00:00",
+      "TCODITICK": "005186250691"
+    },
+    {
+      "TCODIPERS": "O000443",
+      "TNOMBPERS": "Ceferina Tapia",
+      "TNUMEOPERESPE": 40150,
+      "TCODIOPERESPEVARISECU": "00259000004015002002",
+      "TDESCOPERESPE": "Pegar Pechera",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "009883800762"
+    },
+    {
+      "TCODIPERS": "O004953",
+      "TNOMBPERS": "Isabel Camones",
+      "TNUMEOPERESPE": 41023,
+      "TCODIOPERESPEVARISECU": "00259000004102300003",
+      "TDESCOPERESPE": "Pesp/Asent Pechera",
+      "TFECHLECT": "2025-11-27 00:00:00",
+      "TCODITICK": "009326669495"
+    },
+    {
+      "TCODIPERS": "O000257",
+      "TNOMBPERS": "Willian Pacheco",
+      "TNUMEOPERESPE": 42407,
+      "TCODIOPERESPEVARISECU": "00259000004240700004",
+      "TDESCOPERESPE": "Atraque Pechera",
+      "TFECHLECT": "2025-11-29 00:00:00",
+      "TCODITICK": "004604671982"
+    },
+    {
+      "TCODIPERS": "O00A451",
+      "TNOMBPERS": "Alfonso Ramos",
+      "TNUMEOPERESPE": 41748,
+      "TCODIOPERESPEVARISECU": "00201000004174801004",
+      "TDESCOPERESPE": "Pespuntar Bandas",
+      "TFECHLECT": "2025-11-29 00:00:00",
+      "TCODITICK": "001640334831"
+    }
+  ],
+  "tztotrazwebcort": [
+    {
+      "TNUMEORDECORT": "312322",
+      "TNUMETEND": "00895724",
+      "TFECHDESPCORT": "2025-11-26 15:47:48"
+    }
+  ],
+  "tztotrazwebcortoper": [
+    {
+      "TCODIOPER": "01",
+      "TDESCOPER": "Tendido",
+      "TFECHLECT": "2025-11-21 12:43:25",
+      "TCODIPERS": "O002389",
+      "TNOMBPERS": "Juan Peralta",
+      "TNUMETICK": "987330"
+    },
+    {
+      "TCODIOPER": "01",
+      "TDESCOPER": "Tendido",
+      "TFECHLECT": "2025-11-21 12:43:25",
+      "TCODIPERS": "O00D575",
+      "TNOMBPERS": "Luis More",
+      "TNUMETICK": "987331"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2025-11-24 09:02:09",
+      "TCODIPERS": "O00D327",
+      "TNOMBPERS": "Ronald Vilchez",
+      "TNUMETICK": "987332"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2025-11-24 09:02:09",
+      "TCODIPERS": "O00D327",
+      "TNOMBPERS": "Ronald Vilchez",
+      "TNUMETICK": "987335"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2025-11-24 09:02:09",
+      "TCODIPERS": "O003395",
+      "TNOMBPERS": "Luciano Tello",
+      "TNUMETICK": "987338"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2025-11-24 09:00:00",
+      "TCODIPERS": "O00D199",
+      "TNOMBPERS": "Juan Rivadeneira",
+      "TNUMETICK": "995997"
+    },
+    {
+      "TCODIOPER": "03",
+      "TDESCOPER": "Corte",
+      "TFECHLECT": "2025-11-24 09:02:09",
+      "TCODIPERS": "O003395",
+      "TNOMBPERS": "Luciano Tello",
+      "TNUMETICK": "987333"
+    },
+    {
+      "TCODIOPER": "04",
+      "TDESCOPER": "Numeracion",
+      "TFECHLECT": "2025-11-24 09:22:09",
+      "TCODIPERS": "O00D300",
+      "TNOMBPERS": "Julio Marcas",
+      "TNUMETICK": "987344"
+    },
+    {
+      "TCODIOPER": "05",
+      "TDESCOPER": "Inspection",
+      "TFECHLECT": "2025-11-25 16:54:42",
+      "TCODIPERS": "O00D930",
+      "TNOMBPERS": "Patricia Sutacuro"
+    }
+  ],
+  "tztotrazwebtint": [
+    {
+      "TNUMEOB": 4344237,
+      "TTELAPRIN": "1",
+      "TTIPOARTI": "TELA",
+      "TPEDISGT": 5006348,
+      "TNUMEUD": 907101,
+      "TKILOACAB": 18.95,
+      "TKILOPROG": 19.6,
+      "TREDUACAB": 1214469,
+      "TCODITELA": "80345",
+      "TDESCTELA": "Jersey raya feed 150/136/1 poliester reciclado c/lyc wicking",
+      "TTIPOCOLN": "R",
+      "TDESCTIPOCOLN": "Rayado",
+      "TNUMECOLN": "12050004",
+      "TDESCCOLN": "Turquin/blanc 2qb",
+      "TTIPOTELA": "R",
+      "TDESCTIPOTELA": "Rayada",
+      "TTIPOACABTELA": "V",
+      "THILOCOLO": "1",
+      "TINDIANTIPILI": "0",
+      "TNUMECOMP": "01",
+      "TDESCCOMP": "Banda P/ Cuello (Al Traves)(2),Cuello (Al Traves)(2),Pech Sup E Inf(2),Mng(2),Splda(1),Fte(1)",
+      "TTIPOCOMP": "01",
+      "TDESCTIPOCOMP": "Body",
+      "TDESCTIPOARTI": "Tela",
+      "TCODIRECE": "SP00069720",
+      "TMAQUACAB": "0RM03",
+      "TNOMBMAQUACAB": "Rama 3",
+      "TMODEMAQUACAB": "Red Evo 5",
+      "TFABRMAQUACAB": "Unitech",
+      "TFECHACABINIC": "2025-10-27 19:23:00",
+      "TFECHACABFINA": "2025-10-27 19:30:00",
+      "TOPERACABINIC": "E003501",
+      "TNOMBOPERACABINIC": "Pedro Pinchi",
+      "TFECHCALITINT": "2025-10-27 02:12:00",
+      "TFECHDESPTINT": "2025-10-28 00:00:00"
+    }
+  ],
+  "tztotrazwebteje": [
+    {
+      "TORDETEJE": 1086777,
+      "TTELAPRIN": "1",
+      "TKILOCRUD": 19.6,
+      "TNUMEOB": 4344237,
+      "TREDUCRUD": 1214196,
+      "TCODITELA": "80345",
+      "TDESCTELA": "Jersey raya feed 150/136/1 poliester reciclado c/lyc wicking",
+      "TNUMEGALG": 24,
+      "TDESCTIPOARTI": "Tela",
+      "THILOCOLO": "1",
+      "TTIPOTEJI": "J",
+      "TDESCTIPOTEJI": "Jersey",
+      "TTIPOMAQUTEJE": "T",
+      "TDESCTIPOMAQUTEJE": "Circular",
+      "TCODIMATEPRIM": "L",
+      "TDESCCODIMATEPRIM": "Lycra",
+      "TMATEPRIM": "X",
+      "TDESCMATEPRIM": "Mix",
+      "TNUMEPIEZ": 4244955,
+      "TSECUPIEZ": 0,
+      "TFECHTEJE": "2025-09-29 18:15:00",
+      "TCALIPIEZ": 1,
+      "TDESCCALI": "1a Calidad",
+      "TKILOPIEZ": 19.6,
+      "TMETRPIEZ": 62.222,
+      "TCODIMAQU": "0C0W5",
+      "TNOMBMAQU": "Jersera D30-96a Wg C/Lycra",
+      "TMODEMAQU": "****",
+      "TFABRMAQU": "Mayer",
+      "TRPMSTND": 13,
+      "TCODIPERS": "E004189",
+      "TNOMBPERS": "Jose Quispe"
+    }
+  ],
+  "tztotrazwebhilo": [
+    {
+      "TREDUCRUD": 1214196,
+      "TTELAPRIN": "1",
+      "TCODITELA": "80345",
+      "TDESCTELA": "Jersey raya feed 150/136/1 poliester reciclado c/lyc wicking",
+      "TDESCTIPOARTI": "Tela",
+      "TREDUHILOPRIN": 1142858,
+      "THILOPRIN": "P150D",
+      "TDESCHILOPRIN": "Poliester 150/136/1 Texturizado Pa  102tpm Repreve",
+      "TLOTEHILA": "4300799",
+      "TLOTENETT": "P5Q654Y585",
+      "TPROVPRIN": "001391",
+      "TNOMBPROVPRIN": "Texcope Sac"
+    }
+  ],
+  "tztotrazwebhiloloteprin": [
+    {
+      "TLOTENETT": "P5Q654Y585",
+      "TGUIAHILO": "007-23532",
+      "TFECHGUIAHILO": "2025-08-06 00:00:00",
+      "TPESOGUIAHILO": 4888.5,
+      "TNUMEORDECOMP": 2025008392.0,
+      "TFECHORDECOMP": "2025-07-31 00:00:00",
+      "TNUMEFACTHILO": "FAC:F008-00028290 SOCAP"
+    },
+    {
+      "TFECHGUIAHILO": "NaT",
+      "TFECHORDECOMP": "NaT"
+    }
+  ],
+  "quimicos_certificados": []
+}

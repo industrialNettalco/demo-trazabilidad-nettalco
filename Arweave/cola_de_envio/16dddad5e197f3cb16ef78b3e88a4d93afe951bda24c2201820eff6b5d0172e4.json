@@ -1,0 +1,66 @@
+{
+  "tztotrazwebinfo": [
+    {
+      "TCODICLIE": "0234",
+      "TNOMBCLIE": "HANNA ANDERSSON",
+      "TCODIESTICLIE": "45360",
+      "TNUMEVERSCLIE": "02",
+      "TCODIETIQCLIEXEDI": "48Q",
+      "TCODIETIQCLIE": "BLCK/CL GR",
+      "TDESCETIQCLIE": "Black/Clay Gray",
+      "TCODITALL": "100",
+      "TCODIESTINETT": "59603",
+      "TNUMEVERSESTINETT": "01",
+      "TDESCPREN": "Ku star wars darth stripe sj",
+      "TTIPOPREN": "C2",
+      "TDESCTIPOPREN": "Conj T-Shirt/Short",
+      "TCODIPROG": "000984",
+      "TDESCPROG": "Lj/Sj/Women Nightgown",
+      "TGRUPMEDI": "TK",
+      "TDESCGRUPMEDI": "Toddler-Kids",
+      "TINDIEDAD": "N",
+      "TDESCEDAD": "Niño",
+      "TINDIGENE": "U",
+      "TDESCGENE": "Unisex",
+      "TGENDER": "Kids",
+      "TCLASIFIC": "A",
+      "TDESCCLASPREN": "Prenda de Primera calidad",
+      "TDESCUBIC": "En APT",
+      "TDESCGRUPFUPC": "Kids Snug-Fit Sleepwear Sizes",
+      "TDIREBUSI": "N"
+    }
+  ],
+  "tztotrazwebalma": [
+    {
+      "TNUMECAJA": "17559030",
+      "TCANTPREN": 1,
+      "TPURCORDE": "PO-000003929",
+      "TCODITEMP": "2018SS",
+      "TCODIDEST": "USA",
+      "TDESCDEST": "Estados Unidos",
+      "TDESCTIPOCAJA": "Caja de exportación (obsoletos)",
+      "TFECHRECEALMA": "2026-02-07 05:17:26",
+      "TCODIPERSRECEALMA": "O00A859",
+      "TNOMBPERSRECEALMA": "Luis Sanchez"
+    }
+  ],
+  "tztotrazwebacab": [
+    {
+      "TNUMECAJA": "17559030",
+      "TFECHPESA": "2026-02-06 23:28:00",
+      "TCODIPERSPESA": "O00F311",
+      "TNOMBPERSPESA": "Juan Martinez",
+      "TPESOBRUT": 5.22,
+      "TPESONETO": 5.22,
+      "TFECHEMPA": "2026-02-05 10:28:12",
+      "TCODIPERSEMPA": "O00F301",
+      "TNOMBPERSEMPA": "Jorge Campoverde",
+      "TLOTEAUDIESTA": "83E248",
+      "TPRENINSPMEDI": "0",
+      "TNUMECAJAESTA": "13075035",
+      "TTIPOTICK": "S",
+      "TDESCTIPOTICK": "Prenda sustituta"
+    }
+  ],
+  "quimicos_certificados": []
+}
