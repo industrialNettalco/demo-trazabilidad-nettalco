@@ -55,6 +55,7 @@ list_temp_dfs = [
     "tztotrazwebcortoper",
     "tztotrazwebcost",
     "tztotrazwebcostoper",
+    "tztotrazwebacabmodu",
     "tztotrazwebacab",
     "tztotrazwebacabmedi",
     "tztotrazwebalma",

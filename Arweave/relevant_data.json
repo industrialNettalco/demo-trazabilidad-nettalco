@@ -108,6 +108,17 @@
         "TFECHLECT",
         "TCODITICK"
     ],
+    "tztotrazwebacabmodu" : [
+        "TNUMECAJA",
+        "TCODIMODU",
+        "TDESCMODU",
+        "TCODIPERS",
+        "TNOMBPERS",
+        "TCODIOPER",
+        "TDESCOPER",
+        "TFECHLECT",
+        "TCODITICK"
+    ],
     "tztotrazwebcort" : [
         "TNUMEORDECORT",
         "TNUMETEND",

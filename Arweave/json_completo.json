@@ -1107,6 +1107,48 @@
    "TCODITICK": "001923989872"
   }
  ],
+ "tztotrazwebacabmodu": [
+  {
+   "TCODIMODU": "05",
+   "TCODIPERS": "O00H279",
+   "TNOMBPERS": "Silvia Avila"
+  },
+  {
+   "TCODIMODU": "05",
+   "TCODIPERS": "O003679",
+   "TNOMBPERS": "Vilma Olaya"
+  },
+  {
+   "TCODIMODU": "05",
+   "TCODIPERS": "O00C090",
+   "TNOMBPERS": "Rodrich Santiago"
+  },
+  {
+   "TCODIMODU": "05",
+   "TCODIPERS": "O00H088",
+   "TNOMBPERS": "Emilia Lanche"
+  },
+  {
+   "TCODIMODU": "05",
+   "TCODIPERS": "O00J952",
+   "TNOMBPERS": "Maria Urbano"
+  },
+  {
+   "TCODIMODU": "05",
+   "TCODIPERS": "O006366",
+   "TNOMBPERS": "Elisa Bardales"
+  },
+  {
+   "TCODIMODU": "05",
+   "TCODIPERS": "O00C602",
+   "TNOMBPERS": "Susilena Hualinga"
+  },
+  {
+   "TCODIMODU": "05",
+   "TCODIPERS": "O00J686",
+   "TNOMBPERS": "Joaquin Huerta"
+  }
+ ],
  "tztotrazwebacab": [
   {
    "TFECHAUDI": "2026-02-04 17:15:08",
